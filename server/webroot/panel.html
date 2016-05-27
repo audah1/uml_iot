@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="/socket.io/socket.io.js"></script>
+<script data-main="/static/client.js" src="/static/requirejs/require.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>kmm server</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
+<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="page1" data-position="fixed">
+	<a href="/list" title="main"><img src="/static/naver.gif" width="150"/></a>
+	<div data-role="header">
+		<h1>강명모</h1>
+	</div>
+	<div data-role="content">
+		<div data-role="collapsible">
+			<h3>그룹채팅</h3>
+			<p>TYPE NAME:
+			<input id="GC_TYPE" />
+			GROUP NAME:
+			<input id="GC_NAME" />
+			CLIENT NAME & MESSAGE:
+			<input id="GC_CLIENT"/>
+			<button id="buttonGROUPSEND"> GROUPSEND MESSAGE </button>
+			</p>
+		</div>
+	
+		<div data-role="collapsible" data-type="horizontal">
+			<h3>핑 및 쿠키</h3>
+			<p>
+			<div data-role="controlgroup" data-type="horizontal">
+				<button id="cookie_save"> cookie/localstorage SAVE </button>
+				<button id="button_pingtest"> Ping TEST </button>
+				<button id="button_sendwebsocketrpc"> Send WEBSOCKET(RPC) </button>
+				<button id="button_getlogdata"> Get log data </button>
+			</div>
+			Address :
+			<input id ="pingtestaddress" />
+			
+		</div>
+		<div data-role="collapsible">
+			<h3>DB</h3>
+			Table Name:
+			<input id="SQ_table" />
+			Key:
+			<input id="SQ_key" />    
+			Value of key:
+			<input id="SQ_value" />
+			<div data-role="collapsible">
+			<h3>mysql</h3>
+			<p><!--
+				ID:
+				<input id="DB_ID" />
+				NAME:
+				<input id="DB_NAME" />
+				MODEL NUMBER:
+				<input id="DB_MN" />
+				SERIES:
+				<input id="DB_SEI" />
+				!-->
+			<hr/>
+			<div data-role="controlgroup" data-type="horizontal">
+				<button id="buttonCREATETABLE"> CREATE TABLE </button>
+				<button id="button_mysqllist"> LIST DATA </button>
+				<button id="button_mysqldeletedata"> DELETE DATA </button>
+				<button id="buttonmysqlgetdata"> GET DATA </button>
+				<button id="buttonmysqlinsert"> INSERT DATA </button>
+				<button id="buttonUPDATE"> UPDATE DATA </button>
+				<button id="buttonSAVEOBJ"> Save JSON object </button>
+				<button id="buttonRESTOREOBJ"> Restore JSON object </button>
+			</div>
+			<hr/>
+			
+			</div>
+			<div data-role="collapsible">
+				<h3>sqlite</h3>
+				<p>
+				<div data-role="controlgroup" data-type="horizontal">
+					<button id="buttonCREATE"> CREATE SQ TABLE </button>
+					<button id="buttonSETDATA"> SAVE DATA (setitem) </button>
+					<button id="buttonGETDATA"> list DATA (getitem) </button>
+					<!--<button id="buttonjson"> Table value data </button>!-->
+					<button id="buttonDEL"> SQlite delete data </button>
+					<button id="buttonINS"> SQlite insert data </button>
+					<button id="buttonUPDATEsq"> SQlite update data </button>
+					<br/>
+				</div>
+				
+			</div>
+		</div>
+		
+			<div data-role="collapsible">
+				<h3>rpc test</h3>
+				<p>
+				Contents:
+				<ul id="content">
+				</ul>
+				Result:
+				<ul id="result">
+				</ul>
+				Json:
+				<div id="stage"></div>
+				<hr/>
+				Test CHAT
+				<P>
+				name: 
+				<input id="CH_NAME" />
+				message:
+				<input id ="CH_MESSAGE" />
+				<div data-role="controlgroup" data-type="horizontal">
+					<button id="button_sendajax"> Send AJAX </button>    
+					<button id="button_sendwebsocket"> Send WEBSOCKET(CHAT) </button>
+					<button id="button_getjson"> GET JSON </button>
+					<button id="button_postrpc"> POST RPC </button>
+				</div>
+				
+			</div>
+			<p>
+		<style type="text/css">
+            #console {
+                width: 	80%;
+                margin: 0;
+                font-family: fixed, lucida console, courier, "Courier New", Courier, monospace;
+                line-height: 1.3;
+                background: lightcyan;
+                border: 	3px solid #100;
+                text-align: 	left;
+                padding: 	5px;
+                }
+                TEXTAREA#console
+                {
+                    height:	99%;
+                }
+        </style>
+        <br>
+        <center style="height:99%">
+            <pre id="console" wrap="off" readonly></pre>
+        </center>
+	</div>
+	
+	<div data-role="footer" data-position="fixed">
+		<h4>강명모</h4>
+	</div>
+</div>
+</body>
+</html>
+
