@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> list page </title>
+</head>
+<body>
+    <h1> list page </h1>
+    <td>
+        <a href="/chat"> ChatServer </a>
+    </td>
+    <hr/>
+    <a href="/insert">insert data</a>
+    <hr />
+    Table name : <%= tableName %>
+    <table width="100%" border="1">
+        <tr>
+            <th>DELETE</th>
+            <th>EDIT</th>        
+            <th>KEY</th>
+        </tr>
+        <% data.forEach(function (item, index) { %>
+        <tr>
+            <td><a href="/delete/<%= item %>"> DELETE</a></td>
+            <td><a href="/edit/<%= item %>">EDIT</a></td>
+            
+            <td><%= item %></td>
+        </tr>
+        <% }); %>
+    </table>
+    <hr/>
+    
+</body>
+</html>
