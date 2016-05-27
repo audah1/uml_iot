@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Insert Page </title>
+</head>
+<body>
+    <h1> Insert </h1>
+    <hr/>
+    <form method = "post">
+    <fieldset>
+        <legend> Insert data </legend>
+        <table>
+            <tr>
+                <td><label> Key </label></td>
+                <td><input id ="keyin" type = "text" name ="key" /></td>
+                
+            </tr>
+            <tr>
+                <td><label> Value </label></td>
+                <td><input type="text" name="value" /></td>
+            </tr>
+            
+                <!--<td><label> name </label></td>
+                <td><input type = "text" name ="name" /></td>
+            </tr>
+            <tr>
+                <td><label> model </label></td>
+                <td><input type="text" name="modelnumber" /></td>
+            </tr>
+            <tr>
+                <td><label> series </label></td>
+                <td><input type="text" name="series" /></td>-->
+            </tr>
+        </table>
+        <input type="submit" onclick="alertmsg()" />
+        <script>function alertmsg(){
+            if(name =="")alert('<WARNING> Insert key');}</script>
+    </fieldset>
+    </form>
+</body>
+</html>
