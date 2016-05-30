@@ -28,12 +28,14 @@ var fs = require("fs");
 After installation nodejs, you can use command `node` and `npm install`.
 
 Using the `node` command to execute the .js file and if the module is required when using `npm install`.
-I have used a module Make reference `package.json` and `npm install`.
+
 ```
 node test.js
 npm install express (expample)
+```
 
-if you have a file package.json
+I have used a module Make reference `package.json` and `npm install`.
+```command
 npm install 
 ```
 
