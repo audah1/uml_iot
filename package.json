@@ -4,8 +4,10 @@
   "description": "",
   "main": "Tmfepdjqtsmsrj.js",
   "dependencies": {
+    "ain2": "^2.0.0",
     "async": "^2.0.0-rc.1",
     "body-parser": "^1.15.0",
+    "chai": "^3.5.0",
     "colors": "^1.1.2",
     "cookie-parser": "^1.4.1",
     "css": "^2.2.1",
@@ -21,6 +23,7 @@
     "js": "^0.1.0",
     "jsdom": "^8.1.0",
     "limit": "^0.0.1",
+    "log4js": "^0.6.36",
     "morgan": "^1.7.0",
     "multer": "^1.1.0",
     "mysql": "^2.10.2",
