@@ -1,4 +1,4 @@
-var ping = require('./public/ping/ping');
+var ping = require('./public/ping/index');
 var fs=require('fs');
 
 var option=require('./option');
