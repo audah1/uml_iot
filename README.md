@@ -11,8 +11,10 @@ uml iot server based on nodejs
 * and so on
 * a logger for connect/express servers
 
+
 ## Installation nodejs
 [http://nodejs.org](http://nodejs.org, "node").     After connecting the installation to suit your os version
+
 
 ## usage
 use common.js
@@ -29,11 +31,12 @@ Using the `node` command to execute the .js file and if the module is required w
 I have used a module Make reference `package.json` and `npm install`.
 ```
 node test.js
-npm install express 
+npm install express (expample)
 
 if you have a file package.json
 npm install 
 ```
+
 
 ## configuration
 
@@ -62,6 +65,7 @@ The receiver of the request must reply with a valid response to all received req
 * `result` - The data returned by the invoked method. If an error occurred while invoking the method, this value must be null.  
 * `error` - A specified error code if there was an error invoking the method, otherwise null.  
 * `id` - The id of the request it is responding to.
+
 
 ## A brief introduction of each server
 ##### http server
@@ -108,6 +112,7 @@ node socket-chat.js
 When connected to the `http://127.0.0.1:52273` in a Web browser can be a JSON RPC TEST and Ping , group chat , database testing.
   
   and testing TCP, UDP, serial. ( `/uml_iot/test/TCP-client.js`, `/uml_iot/test/udp-client.js`, `/uml_iot/test/serials_client.js` )
+
 
 ## Documentation 
 Talk to me.
