@@ -53,11 +53,11 @@ The receiver of the request must reply with a valid response to all received req
 * `id` - The id of the request it is responding to.
 
 ## A brief introduction of each server
-#### http server
+##### http server
 using `http`,`express`moudle. 
 This server can be given a specific function for each url with the express . And you can test your database or rpc using jquery.
 
-#### TCP server
+##### TCP server
 This server using the net module. 
 ```javascript
 var net = require("net");
@@ -74,7 +74,7 @@ Using the callback event called 'data' to process the data in json format.
 When you connect the client in `/uml_iot/test/TCP-client` to the server, Join the group using the function 'JIC' to join a particular group , and made ​​it possible for the client together with the same group chat .
 tcp, udp, web server and so on .. The following functions(`JIC`,`JAC`,`JRC`) can be found in the `/uml_iot/server/typechat.js`.
 
-#### UDP server
+##### UDP server
 This server using the dgram module.
 ```javascript
 var dgram = require("dgram");
@@ -97,7 +97,7 @@ node test.js
 npm install express 
 ```
 
-#### for windows
+##### for windows
 Run the server from the command
 ```
 node socket-chat.js
