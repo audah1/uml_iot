@@ -13,7 +13,7 @@ uml iot server based on nodejs
 
 
 ## Installation nodejs
-[http://nodejs.org](http://nodejs.org"node")    
+[http://nodejs.org](http://nodejs.org)    
 After connecting the installation to suit your os version
 
 
