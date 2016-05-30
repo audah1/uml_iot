@@ -28,18 +28,24 @@ var fs = require("fs");
 
 After installation nodejs, you can use command `node` and `npm install`.
 
-Using the `node` command to execute the .js file and if the module is required when using `npm install`.
-
-```
+Using the `node` command to execute the .js file. 
+```command
 node test.js
-npm install express (expample)
 ```
 
 I have used a module Make reference `package.json` and `npm install`.
-```command
-npm install 
 ```
+npm install
+```
+then, create directory `/uml_iot/node_module`.
+lastly, `ping`module and `xm2js`module in `node_module` move to `/uml_iot/server/public`. 
 
+
+Generally,
+if the `express`module is required when using `npm install express`.
+```
+npm install express (expample)
+```
 
 ## configuration
 
@@ -122,15 +128,15 @@ serialPort.on("open", function () {
     }
 }
 ```
-Using the callback event called 'message' and 'data' to process the data in json format. And additionally need remote.
-Results of the test are the same as tcp.
+Using the callback event called 'message' and 'data' to process the data. 
+
 ##### for windows
 Run the server from the command
 ```
 node socket-chat.js
 ```
 
-When connected to the `http://127.0.0.1:52273` in a Web browser can be a JSON RPC TEST and Ping , group chat , database testing.
+When connected to the `http://127.0.0.1:52273/chat` in a Web browser can be a JSON RPC TEST and Ping , group chat , database testing.
   
   and testing TCP, UDP, serial. ( `/uml_iot/test/TCP-client.js`, `/uml_iot/test/udp-client.js`, `/uml_iot/test/serials_client.js` )
 
