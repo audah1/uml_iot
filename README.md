@@ -13,7 +13,7 @@ uml iot server based on nodejs
 
 
 ## Installation nodejs
-[http://nodejs.org](http://nodejs.org, "node").     After connecting the installation to suit your os version
+[http://nodejs.org](http://nodejs.org, "node")    After connecting the installation to suit your os version
 
 
 ## usage
@@ -75,7 +75,7 @@ using `http`,`express`moudle.
 This server can be given a specific function for each url with the express . And you can test your database or rpc using jquery.
 
 ##### TCP server
-This server using the net module. 
+This server using the `net` module. 
 ```javascript
 var net = require("net");
 
@@ -92,7 +92,7 @@ When you connect the client in `/uml_iot/test/TCP-client` to the server, Join th
 tcp, udp, web server and so on .. The following functions(`JIC`,`JAC`,`JRC`) can be found in the `/uml_iot/server/typechat.js`.
 
 ##### UDP server
-This server using the dgram module.
+This server using the `dgram` module.
 ```javascript
 var dgram = require("dgram");
 
@@ -105,6 +105,24 @@ var server = dgram.createSocket('udp4');
 Using the callback event called 'message' to process the data in json format. And additionally need remote.
 Results of the test are the same as tcp.
 
+##### serial server
+This server using the `serialport` module.
+```javascript
+var uart = require("serialport");
+
+serialPort = new uart.SerialPort(valtable.serialport, {
+    baudrate: 115200,
+    parser: uart.parsers.readline(delimiter)
+});
+serialPort.on("open", function () {
+    //when the port is opened and ready for writing.
+    serialPort.on('data', function(data) {
+        //data handler using callback
+    }
+}
+```
+Using the callback event called 'message' and 'data' to process the data in json format. And additionally need remote.
+Results of the test are the same as tcp.
 ##### for windows
 Run the server from the command
 ```
