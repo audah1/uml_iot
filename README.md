@@ -23,8 +23,19 @@ var express = require("express");
 var fs = require("fs");
 ```
 
-## configuration
+After installation nodejs, you can use command `node` and `npm install`.
+
+Using the `node` command to execute the .js file and if the module is required when using `npm install`.
 I have used a module Make reference `package.json` and `npm install`.
+```
+node test.js
+npm install express 
+
+if you have a file package.json
+npm install 
+```
+
+## configuration
 
 http server(`/uml_iot/server/socket_server.js`) and total server(`/uml_iot/server/socket-chat.js`), TCP server(`/uml_iot/server/TCPserver.js`), UDP server(`/uml_iot/server/udp-server.js`), serial server(`/uml_iot/server/serials_server.js`).  
 and these servers exports in `socket-chat.js`.
@@ -88,15 +99,6 @@ var server = dgram.createSocket('udp4');
 Using the callback event called 'message' to process the data in json format. And additionally need remote.
 Results of the test are the same as tcp.
 
-## Test
-After installation nodejs, you can use command `node` and `npm install`.
-
-Using the `node` command to execute the .js file and if the module is required when using `npm install`.
-```
-node test.js
-npm install express 
-```
-
 ##### for windows
 Run the server from the command
 ```
@@ -106,7 +108,6 @@ node socket-chat.js
 When connected to the `http://127.0.0.1:52273` in a Web browser can be a JSON RPC TEST and Ping , group chat , database testing.
   
   and testing TCP, UDP, serial. ( `/uml_iot/test/TCP-client.js`, `/uml_iot/test/udp-client.js`, `/uml_iot/test/serials_client.js` )
-
 
 ## Documentation 
 Talk to me.
