@@ -138,7 +138,7 @@ app.use('/moniwiki', express.static(__dirname + '/moniwiki'));
 
 app.route('/chat')
     .get(function(req,res,next){
-        fs.readFile('./public/panel.html', function(error,data){
+        fs.readFile('./webroot/panel.html', function(error,data){
             res.writeHead(200,{'Content-Type':'text/html'});
             res.end(data);
         });
@@ -174,7 +174,7 @@ app.route('/')
     
 app.route('/list')
     .get (function(req, res){
-        fs.readFile('./public/list.html', 'utf8', function(error, data){     //////여기서 data는 html그냥
+        fs.readFile('./webroot/list.html', 'utf8', function(error, data){     //////여기서 data는 html그냥
             dborm.listitem(function(error, results){    ////database에서 가져오는 전체 데이터 ....
                 res.send(ejs.render(data,{data: results, tableName: tablename}));
             
@@ -201,7 +201,7 @@ app.route('/delete/:key')
     
 app.route('/edit/:key') //url문제 /?id:xx
     .get(function(req, res, next) {
-        fs.readFile('./public/edit.html', 'utf-8', function(error, data){
+        fs.readFile('./webroot/edit.html', 'utf-8', function(error, data){
             dborm.getitem(function(error, result) {
                 res.send(data);
             },tablename,req.params.key);
@@ -227,7 +227,7 @@ app.route('/edit/:key') //url문제 /?id:xx
 
 app.route('/insert')
     .get(function(req, res, next) {
-        fs.readFile('./public/insert.html', 'utf-8', function(error, data) {
+        fs.readFile('./webroot/insert.html', 'utf-8', function(error, data) {
             res.send(data);
         });
     })
