@@ -14,7 +14,7 @@ log4js.configure({
  	appenders: [ 
  		{ type: 'console' }, 
  		{ type: 'file', filename: './logfile/MessengerLog.txt', category: 'express',maxLogSize : 2048000 ,backups : 5}
- 	] 
+ 	]
 });
 
 var processgroupmessage =null;
@@ -37,11 +37,6 @@ var server = http.createServer(app);
 server.listen(52273, function(){
     console.log('Server running 127.0.0.1:52273');
 });
-function serverclose(){process.exit(0);}
-var phpnode = require('php-node')({bin:"C:\\Users\\audah\\nodejs\\webchat\\public\\php\\php-cgi.exe"});
-app.set('views', __dirname);
-app.engine('php', phpnode);
-app.set('view engine', 'php');
 
 function gethead(phpres){
     var head = phpres.split("\r\n\r\n");
@@ -122,7 +117,7 @@ var filepath = path.join(__dirname,reqdata.pathname);
         });
 
     });
-
+/*
 app.route('*favicon.ico*')
     .all(function(req, res) {
         //console.log(req.url);
@@ -135,7 +130,7 @@ app.route('*favicon.ico*')
             res.end(data);
         });
     });
-
+*/
 
 app.use('/mantisbt-1.2.19', express.static(__dirname + '/mantisbt-1.2.19'));
 app.use('/moniwiki', express.static(__dirname + '/moniwiki'));
