@@ -42,7 +42,7 @@ npm install
 
 ## configuration
 
-http server(`/uml_iot/server/socket_server.js`) and total server(`/uml_iot/server/socket-chat.js`), TCP server(`/uml_iot/server/TCPserver.js`), UDP server(`/uml_iot/server/udp-server.js`), serial server(`/uml_iot/server/serials_server.js`).  
+http server(`/uml_iot/server/socket_server.js`) and socket server(`/uml_iot/server/socket-chat.js`), TCP server(`/uml_iot/server/TCPserver.js`), UDP server(`/uml_iot/server/udp-server.js`), serial server(`/uml_iot/server/serials_server.js`).  
 and these servers exports in `socket-chat.js`.
 
 ``` javascript
