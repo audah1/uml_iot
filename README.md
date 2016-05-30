@@ -102,10 +102,9 @@ Run the server from the command
 ```
 node socket-chat.js
 ```
-Then , all the servers will be the operation.
 
 When connected to the `http://127.0.0.1:52273` in a Web browser can be a JSON RPC TEST and Ping , group chat , database testing.
-and testing TCP, UDP, serial. ( `/uml_iot/test/TCP-client.js`, `/uml_iot/test/udp-client.js`, `/uml_iot/test/serials_client.js` )
+  and testing TCP, UDP, serial. ( `/uml_iot/test/TCP-client.js`, `/uml_iot/test/udp-client.js`, `/uml_iot/test/serials_client.js` )
 
 
 ## Documentation 
