@@ -38,7 +38,7 @@ var selectSQlite=false;
 var selectSQLITE=valtable.sqlite;
 if(selectMYSQL){
     var dbserver = require('./db_orm');
-    dbserver.connect2mysql ('Company','root','dbswlfjq1');
+    dbserver.connect2mysql ('Company','root','qwerty123');
     dbserver.register(jsonrpcserver.onAsync);
 }
 if(selectSQlite){
