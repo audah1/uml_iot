@@ -1,5 +1,5 @@
 var async = require("async");
-var jsonclient=require('../server/public/jsonrpcclient1');
+var jsonclient=require('../node_modules/jsonrpcclient1');
 var HandlingJSONres=jsonclient.HandlingJSONres;
 var getRPC =jsonclient.rpc;
 var mkobj =jsonclient.mkobj;
