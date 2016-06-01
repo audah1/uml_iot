@@ -1,6 +1,4 @@
 var dgram = require('dgram');
-
-
 var PORT = 52222;
 var HOST = '127.0.0.1';
 var remote = {host:'127.0.0.1',port:52222};
@@ -10,6 +8,15 @@ client=null;
 var processgroupmessage=null;
 function sendall(message){
     processgroupmessage(null,null,["SEND","KANG",message]);
+}
+function writeData(socket, jsonMsg){
+    process.stdout.write("usend :"+jsonMsg);
+    client.send(jsonMsg, 0, jsonMsg.length, PORT, HOST, function(err, bytes) {
+        if (err) {
+            console.log(err);
+            throw err;
+        }//client.close();
+    });
 }
 
 var udpsend;
@@ -32,22 +39,11 @@ function udp_bridge(){
     });
     udpsend=function(callback,message){
         process.stdout.write("usend ~~:"+message);
-        writeData(client,message,function(err,results){
-            callback(null,[]);
-        });           
+        writeData(client,message);           
     }
 };     
 udp_bridge();
 
-function writeData(socket, jsonMsg){
-        process.stdout.write("usend :"+jsonMsg);
-        client.send(jsonMsg, 0, jsonMsg.length, PORT, HOST, function(err, bytes) {
-            if (err) {
-                console.log(err);
-                throw err;
-            }//client.close();
-        });
-    }
 exports.register = function(M_on){
     M_on("USEND",udpsend);
 };
