@@ -12,7 +12,7 @@ var builder = new xml2js.Builder();
 var UDPserver = dgram.createSocket('udp4');
 UDPserver.on('listening', function() {
 	var addr = UDPserver.address();
-	console.log('UDP Server listening port : ' + addr.port);
+	console.log('<<UDP Server listening port : ' + addr.port+'>>');
 });
 UDPserver.bind(52222);
 UDPserver.on('message', function(message, remote){
