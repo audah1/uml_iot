@@ -46,7 +46,6 @@ if(port == undefined)
 {
     port = 8107;
 }
-console.log("??????",port);
 var client=null;
 function connect_tcp(){
     //try{
