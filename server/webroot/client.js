@@ -224,7 +224,7 @@ $(document).ready(main);
             writeData(HobbitsRPC.client,senddata);
         });
         $('#button_getlogdata').click(function(){
-            var senddata =(HobbitsRPC.makeObject(makereqobj("GLD",[]),function(rsvd,res){
+            var senddata =(HobbitsRPC.makeObject(makereqobj("GLD",[$('#logstart'),$('#logend')]),function(rsvd,res){
                 //printresult('Ping result!',res);
             }));
             writeData(HobbitsRPC.client,senddata);
