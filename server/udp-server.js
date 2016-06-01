@@ -5,7 +5,7 @@ var HandlingObjectAsync = null;
 var modifyparameterfunc=null;
 var processgroupmessage=null;
 var boolean=false;
-var xml2js=require('./public/xml2js/lib/xml2js.js');
+var xml2js=require('../node_modules/xml2js/lib/xml2js.js');
 var xmlparser=new xml2js.Parser();
 var builder = new xml2js.Builder();
 
@@ -24,7 +24,7 @@ UDPserver.on('message', function(message, remote){
                     if(boolean==true)console.log(err);
                     throw err;
                 }
-                if(boolean==true)console.log('UDP message sent!!!! ' + remote.address + ':' + remote.port);               
+                if(boolean==true)console.log('UDP message sent!! ' + remote.address + ':' + remote.port);               
             });
         }catch(err){
             if(boolean==true)console.log('UDP send Error');
