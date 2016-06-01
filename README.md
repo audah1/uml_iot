@@ -39,8 +39,6 @@ npm install
 ```
 
 * then, create directory `/uml_iot/node_module`.
-* `ping`module and `xm2js`module in `node_module` move to `/uml_iot/server/public`. 
-* Finally, copy `/ uml_iot / server / public` directory to ` / uml_iot / test`.
 
 Generally,
 if the `express`module is required when using `npm install express`.
