@@ -1,4 +1,4 @@
-var requirejs=require("../server/public/requirejs/require");
+//var requirejs=require("../server/public/requirejs/require");
 //var require=requirejs.require;
 var jsonclient=require('../server/public/jsonrpcclient1.js');
 var net = require('net');
@@ -9,7 +9,7 @@ var readline = require('readline');
 var rl = readline.createInterface(process.stdin, process.stdout);
 var parsers = require("../server/public/parsers");
 
-var xml2js=require('../server/public/xml2js/lib/xml2js');
+var xml2js=require('../node_modules/xml2js/lib/xml2js');
 var xmlparser=new xml2js.Parser();
 var builder = new xml2js.Builder();
 var HandlingJSONres=jsonclient.HandlingJSONres;
