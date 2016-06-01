@@ -1,10 +1,15 @@
 var net = require('net');
 var fs=require('fs');
 var parsers = require("./public/parsers");
+var delimiter='\n';
 
 var option=require('./option.js');
 option.loadconfig();
 
+var processgroupmessage=null;
+function sendall(message){
+    processgroupmessage(null,null,["SEND","KANG",message]);
+}
 function writeData(socket, datain){
     var data = datain;//+'\n';
     var success = !socket.write(data);
@@ -15,12 +20,6 @@ function writeData(socket, datain){
             });
         })(socket,data);
     }   
-}
-var delimiter='\n';
-
-var processgroupmessage=null;
-function sendall(message){
-    processgroupmessage(null,null,["SEND","KANG",message]);
 }
 
 var tcpsend;
@@ -41,9 +40,7 @@ function tcpbridge(){
     tcpsend=function(callback,message){
         process.stdout.write("tsend :"+message);
         sendall(message);
-        writeData(client,message+delimiter,function(err,results){
-            callback(null,[]);
-        });
+        writeData(client,message+delimiter);
     };
 };
 tcpbridge();
