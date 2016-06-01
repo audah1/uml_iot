@@ -35,7 +35,7 @@ app.use(log4js.connectLogger(logger, { level: 'auto' }));
 var urlencodedParser = bodyparser.urlencoded({ extended: false })
 var server = http.createServer(app);
 server.listen(52273, function(){
-    console.log('Server running 127.0.0.1:52273');
+    console.log('<<Socket Server running 127.0.0.1:52273>>');
 });
 
 function gethead(phpres){
