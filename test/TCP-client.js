@@ -1,17 +1,17 @@
-var requirejs=require("./public/requirejs/require");
-var require=requirejs.require;
+var requirejs=require("../server/public/requirejs/require");
+//var require=requirejs.require;
+var jsonclient=require('../server/public/jsonrpcclient1.js');
 var net = require('net');
 var async = require("async");
 var reconnect=require('reconnect');
 
 var readline = require('readline');
 var rl = readline.createInterface(process.stdin, process.stdout);
-var parsers = require("../parsers");
+var parsers = require("../server/public/parsers");
 
-var xml2js=require('../xml2js/lib/xml2js');
+var xml2js=require('../server/public/xml2js/lib/xml2js');
 var xmlparser=new xml2js.Parser();
 var builder = new xml2js.Builder();
-var jsonclient=require('../jsonrpcclient1');
 var HandlingJSONres=jsonclient.HandlingJSONres;
 var getRPC =jsonclient.rpc;
 //var HandlingJSONresult=jsonclient.HandlingJSONresult;
