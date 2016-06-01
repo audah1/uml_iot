@@ -221,7 +221,7 @@ var StartTCP = function(port,HandlingObjectAsync_input,processgroupmessage_input
     TCPserver = net.createServer(clientHandler);
     TCPserver.listen(port, function() {
         var server = TCPserver;
-        console.log('Server listening: ' + JSON.stringify(server.address()));
+        console.log('<<TCP Server listening port : 52222>>');
         server.on('close', function(){
             if(bDebug)console.log('Server Terminated');
         });
