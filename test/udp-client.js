@@ -7,7 +7,7 @@ var async = require("async");
 var readline = require('readline');
 var rl = readline.createInterface(process.stdin, process.stdout);
 
-var xml2js=require('../server/public/xml2js/lib/xml2js');
+var xml2js=require('../node_modules/xml2js/lib/xml2js');
 var xmlparser=new xml2js.Parser();
 var builder = new xml2js.Builder();
 var getRPC =jsonclient.rpc;
