@@ -62,7 +62,7 @@ $(document).ready(main);
         function saveconfig0(){local_set(localstoragetag,g_idtable,getcontrols(g_idtable));} 
         
         //var g_default=JSON.parse('{"CH_NAME":"123","CH_MESSAGE":"","DB_ID":"","DB_NAME":"","DB_MN":"","DB_SEI":"","SQ_table":"","SQ_key":"","SQ_value":"","GC_TYPE":"","GC_NAME":"","GC_CLIENT":""}');
-        var g_default={'pingtestaddress':"192.168.2.254","CH_NAME":"name","CH_MESSAGE":"message","DB_ID":"id","DB_NAME":"Name","DB_MN":"model num","DB_SEI":"series","SQ_table":"table name","SQ_key":"key",
+        var g_default={'pingtestaddress':"192.168.2.254","logstart":"2016-03-13","logend":"2016-03-14","CH_NAME":"name","CH_MESSAGE":"message","DB_ID":"id","DB_NAME":"Name","DB_MN":"model num","DB_SEI":"series","SQ_table":"table name","SQ_key":"key",
                     "SQ_value":"value","GC_TYPE":"JAC","GC_NAME":"KANG","GC_CLIENT":"MM"};
 
         function getcontrols2(idtable){       //값저장
@@ -218,17 +218,23 @@ $(document).ready(main);
         groupchat();
         
         $('#button_pingtest').click(function(){
-            var senddata =(HobbitsRPC.makeObject(makereqobj("TSTPING",[$('#pingtestaddress').val()]),function(rsvd,res){
+            var requestobject = {CMD:"TSTPING", parameter:[$('#pingtestaddress').val()]};
+            var senddata =HobbitsRPC.makeObject(requestobject,function(rsvd,res){
                 //printresult('Ping result!',res);
-            }));
+            });
             writeData(HobbitsRPC.client,senddata);
         });
+        
         $('#button_getlogdata').click(function(){
-            var senddata =(HobbitsRPC.makeObject(makereqobj("GLD",[]),function(rsvd,res){
-                //printresult('Ping result!',res);
-            }));
+            var startpoint=$('#logstart').val();
+            var endpoint=$('#logend').val();
+            var requestobject = {CMD:"GLD", parameter:[startpoint,endpoint]};
+            var senddata =HobbitsRPC.makeObject(requestobject,function(rsvd,res){
+            });
+            
             writeData(HobbitsRPC.client,senddata);
         });
+        
         $('#button_sendajax').click(function(){
             $.ajax({
                 type:"post",  
