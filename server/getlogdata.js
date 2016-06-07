@@ -11,13 +11,14 @@ function get_log_data(callback){
 function get_log_data(callback,start,end){
     var getdata1 = fs.readFile("./logfile/MessengerLog.txt","utf-8",function(err,res){
         var getdata2='';
-        for(var i=4; i>0; i--)
+        for(var i=5; i>0; i--)
         {
             fs.readFile("./logfile/MessengerLog.txt."+i,"utf-8",function(err1,res1){
                 getdata2 += res1;
             });
         }
         var get_totaldata=res+getdata2;
+        console.log(get_totaldata);
         function find_start_end_of_logdata(bufdata,point){
             var i;
             for(i=0; i<bufdata.length; i++)
@@ -29,12 +30,13 @@ function get_log_data(callback,start,end){
                 //  return i;
                 //}
             }
-            return -1; //not found
+            return null; //not found
         }
         var startpoint=find_start_end_of_logdata(get_totaldata,start);
         console.log("s.p =",startpoint);
         var endpoint = find_start_end_of_logdata(get_totaldata,end);
         console.log("e.p =",endpoint);
+        if(endpoint==null)endpoint=res.length-1;
         //var enddata2=end.substring(0,9)+end.substring(10)+1;
         //console.log(enddata2);
         //var getdata = data.substring(startpoint,enddata2-1);
