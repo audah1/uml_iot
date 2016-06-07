@@ -102,7 +102,7 @@ app.route('*.php*')
     .all(function(req, res) {
         //console.log(req.url);
         reqdata = require("url").parse(req.url,true);
-var filepath = path.join(__dirname,reqdata.pathname);
+        var filepath = path.join(__dirname,reqdata.pathname);
         var phpCGI = require("php-cgi");
         phpCGI.detectBinary();//on windows get a portable php to run.
         phpCGI.env['DOCUMENT_ROOT'] = __dirname;//+path.sep+'htdocs'+path.sep;
@@ -132,7 +132,7 @@ app.route('*favicon.ico*')
     });
 */
 
-app.use('/mantisbt-1.2.19', express.static(__dirname + '/mantisbt-1.2.19'));
+app.use('/mantis', express.static(__dirname + '/mantis'));
 app.use('/moniwiki', express.static(__dirname + '/moniwiki'));
 
 
