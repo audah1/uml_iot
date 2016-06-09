@@ -13,7 +13,7 @@ var log4js=require('log4js');
 log4js.configure({ 
  	appenders: [ 
  		{ type: 'console' }, 
- 		{ type: 'file', filename: './logfile/MessengerLog.txt', category: 'express',maxLogSize : 2048000 ,backups : 5}
+ 		{ type: 'file', filename: './logfile/MessengerLog.txt', category: 'express',maxLogSize : 12048000 ,backups : 3}
  	]
 });
 
