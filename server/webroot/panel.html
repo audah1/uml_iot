@@ -1,14 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="/socket.io/socket.io.js"></script>
-<script data-main="/static/client.js" src="/static/requirejs/require.js"></script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>kmm server</title>
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
-<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+
+
+<script src="/socket.io/socket.io.js"></script>
+
+
+<link rel="stylesheet" href="/static/jquery-ui-1.11.4.css">
+<1link rel="stylesheet" href="/static/jquery.mobile-1.0.min.css" />
+<!--<link rel="stylesheet" href="/static/jquery.mobile.structure-1.4.5.min.css" />
+
+
+-->
+<script src="/static/jquery-1.6.4.min.js"></script>
+<!--<script src="http://code.jquery.com/jquery-1.10.2.js"></script>-->
+<script src="/static/jquery-ui.min-1.11.4.js"></script>
+<!--
 <script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+<script src="/static/jquery.mobile-1.4.5.min.js"></script>-->
+<script src="/static/jquery.mobile-1.0.min.js"></script>
+<script>
+  $(function() {
+    $( "#logstart" ).datepicker({
+        dateFormat: "yy-mm-dd"
+    });
+    $( "#logend" ).datepicker({
+        dateFormat: "yy-mm-dd"
+    });
+  });
+  </script>
+
+<script>var exports={};</script>
+<script data-main="/static/client.js" src="/static/requirejs/require.js"></script>
+
 </head>
 <body>
 
@@ -17,6 +44,7 @@
 	<div data-role="header">
 		<h1>server</h1>
 	</div>
+	<button id="cookie_save"> localstorage SAVE </button>
 	<div data-role="content">
 		<div data-role="collapsible">
 			<h3>그룹채팅</h3>
@@ -31,19 +59,19 @@
 		</div>
 	
 		<div data-role="collapsible" data-type="horizontal">
-			<h3>핑 및 쿠키</h3>
+			<h3>핑 & 로그</h3>
 			<p>
 			<div data-role="controlgroup" data-type="horizontal">
 				
-				<button id="cookie_save"> cookie/localstorage SAVE </button>
+				
 				<button id="button_pingtest"> Ping TEST </button>
 				<button id="button_sendwebsocketrpc"> Send WEBSOCKET(RPC) </button>
 				<button id="button_getlogdata"> Get log data </button>
 			</div>
-			start(xxxx-xx-xx) : 
-			<input id ="logstart" />
-			end(xxxx-xx-xx) :
-			<input id ="logend" />
+			start : 
+			<input type="text" id ="logstart" />
+			end :
+			<input type="text" id ="logend" />
 			Address :
 			<input id ="pingtestaddress" />
 			
@@ -88,11 +116,12 @@
 				<div data-role="controlgroup" data-type="horizontal">
 					<button id="buttonCREATE"> CREATE SQ TABLE </button>
 					<button id="buttonSETDATA"> SAVE DATA (setitem) </button>
-					<button id="buttonGETDATA"> list DATA (getitem) </button>
+					<button id="buttonGETDATA"> GET DATA (getitem) </button>
 					<!--<button id="buttonjson"> Table value data </button>!-->
 					<button id="buttonDEL"> SQlite delete data </button>
 					<button id="buttonINS"> SQlite insert data </button>
 					<button id="buttonUPDATEsq"> SQlite update data </button>
+					<button id="buttonlistdata_sq"> SQlite list data </button>
 					<br/>
 				</div>
 				
