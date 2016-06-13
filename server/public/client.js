@@ -2,7 +2,7 @@
 //var $;  
 //var exports={};
 require([/*"./xml2js/lib/xml2js",*/"/static/jsonrpcclient.js","/static/jquerynew/jquery.js","/static/jquerynew/jquery.cookie.js",
-        "/static/bravo.js","/static/ansi_up-master/ansi_up.js"],function(/*xml2js,*/jsonclient,$){
+        "/static/bravo.js","/static/ansi_up-master/ansi_up.js"/*,"/static/jquery-ui.css","/static/jquery-1.10.2.js","/static/jquery-ui.js"*/],function(/*xml2js,*/jsonclient,$){
     /*var b=require(["/static/b.js"],function(b){
         if(debug)console.log('b input>>>>>');
         if(debug)console.log(b.func());
@@ -97,13 +97,23 @@ $(document).ready(main);
             localStorage.setItem(tag,JSON.stringify(valtable));
         }
         function loadconfig(){setcontrols2(g_default,local_get2(localstoragetag2,g_default));}
-        function saveconfig(){local_set2(localstoragetag2,g_default,getcontrols2(g_default));} 
+        function saveconfig(){local_set2(localstoragetag2,getcontrols2(g_default));} 
 
         //$("#myTable").tablesorter( {sortList: [[0,0], [2,0]]} ); 
         var getRPC =jsonclient.rpc;
         var HandlingJSONresult=jsonclient.HandlingJSONresult;
         var HandlingJSONres=jsonclient.HandlingJSONres;
-        
+        var txt  = "\n\n\033[1;33;40m 33;40  \033[1;33;41m 33;41  \033[1;33;42m 33;42  \033[1;33;43m 33;43  \033[1;33;44m 33;44  \033[1;33;45m 33;45  \033[1;33;46m 33;46  \033[1m\033[\n\n\033[1;33;40m >> Tests OK \n\n\033[1;33;40m "
+        var consolehtml = ansi_up.ansi_to_html(txt);
+        var cdiv = document.getElementById("console");
+        cdiv.innerHTML=consolehtml;
+                //$('#console').html(html);
+                
+        function printconsole(res){
+            consolehtml+=ansi_up.ansi_to_html("test : "+res+'\n');
+            var cdiv = document.getElementById("console");
+            cdiv.innerHTML=consolehtml;
+        }           
         function writeData(socket, jsonMsg){
             socket.emit('rpcreq',jsonMsg);
             //socket.emit('message',jsonMsg);
@@ -126,20 +136,18 @@ $(document).ready(main);
                 if(debug)console.log('what is event connect!!!!!!!!!!!!!');
             });
             
-            var txt  = "\n\n\033[1;33;40m 33;40  \033[1;33;41m 33;41  \033[1;33;42m 33;42  \033[1;33;43m 33;43  \033[1;33;44m 33;44  \033[1;33;45m 33;45  \033[1;33;46m 33;46  \033[1m\033[\n\n\033[1;33;40m >> Tests OK \n\n\033[1;33;40m "
-                var consolehtml = ansi_up.ansi_to_html(txt);
-                var cdiv = document.getElementById("console");
-                cdiv.innerHTML=consolehtml;
-                //$('#console').html(html);
                 
+ 
+            
+            
             socket.on('rpcres', function(data){  //wsocket rpc
                 if(debug)console.log('rpcres=', data);
                 //var txt  = "\n\n\033[1;33;40m 33;40  \033[1;33;41m 33;41  \033[1;33;42m 33;42  \033[1;33;43m 33;43  \033[1;33;44m 33;44  \033[1;33;45m 33;45  \033[1;33;46m 33;46  \033[1m\033[0\n\n\033[1;33;42m >> Tests OK\n\n"
-                consolehtml+=ansi_up.ansi_to_html("test : "+data.RES+'\n');
-                var cdiv = document.getElementById("console");
-                cdiv.innerHTML=consolehtml;
+                //consolehtml+=ansi_up.ansi_to_html("test : "+data.RES+'\n');
+                //var cdiv = document.getElementById("console");
+                //cdiv.innerHTML=consolehtml;
                 //$('#console').append(html);
-                   // HandlingJSONres(/*JSON.parse*/(data));
+                HandlingJSONres(/*JSON.parse*/(data));
                     //$('#CH_NAME').val('rpc');
             });
             /*
@@ -192,24 +200,29 @@ $(document).ready(main);
                 output += '</li>';
                 $(output).prependTo('#content');
         }        
-        function ajaxRPC(requestobject,async){ 
+        function ajaxRPC(requestobject,async,callback){ 
+            var result=null;
             if(async!==undefined)async=false;
             var requestobject = HobbitsRPC.makeObject(requestobject,function(rsvd,res){
+                console.log("ajax rpc  res data ==",res);
+                result=res;
+                if(callback!=undefined)callback(null,res);
             });
             
-            var ajaxres= $.ajax({
+            $.ajax({
                 type:"post",
                 url:"/chat",
                 data: {rpc:JSON.stringify(requestobject)},
                 async:async,
                 success:
                     function(recvData){
-                        //HandlingJSONres(JSON.parse(recvData));
+                        console.log("ajax recv data ==",recvData);
+                        HandlingJSONres(JSON.parse(recvData));
                     },
                 // beforeSend:showRequest,  
-                error:function(e){alert(e.responseText);}
+                error:function(e){alert(e.responseText);callback("ajax error!!",null);}
             });
-            return (JSON.parse(ajaxres.responseText).RES);
+            return result;
         }
         
         
@@ -220,18 +233,31 @@ $(document).ready(main);
         $('#button_pingtest').click(function(){
             var requestobject = {CMD:"TSTPING", parameter:[$('#pingtestaddress').val()]};
             var senddata =HobbitsRPC.makeObject(requestobject,function(rsvd,res){
+                printconsole(res);
                 //printresult('Ping result!',res);
             });
             writeData(HobbitsRPC.client,senddata);
         });
-        
+       
         $('#button_getlogdata').click(function(){
             var startpoint=$('#logstart').val();
             var endpoint=$('#logend').val();
-            var requestobject = {CMD:"GLD", parameter:[startpoint,endpoint]};
-            var senddata =HobbitsRPC.makeObject(requestobject,function(rsvd,res){
-            });
-            
+            /*
+            var filepath = "./logfile/MessengerLog.txt.2";
+            var filepath1 = "./logfile/MessengerLog.txt.1";
+            var filepath2 = "./logfile/MessengerLog.txt";
+
+            var requestobject = {CMD:"GLD", parameter:[filepath,startpoint,endpoint]};
+            var senddata =HobbitsRPC.makeObject(requestobject,function(rsvd,res){printconsole(res)});
+            writeData(HobbitsRPC.client,senddata);
+            var requestobject1 = {CMD:"GLD", parameter:[filepath1,startpoint,endpoint]};
+            var senddata =HobbitsRPC.makeObject(requestobject1,function(rsvd,res){printconsole(res)});
+            writeData(HobbitsRPC.client,senddata);
+            var requestobject2 = {CMD:"GLD", parameter:[filepath2,startpoint,endpoint]};
+            var senddata =HobbitsRPC.makeObject(requestobject2,function(rsvd,res){printconsole(res)});
+            writeData(HobbitsRPC.client,senddata);
+            */
+            var senddata =HobbitsRPC.makeObject({CMD:"GGD", parameter:[startpoint,endpoint]},function(rsvd,res){printconsole(res)});
             writeData(HobbitsRPC.client,senddata);
         });
         
@@ -271,6 +297,7 @@ $(document).ready(main);
         });
         $('#button_sendwebsocketrpc').click(function(){
             var senddata = /*JSON.stringify*/(HobbitsRPC.makeObject(makereqobj("ADD",[1,2,3,4,5,6]),function(rsvd,res){
+                printconsole(res);
             }));
             //var xmldata= builder.buildObject(senddata); 
             writeData(HobbitsRPC.client,senddata);
@@ -289,7 +316,7 @@ $(document).ready(main);
             var requestobject2 = {CMD:"CRT", parameter:[table]};
             var res =ajaxRPC(requestobject2,false);
             if(debug)console.log('return Value =', res);
-                printresult('data list',JSON.stringify(res));
+                printresult('data list',(res));
                 //$('#content').html(output);
         });   
         $('#button_mysqllist').click(function(){
@@ -298,7 +325,7 @@ $(document).ready(main);
             var requestobject2 = {CMD:"LST", parameter:[table]};
             var res =ajaxRPC(requestobject2,false); 
             if(debug)console.log('return Value =', res);
-                printresult('data list',JSON.stringify(res));
+                printresult('data list',(res));
                 //$('#content').html(output);
         });
         $('#button_mysqldeletedata').click(function(){
@@ -309,7 +336,7 @@ $(document).ready(main);
             var requestobject3 = {CMD:"DEL", parameter:[table,key]};
             var res =ajaxRPC(requestobject3,false); 
             if(debug)console.log('return Value =', res);
-                printresult('data delete',JSON.stringify(res));
+                printresult('data delete',(res));
         });
         $('#buttonmysqlgetdata').click(function(){
             var id=$('#DB_ID').val();
@@ -323,7 +350,7 @@ $(document).ready(main);
             $('#DB_MN').val(res[0].modelnumber);
             $('#DB_SEI').val(res[0].series);
             if(debug)console.log('return Value =', res);
-                printresult('data result',JSON.stringify(res));
+                printresult('data result',(res));
         });
         $('#buttonmysqlinsert').click(function(){
             var name=$('#DB_NAME').val();
@@ -336,7 +363,7 @@ $(document).ready(main);
             var requestobject3 = {CMD:"INS", parameter:[table,key,value]};
             var res =ajaxRPC(requestobject3,false); 
             if(debug)console.log('return Value =', res);
-                printresult('data insert',JSON.stringify(res));
+                printresult('data insert',(res));
         }); 
                 //loadconfig
         $('#buttonUPDATE').click(function(){
@@ -351,7 +378,7 @@ $(document).ready(main);
             var requestobject3 = {CMD:"UPD", parameter:[table,key,value]};
             var res =ajaxRPC(requestobject3,false); 
             if(debug)console.log('return Value =', res);
-                printresult('data update',JSON.stringify(res));
+                printresult('data update',(res));
         });
         $('#buttonSAVEOBJ').click(function(){
             var name=$('#DB_NAME').val();
@@ -365,7 +392,7 @@ $(document).ready(main);
             var requestobject3 = {CMD:"SVO", parameter:[table,key,object]};
             var res =ajaxRPC(requestobject3,false); 
             if(debug)console.log('return Value =', res);
-                printresult('data save obj',JSON.stringify(res));
+                printresult('data save obj',(res));
         });
         $('#buttonRESTOREOBJ').click(function(){
             var name=$('#DB_NAME').val();
@@ -378,7 +405,7 @@ $(document).ready(main);
             var requestobject3 = {CMD:"RES", parameter:[table,key]};
             var res =ajaxRPC(requestobject3,false); 
             if(debug)console.log('return Value =', res);
-                printresult('data res obj',JSON.stringify(res));
+                printresult('data res obj',(res));
         });
         $('#buttonCREATE').click(function(){
             var table=$('#SQ_table').val();
@@ -391,7 +418,7 @@ $(document).ready(main);
                 var table=$('#SQ_table').val();
                 var key=$('#SQ_key').val();
                 var value=$('#SQ_value').val();
-                var requestobject3 = {CMD:"SET", parameter:[table,key,value]};
+                var requestobject3 = {CMD:"SETITEM", parameter:[table,key,value]};
                 var res =ajaxRPC(requestobject3,false); 
                 if(debug)console.log('return Value =', res);
                     printresult('set data',res);
@@ -400,7 +427,7 @@ $(document).ready(main);
                 var table=$('#SQ_table').val();
                 var key=$('#SQ_key').val();
                 var value=$('#SQ_value').val();
-                var requestobject3 = {CMD:"GET", parameter:[table,key,value]};
+                var requestobject3 = {CMD:"GETITEM", parameter:[table,key,value]};
                 var res =ajaxRPC(requestobject3,false); 
                 if(debug)console.log('return Value =', res);
                     printresult('get data',res);
@@ -439,6 +466,13 @@ $(document).ready(main);
             if(debug)console.log('return Value =', res);
                 printresult('update sq',res);
         });
+        $('#buttonlistdata_sq').click(function(){
+            var table=$('#SQ_table').val();
+            var requestobject3 = {CMD:"LST", parameter:[table]};
+            var res =ajaxRPC(requestobject3,false); 
+            if(debug)console.log('return Value =', res);
+                printresult('LIST sq',res);
+        });
 /*      //cookie
         var gcTYPE= $.cookie('type');
         if(debug)console.log('what the ::::',gcTYPE);
@@ -463,6 +497,7 @@ $(document).ready(main);
             var requestobject2 = {CMD:$('#GC_TYPE').val(), parameter:[$('#GC_NAME').val(),$('#GC_CLIENT').val()]}; 
             var senddata = /*JSON.stringify*/(HobbitsRPC.makeObject(requestobject2,function(rsvd,res){
                 //printresult('group chat',res);
+                printconsole(res);
             }));
             writeData(HobbitsRPC.client,senddata);
             saveconfig();
