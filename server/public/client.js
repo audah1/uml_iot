@@ -11,9 +11,29 @@ require([/*"./xml2js/lib/xml2js",*/"/static/jsonrpcclient.js","/static/jquerynew
     //jsonclient= jsonclientInput;
     //$=jquery;
 var debug=false;
-
-$(document).ready(main);
+    $(document).ready(main);
+    window.onpopstate = function(event) {     ////////////////////////////히스토리 데이터 객체에 저장하는 기능
+        //alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
+        test_menu(window.location.hash);
+    };
+    function test_menu(name){
+        if(name=="#groupchat"){$('#chat').show();$('#pinglogtest').hide();$('#sql').hide();$('#rpctest').hide();$('#board').show();}//window.location.protocol+
+        else if(name=="#pinglog"){$('#chat').hide();$('#pinglogtest').show();$('#sql').hide();$('#rpctest').hide();$('#board').show();}
+        else if(name=="#sql"){$('#chat').hide();$('#pinglogtest').hide();$('#sql').show();$('#rpctest').hide();$('#board').show();}
+        else if(name=="#rpctest"){$('#chat').hide();$('#pinglogtest').hide();$('#sql').hide();$('#rpctest').show();$('#board').hide();}
+    }
+    function history_url(page,url){
+        history.pushState({state:page}, null, '#'+url);
+    }
     function main(){
+        
+        $('#chat').hide();
+        $('#pinglogtest').hide();
+        $('#sql').hide();
+        $('#rpctest').hide();
+        $('#board').hide();
+        test_menu(window.location.hash);
+       
         function getcontrols(idtable){       //값저장
             var valtable={};
             for(var i=0; i<idtable.length;i++)
@@ -137,9 +157,6 @@ $(document).ready(main);
             });
             
                 
- 
-            
-            
             socket.on('rpcres', function(data){  //wsocket rpc
                 if(debug)console.log('rpcres=', data);
                 //var txt  = "\n\n\033[1;33;40m 33;40  \033[1;33;41m 33;41  \033[1;33;42m 33;42  \033[1;33;43m 33;43  \033[1;33;44m 33;44  \033[1;33;45m 33;45  \033[1;33;46m 33;46  \033[1m\033[0\n\n\033[1;33;42m >> Tests OK\n\n"
@@ -229,12 +246,31 @@ $(document).ready(main);
         console.log('$(document).ready start');
         loadconfig();
         groupchat();
+
+        $('#Groupchat_test').click(function(){
+            history_url(1,"groupchat");
+            test_menu(window.location.hash);
+        })
+        $('#PingLogtest').click(function(){
+            history_url(2,"pinglog");
+            test_menu(window.location.hash);
+        })
+        $('#DBtest').click(function(){
+            history_url(3,"sql");
+            test_menu(window.location.hash);
+        })        
+        $('#RPCtest').click(function(){
+            history_url(4,"rpctest");
+            test_menu(window.location.hash);
+        })        
         
+        $('#cookie_save').click(function(){
+            saveconfig();
+        });
         $('#button_pingtest').click(function(){
             var requestobject = {CMD:"TSTPING", parameter:[$('#pingtestaddress').val()]};
             var senddata =HobbitsRPC.makeObject(requestobject,function(rsvd,res){
                 printconsole(res);
-                //printresult('Ping result!',res);
             });
             writeData(HobbitsRPC.client,senddata);
         });
@@ -432,14 +468,7 @@ $(document).ready(main);
                 if(debug)console.log('return Value =', res);
                     printresult('get data',res);
         });
-        /*$('#buttonjson').click(function(){
-            var table=$('#SQ_table').val();
-            var key=$('#SQ_key').val();
-            var requestobject3 = {CMD:"Get", parameter:[table,key]};
-            var res =ajaxRPC(requestobject3,false); 
-            if(debug)console.log('return Value =', res);
-                printresult('db json',res);
-        });*/
+        
         $('#buttonDEL').click(function(){
             var table=$('#SQ_table').val();
             var key=$('#SQ_key').val();
@@ -492,7 +521,7 @@ $(document).ready(main);
         $.cookie('name',$('#GC_CLIENT').val());
         });        
 */   
-        $('#buttonGROUPSEND').click(function(){ $('#chat').show();
+        $('#buttonGROUPSEND').click(function(){ 
             var data=[$('#GC_TYPE').val(),$('#GC_NAME').val(),$('#GC_CLIENT').val()];
             var requestobject2 = {CMD:$('#GC_TYPE').val(), parameter:[$('#GC_NAME').val(),$('#GC_CLIENT').val()]}; 
             var senddata = /*JSON.stringify*/(HobbitsRPC.makeObject(requestobject2,function(rsvd,res){
@@ -500,12 +529,12 @@ $(document).ready(main);
                 printconsole(res);
             }));
             writeData(HobbitsRPC.client,senddata);
-            saveconfig();
         });
-        $('#cookie_save').click(function(){saveconfig();$('#chat').hide();});
-        $('#console').css("height",280);
+       
+        $('#console').css("height",500);
         
         console.log('$(document).ready end');
     }
+
 });
 ///////////////버튼 a,h,update 위
