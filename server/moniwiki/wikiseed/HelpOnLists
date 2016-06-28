@@ -1,0 +1,131 @@
+== 리스트와 들여쓰기 ==
+숫자가 매겨진 리스트와 총알 리스트를 아주 자연스럽게 입력하실 수 있습니다. 총알 리스트를 만들고 싶으시면 그 줄의 첫 시작을 "{{{[공벡]*}}}"로 시작하여 써주시면 됩니다; 숫자가 매겨진 리스트는 그 줄의 시작을 {{{[공백]1.}}}으로 시작하시면 됩니다.
+
+{{{
+[공백]* 총알리스트 1
+[공백]* 총알리스트 2
+[공백][공백]1. 번호 리스트 1
+[공백][공백]1. 번호 리스트 2
+[공백]* 총알리스트 3
+}}}
+
+ * 총알리스트 1
+ * 총알리스트 2
+  1. 번호 리스트 1
+  1. 번호 리스트 2
+ * 총알리스트 3
+----
+번호가 매겨진 리스트는 "{{{1.}}}" 뿐만아니라 "{{{a.}}}", "{{{A.}}}", "{{{i.}}}", "{{{I.}}}"를 지원합니다.
+
+복잡한 리스트도 간단히 공백으로 여러번 들여쓰기를 하면 쉽게 만들 수 있습니다.
+
+만약 공백을 넣어 들여쓰기만 하고 {{{*}}}나 번호리스트를 지원하는 {{{1.}}} {{{a.}}} 이외의 다른 문자가 온다면, 그 단락은 들여쓰기된 단락으로 인식됩니다.
+
+{{{
+이 단락은 들여쓰기기 되지 않은 단락입니다.
+ 공백을 하나 넣어 새로운 들여쓰기
+ 단락을 만들었습니다.
+    이번에는 공백을 더 넣어
+    새로운 단락을
+    만들었습니다.
+}}}
+
+이 단락은 들여쓰기기 되지 않은 단락입니다.
+ 공백을 하나 넣어 새로운 들여쓰기
+ 단락을 만들었습니다.
+    이번에는 공백을 더 넣어
+    새로운 단락을
+    만들었습니다.
+----
+See also ListFormatting, HelpOnEditing.
+
+=== 사용례 ===
+{{{
+If you indent text
+     like this,
+     then it is indented
+     in the output
+        you can have multiple
+        levels of indent
+
+And if you put asterisks at the start of the line
+  * you get a 
+  * bulleted
+  * list
+    * which can also be indented
+      * to several levels
+
+A numbered list, mixed with bullets:
+  1. one
+  1. two
+    1. one
+      * bullet 1
+      * bullet 2
+    1. two
+  1. three
+    * bullet
+      1. one
+
+Variations of numbered lists:
+  * Lowercase roman
+    i. one
+    i. two
+  * Uppercase roman (with start offset 42)
+    I.#42 forty-two
+    I. forty-three
+  * Lowercase alpha
+    a. one
+    a. two
+  * Uppercase alpha
+    A. one
+    A. two
+}}} 
+
+=== 결과 ===
+If you indent text
+  like this, then it is indented in the output
+    you can have multiple levels of indent
+
+And if you put asterisks at the start of the line
+  * you get a 
+  * bulleted
+  * list
+    * which can also be indented
+      * to several levels
+
+A numbered list, mixed with bullets:
+  1. one
+  1. two
+     1. one
+        * bullet 1
+        * bullet 2
+     1. two
+  1. three
+     * bullet
+        1. one
+
+Variations of numbered lists:
+  * Lowercase roman
+    i. one
+    i. two
+  * Uppercase roman (with start offset 42)
+    I.#42 forty-two
+    I. forty-three
+  * Lowercase alpha
+    a. one
+    a. two
+  * Uppercase alpha
+    A. one
+    A. two
+== 정의 ==
+{{{
+[space]'''term WikiName''':: definition WikiName
+[space]another term:: and its definition
+}}}
+
+ '''term WikiName''':: definition WikiName
+ another term:: and its definition
+
+/!\ 정의 문법은 자주 쓰이지 않는 문법이며 모인모인 호환용 문법입니다. 1.1.3CVS에 포함된 monimarkup.php에서 아직 지원하지 않습니다.
+----
+[[Navigation(HelpOnEditing)]]

@@ -1,9 +1,8 @@
 //var jsonclient; 
 //var $;  
 //var exports={};
-require([/*"./xml2js/lib/xml2js",*/"/static/jsonrpcclient.js","/static/jquerynew/jquery.js","/static/jquerynew/jquery.cookie.js",
-        "/static/bravo.js","/static/ansi_up-master/ansi_up.js"/*,"/static/jquery-ui.css","/static/jquery-1.10.2.js","/static/jquery-ui.js"*/],function(/*xml2js,*/jsonclient,$){
-    /*var b=require(["/static/b.js"],function(b){
+requirejs(["/static/jsonrpcclient.js","/static/bravo.js","/static/ansi_up-master/ansi_up.js",""],function(jsonclient){
+    /*var b=require(["/static/b.js"],function(b){//"/static/bravo.js",
         if(debug)console.log('b input>>>>>');
         if(debug)console.log(b.func());
     });*/
@@ -17,21 +16,52 @@ var debug=false;
         test_menu(window.location.hash);
     };
     function test_menu(name){
-        if(name=="#groupchat"){$('#chat').show();$('#pinglogtest').hide();$('#sql').hide();$('#rpctest').hide();$('#board').show();}//window.location.protocol+
-        else if(name=="#pinglog"){$('#chat').hide();$('#pinglogtest').show();$('#sql').hide();$('#rpctest').hide();$('#board').show();}
-        else if(name=="#sql"){$('#chat').hide();$('#pinglogtest').hide();$('#sql').show();$('#rpctest').hide();$('#board').show();}
-        else if(name=="#rpctest"){$('#chat').hide();$('#pinglogtest').hide();$('#sql').hide();$('#rpctest').show();$('#board').hide();}
+        if(name=="#groupchat"){
+            $('#jqxTabs').jqxTabs('val', 0);
+        }
+        else if(name=="#pinglog"){    
+            $('#jqxTabs').jqxTabs('val', 1);
+        }
+        else if(name=="#sql"){
+            $('#jqxTabs').jqxTabs('val', 2);
+        }
+        else if(name=="#rpctest"){
+            $('#jqxTabs').jqxTabs('val', 3);
+        }
+        else if(name=="#upload"){
+            $('#jqxTabs').jqxTabs('val', 4);
+        }
     }
+    function urlforhistory(divname,num,urlvalue){
+        $('#'+divname).click(function(){
+            history_url(num,urlvalue);
+        })
+    }
+    urlforhistory("Groupchat_test",1,"groupchat");
+    urlforhistory("PingLogtest",2,"pinglog");
+    urlforhistory("DBtest",3,"sql");
+    urlforhistory("RPCtest",4,"rpctest");
+    urlforhistory("Upload",5,"upload");
+    
+    /*
+    $('#Groupchat_test').click(function(){
+        history_url(1,"groupchat");
+    })
+    $('#PingLogtest').click(function(){
+        history_url(2,"pinglog");
+    })
+    $('#DBtest').click(function(){
+        history_url(3,"sql");
+    })        
+    $('#RPCtest').click(function(){
+        history_url(4,"rpctest");
+    })*/
     function history_url(page,url){
         history.pushState({state:page}, null, '#'+url);
     }
     function main(){
+        $('#jqxTabs').jqxTabs({ width: 1200, position: 'top',  collapsible: true });
         
-        $('#chat').hide();
-        $('#pinglogtest').hide();
-        $('#sql').hide();
-        $('#rpctest').hide();
-        $('#board').hide();
         test_menu(window.location.hash);
        
         function getcontrols(idtable){       //값저장
@@ -82,7 +112,7 @@ var debug=false;
         function saveconfig0(){local_set(localstoragetag,g_idtable,getcontrols(g_idtable));} 
         
         //var g_default=JSON.parse('{"CH_NAME":"123","CH_MESSAGE":"","DB_ID":"","DB_NAME":"","DB_MN":"","DB_SEI":"","SQ_table":"","SQ_key":"","SQ_value":"","GC_TYPE":"","GC_NAME":"","GC_CLIENT":""}');
-        var g_default={'pingtestaddress':"192.168.2.254","logstart":"2016-03-13","logend":"2016-03-14","CH_NAME":"name","CH_MESSAGE":"message","DB_ID":"id","DB_NAME":"Name","DB_MN":"model num","DB_SEI":"series","SQ_table":"table name","SQ_key":"key",
+        var g_default={'urlinput':window.location,'pingtestaddress':"192.168.2.254","logstart":"2016-03-13","logend":"2016-03-14","CH_NAME":"name","CH_MESSAGE":"message","DB_ID":"id","DB_NAME":"Name","DB_MN":"model num","DB_SEI":"series","SQ_table":"table name","SQ_key":"key",
                     "SQ_value":"value","GC_TYPE":"JAC","GC_NAME":"KANG","GC_CLIENT":"MM"};
 
         function getcontrols2(idtable){       //값저장
@@ -204,7 +234,6 @@ var debug=false;
             var requestobject={};
             requestobject.CMD = CMD;
             requestobject.parameter = param;
-            
             return requestobject;
         }
 
@@ -241,34 +270,23 @@ var debug=false;
             });
             return result;
         }
-        
+        function move_browser(url){
+            window.location.replace(url);
+        }
         
         console.log('$(document).ready start');
         loadconfig();
         groupchat();
 
-        $('#Groupchat_test').click(function(){
-            history_url(1,"groupchat");
-            test_menu(window.location.hash);
-        })
-        $('#PingLogtest').click(function(){
-            history_url(2,"pinglog");
-            test_menu(window.location.hash);
-        })
-        $('#DBtest').click(function(){
-            history_url(3,"sql");
-            test_menu(window.location.hash);
-        })        
-        $('#RPCtest').click(function(){
-            history_url(4,"rpctest");
-            test_menu(window.location.hash);
-        })        
         
+        $('#move_browser').click(function(){
+            move_browser($('#urlinput').val());
+        })
         $('#cookie_save').click(function(){
             saveconfig();
         });
         $('#button_pingtest').click(function(){
-            var requestobject = {CMD:"TSTPING", parameter:[$('#pingtestaddress').val()]};
+            var requestobject = makereqobj("TSTPING",[$('#pingtestaddress').val()]);
             var senddata =HobbitsRPC.makeObject(requestobject,function(rsvd,res){
                 printconsole(res);
             });
@@ -525,14 +543,14 @@ var debug=false;
             var data=[$('#GC_TYPE').val(),$('#GC_NAME').val(),$('#GC_CLIENT').val()];
             var requestobject2 = {CMD:$('#GC_TYPE').val(), parameter:[$('#GC_NAME').val(),$('#GC_CLIENT').val()]}; 
             var senddata = /*JSON.stringify*/(HobbitsRPC.makeObject(requestobject2,function(rsvd,res){
-                //printresult('group chat',res);
+                console.log("11",res);
                 printconsole(res);
             }));
             writeData(HobbitsRPC.client,senddata);
         });
        
         $('#console').css("height",500);
-        
+        $('#urlinput').css("width",500);
         console.log('$(document).ready end');
     }
 

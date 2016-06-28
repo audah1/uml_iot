@@ -1,0 +1,145 @@
+EMS사양을 정리하기 위한 wiki입니다.
+
+[[TableOfContents]]
+
+----
+
+== ChangeLog ==
+spec정리 시작.
+
+http://stackoverflow.com/questions/18222953/posting-another-web-query-during-render-get-or-render-post-processing
+
+--> twisted의 render_GET처리에서 DB처리등을 지연하여 처리하려면 위의 예제 참조.(DBLoadHandler,DBSaveHandler,LogLoadHandler등에서)
+
+--> Req2DevHandler에서 지연처리를 하고 있네^_^;
+
+
+기존 EMS문제.
+
+--> rdlock사용상에 문제가 있음. 오류발생 확률은 매우 낮음.
+
+--> db access시에 lock이 필요함.(multithread에서 사용시에는)
+
+--> 지원하는 API확인하는 AJAX가 필요하다.
+
+--> unit_test를 돌려보아야 한다.
+== 2015.4.03 ==
+  * 기존서버의 요구사항 정리
+  * 신규로 추가할 기능 정리
+  * 서버의 분할 구조 정리
+=== TDXAGW EMS의 큰기능 ===
+  * webServer 
+    * interface: 관리자side
+    * interface: TDXAGWside
+    * interface: dbServier side
+    * data: webUI화일, SW image
+    * connection: http, websocket, dbServer연결
+    * NEOSS기능 시험을 위한 tcp(client)연결
+  * ipcServer
+    * interface: 관리자side
+    * interface: TDXAGWside
+    * interface: NEOSSside
+    * interface: dbServier side
+    * data: 장치연결정보
+    * connection: UDP(websocket), http, tcp(NEOSS), dbServer연결
+  * dbServer
+    * interface: ipcServer side
+    * interface: webServer side
+    * data: 설정db,log db
+    * connection: db연결,dbClients연결
+    * 저장방식: sqlite,mySQL
+    * 통신형식: TCP(server), UDP
+      * 1차구현은 UDP로 하되 client는 다수일 수 있다.
+      * TCP연결은 계속 유지. 다수 thread의 동시접속을 고려하여, Line방식을 사용하되 Null Char를 delimiter로 사용하여 처리overhead를 줄인다.
+      * load시에는 sql문만 전송하고, 판독결과 나중에 수신받는다.
+      * save시에는 sql문+newLine+저장내용를 전송하고, 저장결과는 나중엔 "OK"만 전송하거나 생략한다.
+      * UDP를 통한 save를 지원하여 log저장등에 사용할 수 있어야 한다. 이경우 저장결과는 생략한다.
+
+=== IPC용 ajax ===
+ * LongPolling형태로 작동
+ * 응답시에 session cookie갱신
+ * session에서 session으로 송신기능
+ * 장비에서 session으로 송신기능
+  
+ 
+=== EMS서버의 화일 및 database ===
+  * system.xml DB
+      * tree정보, 사용자정보, SW버젼정보 포함
+  * 장비별 vgw128_kt.xml DB
+  * 장비별 log.xml DB
+      * 성능 및 ALARM정보
+  * webUI(html,js,css,jpg,ico) FILES
+  * SW image FILES
+  * /software/ 에 ramdisk및kernel을 download받는다(장비용)
+
+=== dbload기능 ===
+  * TDXAGW를 위한 xml제공기능시(mixvendor기능).
+  * XML download기능(saveAs).
+  * 별도의 서버process구현이 필요함.
+  * 장비 및 User공용
+
+  * logload기능은 세부검색 가능하게
+=== dbsave기능 ===
+  * fileUpload로 된 경우 db에 재저장기능
+  * 별도의 서버process구현이 필요함.
+  * dbuploaded기능
+     * dbsave기능에서 fileUpload된 경우에 호출되어야 함.
+  * logsave기능
+=== SW image upload기능(kernel,ramdisk) ===
+  * upload시 화일이름에 포함된 버젼정보 처리기능(webUI기능?)
+  * curl이나 wget을 이용하여서도 upload가 가능하도록 구현
+
+=== EMS설정변경시 자동로드기능(xml parse필요) ===
+  * EMS설정에 login userList관리기능.
+    * 변경은 UI
+    * 판독해서 처리는 server
+
+
+=== UDP를 통한 TDXAGW통신기능 ===
+  * session에서 장비로 송신기능
+  * 주기적인 PING에 응답.
+  * agentready처리,GETTIME처리
+  * 주기적인 PING이 없을시에 memory에서 삭제하고 알림.
+
+=== NEOSS를 위한 TCP listen기능 ===
+  * NEOSS -> TDXAGW 요청기능
+  * TDXAGW -> NEOSS 응답기능
+
+=== NEOSS기능 시험을 위한 TCP client기능 ===
+  * client -> NEOSS service 요청기능
+  * NEOSS service -> client 응답수신
+
+=== 사용자인증 및 세션관리기능(session기반) ===
+  * session기반 broadcast에서 사용됨.
+  * cookie기반 세션구현
+  * 지속시간 매우 길게
+  * 접속이 있으면 지속시간증가하도록
+    * cookie에 적용
+    * 내부세션에 적용
+    * LongPoll을 일정주기로 사용해야 cookie연장된다.
+  * session이 매우 길게(거의 영구적으로) 유지될 수 있는 기능이 있어야함.
+
+=== sqlite db연동기능 ===
+  * webserver를 위한 db저장,읽기기능
+
+=== jsonRPC를 통한 서비스 기능 ===
+  * javascript에 친화적인 JSON형식을 입출력을 구현한다.
+     * TCP/UDP/HTTP
+
+=== xmlRPC를 통한 서비스 기능 ===
+  * xmlRPC를 구현하여 개방성을 추구한다.
+     * TCP/UDP/HTTP
+=== RESTful service를 통한 서비스 기능 ===
+  * URL과 requestType으로만 명령을 전달한다.
+
+=== API호환성 검사기능 ===
+  * 지원하는 api의 종류를 응답하는 기능
+
+=== PHP5-CGI연동 기능 ===
+  * PHP5-CGI연동구현
+     * minify나 기타 확장을 위해 필요하다.
+
+=== UNIT-TEST기능 ===
+  * old server와 new server를 공통으로 만족하는 unit-test.sh구현
+    * api종류에 따라 처리하고, old server의 경우 지원하는 API를 가정한다.
+  * 가급적 coding으로 구현하는 것을 지양하고, nc와 curl/wget등을 이용하여 shellscript로 구현한다.

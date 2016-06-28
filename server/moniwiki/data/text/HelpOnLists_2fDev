@@ -1,0 +1,18 @@
+== 한글 리스트 스타일 ==
+모질라 / 크롬 등등의 브라우저에서 비공식적인 확장인 한글 자음 타입의 리스트를 지원하고 있었다.
+{{{#!html
+<style type='text/css'>
+.hangul ul {
+list-style-type: hangul-consonant;
+}
+
+</style>
+<ul style="list-style-type: hangul-consonant;list-style-image:none;">
+<li>첫번째</li>
+<li>두번째</li>
+<li>세번째</li>
+</ul>
+}}}
+
+Please see
+https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type

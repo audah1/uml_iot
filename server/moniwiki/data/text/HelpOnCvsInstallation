@@ -1,0 +1,51 @@
+/!\ 2013년 5월 현재, KLDP.net 서비스 종료 - 읽기만 가능 -로 인해 github에서 받는 것이 가장 최신 개발 버전입니다.
+----
+CVS 최신 모니위키를 통해서 설치하기
+
+CVS라고 하는 것은 모니위키가 개발중인 최신 버전을 말합니다. 모니위키를 최신 개발버전으로 설치하는 방법은 다음과 같습니다.
+
+== CVS로부터 처음 설치하는 경우 ==
+
+=== CVS에서 가져오기 ===
+CVS에서 최신 모니위키 소스를 가져옵니다.
+
+ 1. 원하는 설치경로로 옮깁니다. (예를 들어 `/home/foobar/public_html`)
+ 2. CVS로부터 소스를 가져옵니다. (이를 checkout이라고 합니다.)
+  1. http://kldp.net/projects/moniwiki/src 를 가면 설명을 보실 수 있습니다.
+  1. 설명에 나와있는 것처럼 먼저 CVS로 로그인을 합니다. {{{cvs -d :pserver:anonymous@kldp.net:/cvsroot/moniwiki login}}}
+   1. 로그인은 단 한번만 하면 됩니다. 한번 로그인 하면 그 정보가 {{{~/.cvspass}}}파일에 보존됩니다.
+  1. CVS로 부터 소스를 가져옵니다. (checkout) {{{cvs -d :pserver:anonymous@kldp.net:/cvsroot/moniwiki checkout moniwiki}}}
+   1. 그러면 현재 디렉토리에 `moniwiki` 디렉토리가 생성되고 그 아래로 소스코드가 다운로드 받아집니다.
+=== 번역 메시지 초기화 ===
+ * /!\ 이 단계에서는 `make` 혹은 `gmake`가 필요합니다. 리눅스 서버 호스팅의 경우 간혹 `make` 혹은 `gmake`를 쓸 수 없는 경우가 있습니다.
+ * 이 과정을 건너뛰는 경우에는 한글 메시지가 나오지 않습니다.
+
+모니위키 본체 프로그램에 대한 번역 메시지.
+{{{
+cd moniwiki/locale
+sh update-makefile.sh
+make
+...
+...
+}}}
+----
+자바스크립트에 대한 번역 메시지.
+{{{
+cd moniwiki/local/js/locale # 디렉토리 명칭에 유의하세요.
+sh update-makefile.sh
+make
+...
+...
+}}}
+=== 모니위키 초기화 및 초기설정 변경 팁 ===
+이후의 설치방법은 HelpOnInstallation 페이지를 참고하세요.
+
+== CVS로부터 업데이트하기 ==
+`moniwiki`가 설치된 디렉토리로 가서 다음 명령을 실행합니다.
+{{{
+cvs up # 혹은 cvs up -d
+...
+}}}
+이렇게 하면 자동으로 업데이트되며, 자신이 고쳐서 쓰고있는 부분은 대게 잘 보존됩니다.
+----
+[[Navigation(HelpOnAdministration)]]

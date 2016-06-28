@@ -1,0 +1,686 @@
+/* MoniWiki base CSS 2005/09/22 by wkpark */
+
+body {
+/* IE hover hack */
+/* behavior:url("../local/csshover.htc"); */
+}
+
+ul li p {
+  margin-top: 0px;
+}
+
+#wikiBanner {
+  clear:both;
+}
+
+tt.wiki, code.wiki {font-family:monospace;}
+tt.foot {
+  font-family:sans-serif;
+  vertical-align: super;
+}
+
+div.foot ul{
+  list-style:none;
+  padding-left:10px;
+}
+
+tt.sister {
+  font-family:sans-serif;
+  vertical-align: super;
+  text-decoration: none;
+}
+
+pre.wiki {
+  word-wrap: break-word; /* IE */
+  overflow-x: auto;
+  font-family:Courier,monospace;
+}
+
+pre {
+  font-family:Courier New,monospace;
+}
+
+pre.console {
+  padding: .25em ;
+  border: 2px inset #808080;
+}
+
+pre.quote {
+  white-space:pre-wrap;
+  white-space: -moz-pre-wrap; 
+  font-family:monospace;
+}
+
+.preWhiteSpace {
+  padding-left:6px;
+  padding-top:6px;
+  font-family: "Courier New", GulimChe, monospace !important;
+  background-color:#000000;
+  color:#c0c0c0;
+  border:1px solid #D8E1E9;
+  border-left:10px solid #D8E1E9;
+  padding:10px;
+}
+
+table.wiki {
+/* background-color: #E9ECEF; */
+}
+
+table.center {
+  margin-left:auto;
+  margin-right:auto;
+}
+
+table.right {
+  float:right;
+/*  margin-left:auto;
+  margin-right:5px; */
+}
+
+td.center {
+  text-align:center;
+}
+
+td.right {
+  text-align:right;
+}
+
+table.wiki tr {
+}
+
+textarea {
+  font-family: monospace;
+  font-size:14px; width:100%;
+}
+
+form, input, button { margin:0; padding:0;/* for IE */}
+button { overflow:visible; /* for IE */}
+
+label { padding-right:3px; }
+
+#editor_info ul {list-style:none; margin:2px 0 2px 0; padding:0;}
+#editor_info li {padding:2px;}
+#editor_area { clear:both; }
+
+.resizable-textarea .grippie {
+  height: 14px;
+  background: #ECE9D6 url(../imgs/misc/grippie.png) no-repeat 100% 100%;
+  border: 1px solid #DFDBCA;
+  border-top-width: 0;
+  cursor: s-resize;
+}
+
+.resizable-textarea {
+  width:100% !important;
+  width:98%; /* for IE */
+}
+
+.resizable-textarea textarea {
+  padding:3px;
+  padding-right:0;
+}
+
+.info th {
+  background-color:#FBFBFB;
+/*  border-collapse: collapse; */
+/*  border: 1px solid silver; */
+}
+
+.disabled {
+  background-color:#E2E2E2 !important;
+  color:gray;
+}
+
+.info td {
+  background-color:#FEFEFE;
+}
+table.info {
+  border-spacing:2px;
+/*  border-collapse:collapse; /* */
+  border-collapse:separate;
+  padding:3px;
+}
+
+div.diff-added, tr.diff-added {
+  background-color:#ccffcc;
+}
+
+div.diff-removed, tr.diff-removed {
+  background-color:#FFDDDD;
+}
+
+div.diff-sep {
+  font-family:"Bitstream Vera Sans mono",monospace;
+  background-color:#e0e0e0;
+  color:#000000; /* */
+  padding:2px;
+}
+
+span.diff-added, ins.diff-added {
+  background-color: #DDFFDD;
+  text-decoration: none;
+}
+
+span.diff-removed, del.diff-removed {
+  background-color: #FFDDDD;
+  text-decoration: none;
+}
+
+div.codeDiff span.num { padding-right:4px; text-align:right; width:40px; display:inline-block; }
+div.codeDiff span.num { background-color:#dddddd; border-right:3px solid #9b9b9b;}
+div.diff-added span.num { background-color:#00ea00; border-right:3px solid #00b700 ;}
+div.diff-removed span.num { background-color:#ff6a6a; border-right:3px solid #cc0000; }
+div.diff-removed span.num:hover { background-color:#ffecec; border-right:3px solid #cc0000; }
+div.diff-added span.num:hover { background-color:#BBFFBB; border-right:3px solid #00b700 ;}
+.codeDiff span.num:hover { background-color:#f0f0f0; border-right:3px solid #9b9b9b;}
+
+.codeDiff h2 { padding-left:5px; }
+
+div.diff-removed.selected { background-color: #FFB5B5; }
+div.diff-added.selected { background-color: #26FF26; }
+
+div.message {
+  background-color: #E8E8E8;
+  padding:0px 5px;
+  vertical-align: middle;
+}
+
+div.message span {
+  padding-left:65px;
+  margin:0px 0px;
+  display:block;
+  min-height: 60px;
+  height: auto !important;
+  height:60px;
+}
+
+div.message span a span {
+  display:inline;
+  padding:0; margin:0;
+  height:auto;
+  min-width:none;
+}
+
+div.message span.warn {
+  background: url(../imgs/info/warn.png) 10px 10px no-repeat;
+}
+
+div.message span.search {
+  background: url(../imgs/info/search.png) 10px 10px no-repeat;
+}
+
+div.message h3 {
+  margin:0px;
+  border:0px;
+  line-height:250%;
+}
+
+pre.errlog {
+  background-color: #E8E8E8;
+  border:2px solid #ff0000;
+  color:#440000;
+  padding:4px;
+}
+
+.highlight {
+  background-color:#FFFF40;
+}
+
+table.goto {
+  background-color: #002B2C;
+}
+
+span.goto, input.goto {
+  font-family:sans-serif;
+  font-size:11px;
+}
+
+table.closure, td.closure, div.closure {
+  background-color: #E9ECEF;
+}
+
+div.closure {
+  background-color: #E9ECEF;
+  padding:3px;
+}
+
+/*  */
+.wikiHr {
+  border:0px solid;
+  padding: 0px 0px; /* */
+  margin-top:0px;
+  height:1px;  
+/* background: #000 url(hr1.gif) no-repeat scroll center; */
+}
+
+#wikiHeader {
+  margin-bottom:3px;
+}
+#wikiHeader a:link {color:black;}
+#wikiHeader a:visited {color:#505050;}
+
+.wikiTitle {
+  font-family:sans-serif;
+  font-size:28px;
+  font-weight:bold;
+  display:block;
+}
+
+.wikiTitle a,.wikiTitle a:active,.wikiTitle a:visited {
+  text-decoration: none;
+}
+
+.clear {
+  clear:both;
+  height:1px; /* */
+}
+
+/* HierarchicalWiki */
+.wikiGroup {
+  font-family:Tahoma,Lucida,sans-serif;
+  font-size:10px;
+  display:block;
+}
+
+#wikiTrailer, #wikiOrigin {
+  padding-left: 20px;
+  padding-bottom: 5px;
+}
+
+#wikiBody {
+  margin: 10px 10px 0px 15px;
+}
+
+#wikiFooter {
+/*  padding: 0.5em 2em; */
+/*  background-color:yellow; */
+}
+
+#wikiHint {
+  font-family:Georgia,Verdana,Lucida,sans-serif;
+  font-size:10px;
+}
+
+#wikiSister {
+/*  background-color:lightgreen; /* */
+}
+
+#wikiPreview {
+  border: 2px solid #a0a0a0;
+  margin: 5px 5px 5px 5px;
+  padding: 5px 1em 5px 1em;
+}
+
+#wikiIcon {
+  float:right;
+  padding: 3px 10px;
+  text-align: right;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+img.wikiIcon {
+  border:0px;
+}
+
+#wikiIcon img, #wikiMenu img {
+  vertical-align: middle;
+}
+
+* html #wikiIcon {
+  visibility:visible; /* for IE */
+}
+
+#wikiHeader:hover #wikiIcon {
+  visibility:visible;
+}
+
+#wikiExtra {
+  padding:1em 2em 1em 2em;
+}
+
+div.indent {
+  margin:5px 0px 5px 0px;
+  padding:0px 1em 0px 0px;
+  border-left:2px solid #e0e0e0;
+}
+
+div.hint { font-size: 10px; background-color: #369; color:white;}
+a.purple { font-size: 10px; text-decoration:none;}
+
+/* Blog CSS */
+a.purple { font-size: 10px; text-decoration:none;}
+div.blog { width:90%; padding: 0em 1em 0em 1em; }
+div.blog-user { font-size:10px; }
+div.blog-title { font-size:16px; font-weight:bold; }
+div.blog-comments { padding: 1em 1em 1em 2em;}
+
+div.blog-date { font-size:18px; font-weight:bold; padding-bottom:5px;}
+span.blog-user { font-size:10px; }
+
+div.trackback-hint { font-size: 10px; padding: 1em 1em 1em 1em;background-color: #eee;}
+/* Calendar */
+td.day { background:#e5d9c7; text-align: center;}
+td.today { background:#ffffff; text-align: center;}
+
+
+/* enscript syntax */
+div.wikiPre i,div.wikiPre b{
+  font-weight: normal;
+  font-style: normal;
+}
+
+img.interwiki {
+  vertical-align:middle; /* */
+}
+
+img.smiley {
+  vertical-align:middle; /* */
+}
+
+img.url {
+  vertical-align:middle; /* */
+  border:0px;
+}
+
+img.icon {
+  vertical-align:middle; /* */
+}
+
+div.imgAttach {
+  display:inline;
+}
+
+img.imgLeft {
+  margin-right : 15px;
+  margin-bottom : 5px;
+}
+
+img.imgRight {
+  margin-left : 10px;
+  margin-bottom : 5px;
+}
+
+img.imgCenter {
+  display:block;
+  margin-left : auto;
+  margin-right : auto;
+}
+
+span.externalLink {
+  display: none;
+}
+
+.purple a {
+    font-family: Verdana, Trebuchet, Arial, Helvetica;
+    font-style: normal;
+    font-weight: bold;
+    font-size: x-small;
+    text-decoration: none;
+    color: #C8A8FF;  /* light purple */
+}
+
+span.lineNumber {
+  color:#ffff00;
+  border-right:3px solid #4e4e4e;
+  margin-right:4px;
+  white-space:pre;
+}
+
+.wikiSyntax, .wikiSyntax code{  
+  font-family:"Bitstream Vera Sans Mono", Courier New, GulimChe, monospace !important;
+  overflow-x:auto;
+}
+
+div.wikiSyntax {
+  word-wrap: break-word; /* IE */
+}
+
+.pageNav { margin-bottom:5px;font-size : 75%; }
+.pageNext { float: right; }
+.pagePrev { float: left; }
+
+#wikiHelper {
+  text-align: left;
+  margin: 5px auto;
+  width:430px;
+}
+
+#wikiResize {
+  float: right;
+  padding-right:10px;
+}
+
+#smileyChooser {
+  padding: 5px;
+  margin-top:3px;
+  margin-bottom:3px;
+  background-color: #f0f0f0;
+  background:url(../imgs/misc/panbg.png) repeat-x;
+  border-top: 1px solid #e4e4e4;
+  border-bottom: 1px solid #808080;
+  border-right: 1px solid #bebebe;
+  border-left: 1px solid #bebebe;
+}
+
+#smileyChooser img {
+  padding: 2px;
+  border: none;
+}
+
+#blogCategory ul {
+  list-style:none;
+  padding-left: 20px;
+}
+
+#blogCategory span.dir {
+  display:none;
+}
+
+a.perma:link, a.perma:visited {
+  visibility: hidden;
+}
+
+* html a.perma:visited { /* IE hack */
+  visibility: visible;
+}
+
+h1:hover a.perma, h2:hover a.perma, h3:hover a.perma {
+  visibility: visible;
+}
+
+h4:hover a.perma, h5:hover a.perma, h6:hover a.perma {
+  visibility: visible;
+}
+
+.rc-date {
+  font-size:1.2em;
+}
+.rc-bookmark {
+  font-size:11px;
+  font-weight:normal;
+}
+
+.rc-button ul {
+  list-style: none;
+  display: inline;
+  padding: 0px;
+}
+
+.rc-button li {
+  display: inline;
+}
+
+.recentChanges .range {
+  font-family: Tahoma, sans-serif;
+  font-size:11px;
+}
+
+.recentChanges button {
+  background:url(../imgs/misc/plus_minus.png) no-repeat;
+  cursor: pointer;
+  vertical-align: top;
+  position: relative;
+  top: 3px;
+  width: 9px;
+  height: 9px;
+  margin-right:3px;
+}
+
+.recentChanges button.close {
+  background:url(../imgs/misc/plus_minus.png) no-repeat 0 -9px;
+}
+
+.recentChanges button span {
+  display:none;
+}
+
+.wikiMarkup {
+  background-color:#ffff00;
+  border-left:2px solid #F5E238;
+  border-right:2px solid #F5E238;
+  border-top:2px dotted #F5E238;
+  border-bottom:2px dotted #F5E238;
+}
+
+.wikiMarkupEdit pre, .wikiMarkupEdit span {
+  background-color:#ffff00;
+  border:2px dotted #F5E238;
+  font-family: "Courier New",sans-serif;
+}
+
+.wikiMarkup img {
+  background-color:#ffff00;
+}
+
+/* since v1.1.3 */
+blockquote.indent {
+  margin:5px 0px 5px 0px;
+  padding:1em;
+  border-left:2px solid #e0e0e0;
+}
+
+blockquote.quote {
+  background-color: #f8f8f8; /* */
+  margin:5px 0px 5px 0px;
+  padding:5px 5px 5px 1ex;
+  border-left:2px solid #d7d7d7;
+}
+
+/* <u></u> replacement */
+em.underline{
+  font-style:normal;
+  text-decoration:underline;
+}
+
+#wikiSubIndex {
+  /* float:right; /* */
+}
+
+#wikiSubIndex {
+  display:block;
+  padding-bottom:0px;
+  padding-left:0px;
+  padding-top:0px;
+  border:0px solid transparent; /* */
+  margin-right:5px;
+  z-index:20;
+}
+
+
+#wikiSubIndex legend {
+  color:#555;
+  background: url(../imgs/misc/open.png) no-repeat;
+  height:9px;
+  width:9px;
+  padding:5px;
+  margin:0px;
+}
+
+#wikiSubIndex legend.close {
+  background: url(../imgs/misc/close.png) no-repeat;
+}
+
+#toc {
+  /* float:right;
+  border:1px solid black; */
+  background: #ffffff;
+  padding:3px;
+}
+
+.wikiRating {
+  left:500px;
+  border-left:5px solid #72BEE2;
+  padding-left:5px;
+}
+
+.attach img {
+  vertical-align:middle;
+}
+
+.addPage {
+  margin-left:auto; /* Moz */
+  margin-right:auto; /* Moz */
+}
+
+.addPage table {
+}
+
+.addPage, .addPage input{
+  font-size:20px;
+}
+
+.addLabel {
+  text-align:right;
+}
+
+.subscribePages ol {
+  list-style:circle;
+}
+
+.pluginInfo fieldset div {
+  background: url(../imgs/info/plugin.png) no-repeat;
+  padding-left:70px;
+}
+
+span.markup.invisible {
+  display:none;
+}
+
+.uploadForm input.fake-file {
+  vertical-align: middle;
+  border:1px solid #cfcfcf;
+  width:292px;
+  background:url("../imgs/misc/x2.png") no-repeat 290px 3px; /* reset icon */
+  font-family:DotumChe, monospace, sans-serif;
+  font-size:12px;
+  padding:2px;
+  padding-right:11px;
+  margin-right:4px;
+  margin-bottom:4px;
+  _height:15px;
+  _margin-top:-2px;
+}
+
+.uploadForm .form-file {
+  padding:0;
+  margin:0;
+  font-size:12px;
+  height:20px;
+  width:76px;
+  left:-3px; /* */
+  filter:alpha(opacity=0.0);
+  opacity:0;
+  cursor:pointer;
+}
+
+.uploadForm .form-file:active {
+  border:1px solid red;
+}
+
+.uploadForm button.add-file {
+  cursor:pointer;
+}
+
+*html .uploadForm .form-file { height:32px; margin-top:-3px; }
+*+html .uploadForm .form-file { height:32px; margin-top:-3px; top:0;}

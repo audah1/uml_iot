@@ -1,0 +1,29 @@
+== XML 문서와 XSLT 프로세싱 ==
+모니위키는 모인모인과 마찬가지로 XML 문서를 위키 문서로 곧바로 만드는 것이 가능하다.
+이 경우 문서는 반드시 XML 선언 "{{{<?xml ...>}}}" 부분이 문서의 맨 첫줄에 있어야 한다. 또한 XML 문서를 HTML문서로 프로세싱하기 위한 스타일 시트를 지정해야 한다. (이는 [[http://www.w3.org/TR/xml-stylesheet/ 표준 "xml-stylesheet" 프로세싱 인스트럭션]]에 의해서 "
+{{{href}}}" 파라메터로 지정해야 한다.)
+
+다음 예제는 XsltVersion 문서의 내용이다.
+
+=== 사용례 ===
+{{{
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<?xml-stylesheet href="XsltVersion" type="text/xml"?>
+
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+   <xsl:output method="html" omit-xml-declaration="yes" indent="no"/>
+
+   <xsl:template match="/">
+     This Wiki is running an XSLT engine by
+     <xsl:value-of select="system-property('xsl:vendor')"/>
+     (<a href="{system-property('xsl:vendor-url')}"><xsl:value-of select="system-property('xsl:vendor-url')"/></a>)
+     implementing XSLT v<xsl:value-of select="system-property('xsl:version')"/>
+   </xsl:template>
+
+</xsl:stylesheet>
+}}} 
+
+=== 결과 ===
+[[Include(XsltVersion)]]

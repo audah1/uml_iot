@@ -1,0 +1,162 @@
+.wikiwyg_toolbar {
+/*  background: #EBE8D5; /* */
+/*  border: 1px outset #ACA899; /* */
+    letter-spacing: 0; /* */
+    line-height: 190%; /* */
+    padding: 2px 0 2px 0;
+}
+
+.wikiwyg_buttons {
+    float:left;
+    margin-right:2px;
+    margin-top:0px;
+    background: url(../images/toolbg.png) repeat-x;
+}
+
+.wikiwyg_buttons span {
+    float:left;
+    position:relative;
+    left:2px;
+    margin-left:2px;
+    padding-right:2px;
+    background: url(../images/toolbg.png) repeat-x;
+    background-position: right top;
+}
+
+span.wikiwyg_control_link a {
+    font-family:'Trebuchet MS',sans-serif;
+    padding: 4px;
+}
+
+.wikiwyg_control_link input {
+    font-family:'Trebuchet MS',sans-serif;
+    float:left;
+    font-size:12px;
+    padding:0 2px;
+}
+
+.wikiwyg_control_link button {
+    float:right;
+    margin-right:3px;
+}
+
+.wikiwyg_mode_selector {
+    font-family:'Trebuchet MS',sans-serif;
+    list-style-image: none;
+    list-style-type: none;
+    list-style-position: outside;
+    margin: 0;
+    padding:0;
+    display: inline-block;
+}
+
+.wikiwyg_mode_selector li:hover {
+    cursor: pointer;
+    background-position: left -65px;
+    border-bottom:1px solid white;
+}
+
+.wikiwyg_mode_selector li:hover span {
+    background-position: right -65px;
+    border-bottom:1px solid white;
+}
+
+ul.wikiwyg_mode_selector {
+    margin-left:2px;
+    display: inline-block;
+    float:right;
+    margin-bottom:-2px;
+}
+
+.wikiwyg_mode_selector li {
+    margin-bottom: -2px;
+    float:left;
+    position:relative; /* magic */
+    padding: 0px 0px;
+    padding-left: 3px;
+    margin-right: 5px;
+    background: url(../images/modebtn.gif) no-repeat;
+    background-position: left -65px;
+    display: inline;
+}
+
+.wikiwyg_mode_selector span {
+    float:left;
+    background: url(../images/modebtn.gif) no-repeat;
+}
+
+.wikiwyg_mode_selector span {
+    display: inline-block;
+    padding: 0px 0px;
+    padding-right:5px;
+    position:relative;
+    left:2px;
+    background-position: right -65px;
+    *height: 26px;
+}
+
+.wikiwyg_toolbar label {
+    padding:4px;
+    /*
+    border:1px outset ThreeDFace !important;
+    border:0px;
+    */
+    background: none;
+}
+
+/*
+.wikiwyg_toolbar input[type="radio"] {
+    display:none;
+}
+*/
+
+.wikiwyg_toolbar label.selected {
+    padding:4px;
+    border:1px outset ThreeDHighlight;
+    background: ThreeDHighlight;
+}
+
+.wikiwyg_button {
+    float:left;
+    padding:1px;
+    /* background: url(../images/bg.png) repeat-x; /* */
+    cursor: pointer;
+    height: 22px;
+    vertical-align: middle;
+}
+
+.wikiwyg_button:hover {
+    padding:0px;
+    border: 1px outset;
+    background: url(../images/ibg.png) no-repeat;
+}
+
+.wikiwyg_button:active {
+    padding:0px;
+    border: 1px inset;
+}
+
+.wikiwyg_separator {
+    float:left;
+    height: 22px;
+    width: 9px;
+    vertical-align: middle;
+}
+
+.wikiwyg_selector {
+    width: 70px;
+}
+
+.wikiwyg_wysiwyg table {
+    border-collapse: collapse;
+    margin-bottom: .2em;
+}
+
+.wikiwyg_wysiwyg table td {
+    border: 1px;
+    border-style: solid;
+    padding: .2em;
+    vertical-align: top;
+}
+
+#wikiwyg_wikitext_textarea { outline:none; }

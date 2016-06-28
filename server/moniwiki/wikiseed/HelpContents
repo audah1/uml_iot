@@ -1,0 +1,22 @@
+#keywords help,도움말,위키
+== 도움말 목록 ==
+아래는 가장 중요한 도움말 페이지목록입니다:
+ * HelpForBeginners - 위키 초보자를 위한 페이지
+ * HelpOnUserPreferences - 위키 사용자로 등록하고, 설정가능한 기본값을 입맛에 맞게 고쳐보세요.
+ * HelpOnPageCreation - 새 페이지 만드는 방법과 템플리트 이용하기
+ * HelpOnPageDeletion - 페이지 지우기
+ * HelpOnEditing - 페이지를 고치기
+ * HelpOnNavigation - 위키위키를 이리저리 돌아다녀보세요.
+ * HelpOnActions - 각 페이지에 대한 여러가지 조작 및 변형법
+ * HelpOnAdministration - 모니위키 설정 및 관리하기
+ * HelpMiscellaneous 그밖에 여러가지와 FAQ
+ * HelpForDevelopers - 모니위키 코드 들여다보기
+
+HelpIndex를 보시면 자동으로 만들어진 도움말 목록을 보실 수 있습니다.
+
+MoniWikiFaq도 보세요.
+== [:SlideShow 슬라이드 쇼]로 보기 ==
+[[SlideShow(MoniWikiTutorial)]]
+
+----
+[[Navigation(HelpContents)]]

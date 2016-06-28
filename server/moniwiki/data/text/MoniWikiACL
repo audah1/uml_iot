@@ -1,0 +1,188 @@
+/!\ since MoniWiki 1.1.2
+
+모니위키의 SecurityPlugin의 한가지
+
+[[TableOfContents]]
+== 설정 ==
+`config.php`에 다음을 넣으면 ACL SecurityPlugin이 활성화됩니다.
+{{{
+$security_class="acl";
+$acl_type="default";
+}}}
+== 미리 정의된 그룹 @group ==
+ * @ALL: 모든 사용자 (priority: 1)
+ * @User: 등록 사용자 (priority: 2)
+== 사용자 정의 그룹 @group 그리고 @group의 priority ==
+{{{
+##@그룹이름 사용자리스트 [priority]
+@Guest  Anonymous                   # priority를 지정하지 않으면 기본값 2
+@Kiwirian foobar,kiwi,hello123   20 # @Kiwirain 그룹의 priority를 잡는다.
+}}}
+/!\ 여기서 Anonymous 사용자는 @Guest로 지정되어 있으며, @Guest는 미리 정의된 그룹이 아닙니다.
+----
+<!> 모니위키 1.1.5부터는 network/ip 주소를 지원합니다.
+{{{
+# 부분 IP, CIDR 등등도 모두 지원.
+@Block 123.123.0.0/255.255.0.0, 123.12, 123.125.0/16 
+}}}
+
+위의 예에서 @Block 그룹을 정의하고 있으며 이에 해당되는 IP대역, 부분IP 등등을 지정하고 있습니다.
+
+아래와 같이 그룹에 대한 효력을 발생시킬 수 있습니다.
+{{{
+*       @Block            deny    * // 모든 페이지(*)를 @Block 사용자그룹에 대해 모든 액션(*)을 거부(deny)
+}}}
+
+/!\ IP, CDIR, 부분IP 등등은 그룹 지정에서만 사용 가능합니다.
+== ACL 타입 ==
+ * `allow` : 허용
+ * `deny` : 제한
+ * `protect`: 비밀번호 제한이 가능한 몇몇 POST액션에 대해 (모든 액션이 관리비번으로 제한가능하지는 않습니다)
+  * 일부 POST액션은 관리자 비밀번호로 제한을 걸어둘 수 있는 액션은 protect 가능한 액션입니다. protect 액션은 ''제한된 allow''이며, 일부 POST액션만 지원합니다. 예) do_post_savepage()는 post 액션이며, 일반 do_goto()같은 액션과는 달리 관리자 비밀번호로 액션을 제한을 할 수 있습니다.
+
+지정 방법은 {{{*}}}는 모든 액션을 가리키며, 페이지 이름은 regex가 가능합니다.
+{{{
+# 페이지이름 @그룹/특정사용자 allow/deny 액션리스트
+FoobarPage @ALL allow *
+FoobarPage babo deny edit,diff,info
+HelpOn.*   @ALL deny edit,savepage
+}}}
+=== 간단한 적용의 일부 ===
+{{{
+@Guest  Anonymous  // @Guest 사용자 그룹 정의
+*       @ALL            deny    * // 모든 페이지(*)를 모든 사용자(@ALL)에서 모든 액션(*)을 거부(deny)
+*       @ALL            allow   ticket // 모든 페이지를 모든 사용자에게 ticket 액션을 허락(allow)
+*       @ALL            allow   read,userform,rss_rc,aclinfo,fortune,deletepage,fixmoin,ticket // 여러 줄로 나눠쓰기 가능
+*       @User           allow   *
+// 모든 페이지(*)를 일반 가입 사용자에게(@User) 허락(*)
+WikiSandBox     @Guest  allow   edit,info,diff
+// WikiSandBox 페이지를 @Guest 그룹에 edit,info,diff 액션을 허용(allow)
+WikiSandBox     Foobar deny edit
+// 사용자 Foobar는 WikiSandbox 편집 못하게 함
+}}}
+
+=== 완전한 적용의 예 ===
+/!\ ''//''로 시작되는 줄은 설명줄입니다.
+{{{
+# acl.default.php
+# <?php exit()?> // 파일은 php이지만 형식은 php가 아닌 일반 텍스트다.
+# Please don't modify the lines above
+#
+# A sample Access Control Lists file for Moniwiki
+#
+@Guest  Anonymous  // @Guest 사용자 그룹 정의
+*       @ALL            deny    *
+// 모든 페이지(*)를 모든 사용자(@ALL)에서 모든 액션(*)을 거부(deny)
+*       @ALL            allow   ticket
+// 모든 페이지(*)를 모든 사용자(@ALL)에게 ticket 액션을 허락(allow) ticket은 가입 폼에 나오는 로봇가입방지 captcha
+*       @User           allow   *
+// 모든 페이지(*)를 일반 가입 사용자에게(@User) 허락(*)
+# some pages are allowed to edit
+WikiSandBox     @Guest  allow   edit,info,diff
+// WikiSandBox 페이지를 @Guest 그룹에 edit,info,diff 액션을 허용(allow)
+# some POST actions support protected mode using admin password
+*       @ALL            protect deletefile,deletepage,rename,rcspurge,rcs,chmod,backup,restore
+// 모든 페이지(*)에 대해 모든 사용자의(@ALL) detetefile,deltetepage 등등의 protect 가능한 액션을 protect
+# some actions allowed to @ALL
+*       @ALL            allow   read,userform,rss_rc,aclinfo,fortune,deletepage,fixmoin,ticket
+# some pages have restrict permission
+MoniWiki        @ALL    deny    edit,uploadfile,diff
+// MoniWiki 페이지를 @ALL 모든 사용자에게 edit,upload,diff등의 일부 액션을 거부
+}}}
+
+== ACL이 성립되는 과정 ==
+=== 마지막 ACL 항목이 적용된다 ===
+explicit하게 지정할 경우 최종 ACL 항목이 적용된다.
+ * {{{allow read}}} + {{{deny read}}} = {{{deny read}}}
+ * {{{deny read}}} + {{{allow read}}} = {{{allow read}}}
+----
+wildcard를 쓴 경우도 역시 최종 ACL 항목이 적용된다.
+ * {{{allow *}}} + {{{deny *}}} = {{{deny *}}} 모든 액션을 거부
+ * {{{deny *}}} + {{{allow *}}} = {{{allow *}}} 모든 액션을 승인
+=== explicit하게 지정해야 한다 ===
+wildcard를 쓴 것 보다 explicit하게 지정된 것이 먼저 적용된다. (순서에 상관 없다)
+ * {{{deny *}}} + {{{allow edit,info}}} = edit와 info 액션만 가능: '''explicit하게 지정된''' 액션만 허락
+ * {{{allow *}}} + {{{deny info,diff}}} = info/diff 이외의 액션이 모두 허용: '''explicit하게 지정된''' 액션만 거부
+ * {{{deny info,diff}}} + {{{allow *}}} = 위의 경우와 같다. explicit하게 지정된 액션인 info, diff만 거부
+
+/!\ {{{deny *}}} + {{{allow read}}}는 아파치의 {{{Order allow,deny}}}와 같다. 즉, explicit하게 지정된 allow에 대해 먼저 검사하여 액션이 read일때만 허락하고 나머지 액션은 deny.
+
+{{{deny edit}}} + {{{allow *}}}은 그 반대로 {{{Order deny,allow}}}가 된다.
+=== 예 ===
+모든 페이지에 대해서 읽기만 가능하게, ProtectedPage에 대해서는 읽기도 거부
+{{{
+* @ALL deny *
+* @ALL allow read
+ProtectedPage @ALL deny read
+}}}
+ProtectedPage는 {{{deny *}}} + {{{allow read}}} + {{{deny read}}} = {{{deny *}}}이 된다.
+----
+/!\ 주의: 모든 경우, explicit하게 지정될 경우에 효력이 발생한다.
+
+{{{
+* @ALL deny *
+* @ALL allow read
+ProtectedPage @ALL deny *
+}}}
+ProtectedPage는 {{{deny *}}} + {{{allow read}}} + {{{deny *}}}이 된다: explicit하게 허락된 read가 허용된다.
+마지막 줄 {{{ProtectedPage @ALL deny *}}}는 무시되게 되는 것이다.
+== priority가 다른 경우 ACL의 성립 과정 ==
+앞절의 설명은 priority가 같은 경우에 대한 일반적인 설명이었다. 그룹의 priority를 두었을 때는 어떻게 적용될까?
+=== 예제 1 ===
+{{{
+@ALL deny *
+@User allow *
+}}}
+이 경우 @User의 priority가 높으므로 {{{allow *}}}이 적용된다.
+=== 예제 2 ===
+{{{
+@ALL deny *
+@User allow read
+}}}
+
+@User에서 read가 허용. 나머지는 {{{@ALL deny *}}}에 의해 거부된다.
+=== 예제 3 ===
+{{{
+*       @ALL            deny    *
+*       @ALL            allow   read,ticket,info,diff,titleindex,bookmark,pagelist
+ProtectedPage @All      deny    read,ticket,info,diff,titleindex,bookmark,pagelist
+}}}
+ * 모든 사용자(@ALL)에게 allow를 제외한 모든 액션 거부.
+ * ProtectedPage는 edit,savepage를 제외하고 모두 불허
+  * 이 경우, allow를 explicit하게 한 모든 액션에 대해 explicit하게 deny를 걸어주어야 된다. {{{deny *}}} 라고만 하면 안된다.
+{{{
+*       @ALL            deny    *
+*       @ALL            allow   show,ticket,titleindex,bookmark,pagelist
+*       @User           allow   edit,savepage
+ProtectedPage @User     deny    * # 이것만으로는 의도대로 작동 안한다.
+# 다음을 explicit하게 명시해야 의도대로 작동한다.
+ProtectedPage @User     deny    edit,savepage
+}}}
+ * 일반 등록 사용자(@User)는 edit,savepage 허락.
+ * ProtectedPage는 모두 불허
+  * 이 경우 등록 사용자에 대해 {{{@User deny *}}} + {{{@User allow edit,savepage}}}이므로 edit,savepage만 허용된다.
+  * {{{allow edit,savepage}}}라고 explicit하게 정의된 것을 다시 취소시켜야 의도대로 작동하는 것이다. 따라서 {{{ProtectedPage @User     deny    edit,savepage}}}라고 써 주어야 한다.
+=== 연습 ===
+1) 그룹 priority가 같은 항목끼리 합쳐지고, 2) 그룹 priority가 높은 항목이 우선적으로 적용된다.
+{{{
+####### @ALL 그룹의 priority는 1이다.
+@Guest     Anonymous             # @ALL을 제외한 모든 그룹의 priority는 그 값이 지정되지 않으면 2 이다.
+@Group1    peter,john      20    # priority = 20
+@Group2    simon,soo             # default group priorty = 2
+* @ALL     allow *               # group priority = 1
+* @ALL     deny  backup,restore
+* @Guest   deny  *               # group priority = 2
+* @Group1  deny  *               # User defined @Group1 group
+* @Group1  allow read,info,diff
+* @Group2  deny  info,diff
+}}}
+ * peter와 john: {{{allow read,info,diff}}} + {{{deny *}}} = read,info,diff만 허용
+ * Anonymous (@Guest): {{{deny *}}}: 모두 거부 (@Guest그룹의 priority가 높으므로 @ALL에 대해 허용된 것과 무관하게 거부된다)
+ * 다른 모든 사용자(@ALL): {{{deny backup,resotre}}} + {{{allow *}}} ('''Order Deny,Allow''')
+ * @Group1 : {{{allow read,info,diff}}} + {{{deny *}}} ('''Order Allow,Deny''') 
+ * @Group2 : {{{deny info,diff}}} + {{{@ALL deny backup,restore}}} + {{{allow *}}}: priority가 같은 항목이 합쳐진다.
+
+/!\ 각 ACL 항목의 같은 priority를 가지는 모든 항목이 합해져서 적용됩니다.
+
+config.php에 {{{$acl_debug=1}}} 옵션을 넣으면, 어떤 식으로 적용될지를 보여줍니다.
+----

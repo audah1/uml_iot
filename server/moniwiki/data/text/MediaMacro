@@ -1,0 +1,53 @@
+Alias of the PlayMacro
+
+/!\ 1.0.8 or later
+
+mp3, 동영상, 유튜브 동영상 등등을 지원하는 매크로 플러그인
+
+== 지원하는 영상 ==
+/!\ 모니위키 1.2.0부터 여러 다양한 동영상 사이트르 지원
+ * 유튜브
+ * 다음 TV팟
+ * Vimeo
+ * 니코니코동화 (모니위키 1.2.4p4 부터)
+
+== 사용법 ==
+일반 mp3 파일
+{{{[[Play(http://foo.bar/my.mp3)]]}}}
+
+일반 wmv 파일
+{{{[[Play(mms://foo.bar.com/my.wmv)]]}}}
+----
+'''vimeo'''
+
+{{{[[Media(http://vimeo.com/65384446)]]}}}
+
+[[Media(http://vimeo.com/65384446)]]
+----
+
+'''tvpot'''
+
+{{{[[Media(http://tvpot.daum.net/v/cJ-r-LJxPeo%24)]]}}}
+
+[[Media(http://tvpot.daum.net/v/cJ-r-LJxPeo%24)]]
+----
+
+'''youtube'''
+
+{{{[[Media(http://www.youtube.com/embed/dMH0bHeiRNg)]]}}}
+[[Media(http://www.youtube.com/embed/dMH0bHeiRNg)]]
+
+== 설정 방법 ==
+=== MP3를 위한 설정 ===
+{{{
+$use_jwmediaplayer=1;
+$jwmediaplayer_prefix='http://www.jeroenwijering.com/embed';
+}}}
+이렇게 설정하면 MP3 플레이를 위해서 jwmediaplayer가 사용된다. 기본값으로 설정되어 있다.
+
+== 사용 례 ==
+[[Play(http://alice.dyndns.info/download/Day%20Dream.mp3)]]
+----
+원래는 PlayMacro라는 이름으로 만들었다가 [[미디어위키]]와 일관성있게 하기 위해서 {{{[[Media()]]}}} 플러그인을 별명으로 함께 등록하였습니다.
+----
+CategoryMacro

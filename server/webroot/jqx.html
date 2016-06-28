@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>kmm server</title>
+<script>//using electron. because jquery is global variable   
+if(typeof(window.require)=="undefined");
+else
+{console.log("require:",typeof(require),",win.req:",typeof(window.require),",win.exports:",typeof(window.exports),",win.module:",typeof(window.module));
+    window.nodeRequire = require;
+    delete window.require;
+    delete window.exports;
+    delete window.module;
+}
+</script>
+<script src="/socket.io/socket.io.js"></script>
+
+<link rel="stylesheet" href="/scripts/jquery-ui-1.11.4.css" type="text/css"/>
+<script src="/scripts/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="/jqwidgets/styles/jqx.base.css" type="text/css"/>
+<script type="text/javascript" src="/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxtabs.js"></script>
+<script src="/scripts/jquery-ui.min-1.11.4.js"></script>
+
+<script>
+    $(function() {
+        $( "#logstart" ).datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+        $( "#logend" ).datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+    });
+</script>
+
+<script>var exports={};</script>
+<script src="/static/requirejs/require.js"></script>
+<script src="/static/client.js"></script>
+</head>
+<body>
+    URL:
+    <input id="urlinput">
+    <button id="move_browser">Go</button>
+    <p>
+	<a href="/list" title="main"><img src="/static/naver.gif" width="150"/></a>
+	<div data-role="header">
+		<h1>UML server</h1>
+	</div>
+    <script>
+    function goBack() {
+        window.history.back();
+    }
+    function goForward() {
+        window.history.forward();
+    }
+    </script>
+    <button onclick="goBack()">Go Back</button>
+    <button onclick="goForward()">Go Forward</button>
+    <button id="cookie_save"> localstorage SAVE </button>
+    <p>
+
+<div id="jqxTabs">
+    <ul>
+        <li id="Groupchat_test">Group chat test</li>
+        <li id="PingLogtest">Ping&Log test</li>
+        <li id="DBtest">DB test</li>
+        <li id="RPCtest">RPC test</li>
+        <li id="Upload">Upload</li>
+    </ul>
+    
+    <div>
+        <h3>*Group chatting</h3>
+        <hr/>
+        <p>TYPE NAME:
+        <input id="GC_TYPE" />
+        GROUP NAME:
+        <input id="GC_NAME" />
+        CLIENT NAME & MESSAGE:
+        <input id="GC_CLIENT"/>
+        <button id="buttonGROUPSEND"> GROUPSEND MESSAGE </button>
+        </p>
+    </div>
+    <div>
+        <h3>*Ping & Log</h3>
+        <hr/>
+        <p>
+        <button id="button_pingtest"> Ping TEST </button>
+        <button id="button_sendwebsocketrpc"> Send WEBSOCKET(RPC) </button>
+        <button id="button_getlogdata"> Get log data </button>
+        <p>
+        start : 
+        <input type="text" id ="logstart" />
+        end :
+        <input type="text" id ="logend" />
+        Address :
+        <input id ="pingtestaddress" />
+    </div>
+    <div>
+        <h3>*DB</h3>
+        <hr/>
+        Table Name:
+        <input id="SQ_table" />
+        Key:
+        <input id="SQ_key" />    
+        Value of key:
+        <input id="SQ_value" />
+    
+        <h3>mysql</h3>
+        <p>
+        <hr/>
+        <div>
+            <button id="buttonCREATETABLE"> CREATE TABLE </button>
+            <button id="button_mysqllist"> LIST DATA </button>
+            <button id="button_mysqldeletedata"> DELETE DATA </button>
+            <button id="buttonmysqlgetdata"> GET DATA </button>
+            <button id="buttonmysqlinsert"> INSERT DATA </button>
+            <button id="buttonUPDATE"> UPDATE DATA </button>
+            <button id="buttonSAVEOBJ"> Save JSON object </button>
+            <button id="buttonRESTOREOBJ"> Restore JSON object </button>
+        </div>
+        <h3>sqlite</h3>
+        <hr/>
+        <p>
+        <div>
+            <button id="buttonCREATE"> CREATE SQ TABLE </button>
+            <button id="buttonSETDATA"> SAVE DATA (setitem) </button>
+            <button id="buttonGETDATA"> GET DATA (getitem) </button>
+            <!--<button id="buttonjson"> Table value data </button>!-->
+            <button id="buttonDEL"> SQlite delete data </button>
+            <button id="buttonINS"> SQlite insert data </button>
+            <button id="buttonUPDATEsq"> SQlite update data </button>
+            <button id="buttonlistdata_sq"> SQlite list data </button>
+            <br/>
+        </div>
+    </div>
+    <div>
+        <h3>*rpc test</h3>
+        <hr/>
+        <p>
+        Contents:
+        <ul id="content">
+        </ul>
+        Result:
+        <ul id="result">
+        </ul>
+        Json:
+        <div id="stage"></div>
+        <hr/>
+        Test CHAT
+        <P>
+        name: 
+        <input id="CH_NAME" />
+        message:
+        <input id ="CH_MESSAGE" />
+        <P>
+        <button id="button_sendajax"> Send AJAX </button>    
+        <button id="button_sendwebsocket"> Send WEBSOCKET(CHAT) </button>
+        <button id="button_getjson"> GET JSON </button>
+        <button id="button_postrpc"> POST RPC </button>
+        <P>
+    </div>
+    <div>
+        <h3> File Upload </h3>
+        <a href="http://127.0.0.1:52273/uploadfile">file system</a>
+        <form action="/uploadfile" method ="post" enctype="multipart/form-data">
+        <br><p><hr/>
+        <table><tr><td>Comment:</td>
+            <td><input type="text" name="comment"/></td></tr><tr><td>File:</td>
+            <td><input id="uploadfile" type="file" name="myfile"/></td>
+            <td><input type="submit" value="Single file Upload" /></td></tr></table>
+        </form>
+    </div>
+</div>
+<div id ="board">
+        <p>
+    <style type="text/css">
+        #console {
+            width: 	70%;
+            margin: 0;
+            font-family: fixed, lucida console, courier, "Courier New", Courier, monospace;
+            line-height: 1.3;
+            background: lightcyan;
+            border: 	3px solid #100;
+            text-align: 	left;
+            padding: 	5px;
+            }
+            TEXTAREA#console
+            {
+                height:	99%;
+            }
+    </style>
+    <br>
+    <center style="height:99%">
+        <pre id="console" wrap="off" readonly></pre>
+    </center>
+</div>
+</body>
+</html>

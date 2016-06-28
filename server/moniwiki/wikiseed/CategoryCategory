@@ -1,0 +1,12 @@
+위키위키에서 분류를 지정하는데 Category를 보통 사용합니다. 위키위키의 분류는 [역링크]를 통해서 구현됩니다.
+
+분류 페이지에 들어가서 제목을 클릭하면 그 분류 페이지에 대한 역링크를 서치하고, 그 분류페이지의 링크가 들어있는 모든 페이지 목록을 보여주게 됩니다.
+
+또한 각각의 분류는 그 분류의 최상위 분류인 Category''''''Category를 가리키는 링크를 가지게 함으로서, 모든 분류페이지를 최종 역링크를 Category''''''Category가 되게 할 수도 있습니다.
+
+모든 분류 목록:
+[[PageList(^Category.*)]]
+
+OriginalWiki와 일관적으로 만드려면 모든 분류는 "Category"로 시작하도록 지정해야 합니다. 물론 다른 방식으로 이름을 붙여도 문제되지 않습니다.
+
+For more information, see Wiki:AboutCategoriesAndTopics .

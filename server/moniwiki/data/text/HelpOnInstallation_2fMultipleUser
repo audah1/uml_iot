@@ -1,0 +1,35 @@
+모니위키 버전 1.0.9 이후부터 모니위키는 다중사용자를 위한 좀 더 편리한 설치환경을 제공합니다.
+
+각 사용자는 따로 설치할 필요 없이 관리자가 설치해놓은 모니위키를 단지 make install로 비교적 간단히 설치할 수 있습니다.
+
+== 관리자 설치 ==
+=== 다운로드 후 압축 풀기 ===
+{{{
+$ zcat moniwiki-1.x.x.tgz |tar xvf -
+}}}
+=== 관리자 모드로 설치 ===
+압축을 푼 moniwiki 디렉토리로 이동 후 아래 명령 실행
+{{{
+# make install
+}}}
+== 버그 ==
+ 1. HelpOnGitInstallation 으로 설치한 경우 wikiseed가 없어 make 실패할 수 있음. Makefile의 8번째 라인을
+  1. 원본 : {{{cp -ar wikiseed imgs css $(DESTDIR)$(prefix)/share/moniwiki}}}
+  1. 수정 : {{{cp -ar imgs css $(DESTDIR)$(prefix)/share/moniwiki}}}
+ 이렇게 고치면 됨
+
+== 사용자 설치 ==
+=== moni-install 실행하기 ===
+{{{
+$ cd to_your_public_html_dir
+$ /usr/share/moniwiki/bin/moni-install
+}}}
+이렇게 하면 [[모니위키]] 설치에 필요한 파일이 public_html 하위에 일부는 복사되고 일부는 설치 디렉토리에 남게됩니다.
+
+== 편리한 점 ==
+이 경우 대부분의 php파일이 설치되지 않은채로 각 사용자가 사용하게 되기 때문에, 모니위키의 php취약점이 발견되었을 경우 관리자가 설치된 [[모니위키]]만을 업데이트하는 것으로 문제점을 해결할 수 있게 됩니다. 물론 일부 카피된 파일 및 php 이외에 웹상에 직접 노출되는 지역 파일은 사용자가 직접 업데이트해야 하겠지요.
+
+== 주의 사항 ==
+심볼릭 링크된 파일이 실행 되는지는 각 데몬(apache, nginx, lighttpd) 마다 설정이나 정책이 다를 수 있으므로 확인이 필요합니다.[* 예를 들어, nginx 에선 심볼릭 링크 된 실행파일(php)의 실행이 안 되는 것으로 확인 되었습니다(WikiPo가 확인 하였으나, 다른 분들도 한 번 더 확인 후 설명 보충 해주시길 바랍니다.)]
+----
+HelpOnInstallation

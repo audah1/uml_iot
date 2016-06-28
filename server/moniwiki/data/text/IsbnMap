@@ -1,0 +1,48 @@
+IsbmMacro에서 사용하기 위해 다음과 같은 방식으로 ISBN을 등록하실 수 있습니다.
+
+{{{
+WowBook http://www.wowbook.com/generic/book/info/book_detail.asp?isbn=ISBN$ISBN2 http://image.wowbook.com/book/large_image/$ISBN2.gif
+Tmecca http://www.tmecca.co.kr/search/isbnsearch.html?isbnstr= 
+AladdinMusic http://www.aladdin.co.kr/music/catalog/music.asp?ISBN= http://www.aladdin.co.kr/CDCover/$ISBN2_1.jpg
+AladdinBook http://www.aladdin.co.kr/catalog/book.asp?ISBN= http://www.aladdin.co.kr/Cover/$ISBN2_1.gif
+}}}
+
+ /!\ 일종의 InterWiki Map인 것이죠.
+----
+알라딘 Book Catalog는 경로가 다르고 gif포맷이라 하나 추가합니다.
+[[ISBN(8986190842,AladdinBook)]]
+[[ISBN(8932905819,AladdinBook)]]
+[[ISBN(0-201-65791-0,WowBook)]]  
+[[ISBN(0735700788,Tmecca)]]
+만들어놓고 정작 테스트는 안했습니다 :p 잘 되네요. :)
+
+----
+[[ISBN(9049741495,AladdinMusic)]] [[ISBN(9049740871,AladdinMusic)]]
+가 안됩니다. 어쩌면 좋을까요?
+
+ http://www.aladdin.co.kr/music/catalog/music.asp?ISBN=9049741495
+ [http://www.aladdin.co.kr/CDCover/2452436078_1.jpg]
+
+----
+알라딘 같은 경우 품절이나 재발매 등으로 ISBN이 새로 배정됐을 때, 그림은 예전 껄 그대로 가져다 씁니다.
+그래서 ISBN으로 링크를 걸면 규칙에 안 맞기 때문에 그림이 안 뜨죠.
+이런 경우, 어떤 식으로든 그림의 주소를 전달하는 방식을 만들 수 있을까요?
+ 2004년인가 2005년부터 새로 나온 책의 이미지 포맷과 이전 책의 이미지 포맷이 달라졌습니다.
+  * 새책 : jpg   {{{http://image.aladdin.co.kr/cover/cover/ISBN$_1.jpg}}}
+  * 이전책 : gif {{{http://image.aladdin.co.kr/cover/cover/ISBN$_1.gif}}}
+
+
+ IsbnMap 에서 map 을 분리해서 사용하는 방법이 있을 수 있고 - 이 경우 출판년도에 따라서 옵션을 달리 줘야 하는 불편함이 있습니다. - ISBN 매크로를 고쳐서 (가능하다면  jpg가 없을 때 gif를 찾는 어떤 로직을 넣는 방법이 있을지 않을까 하는 생각이 듭니다. 제가 coding에 능력이 전혀 없는지라, 이게 구현할 수 있는 방법인지는 모르겠지만 논리적 차원에서는 이게 사용자 정신건강에 이로운 해결책이 아닐까합니다. (제 위키에서 책목록을 관리하는데 수작업으로 바꿔 줄 생각을 하니 조금 끔직합니다. - 스크립트를 돌려도 되기는 하지만 ... )
+  {{{
+AladdinBOOK http://www.aladdin.co.kr/shop/wproduct.aspx?ISBN= http://image.aladdin.co.kr/cover/cover/$ISBN2_1.gif
+AladdinBook http://www.aladdin.co.kr/shop/wproduct.aspx?ISBN= http://image.aladdin.co.kr/cover/cover/$ISBN2_1.jpg
+}}}
+  전 이렇게 써요. -.-;
+
+   모니위키 1.1.3에서는 이와 관련된 버그가 고쳐졌고, 알라딘 같은 경우는 확장자가 jpg/gif인 경우를 자동으로 검출합니다. 이 경우 php.ini에 {{{'allow_url_fopen=1}}}같은 식으로 설정이 되어있어야 합니다. 또, config.php에 {{{$isbn_img_download=1;}}} 와 같이 옵션을 넣으면 이미지를 다운로드할 수도 있게 하여, 일부 referer를 검사하여 이미지를 보이지 않게 하는 사이트에서도 활용하기쉽게 하였습니다. -- WkPark [[DateTime(2009-01-13T07:14:27)]]
+----
+수동으로 효과를 내는 방법
+
+{{{[wiki:AladdinMusic:9049741495 http://www.aladdin.co.kr/CDCover/2452436078_1.jpg]}}}
+[wiki:AladdinMusic:9049741495 http://www.aladdin.co.kr/CDCover/2452436078_1.jpg]
+

@@ -1,0 +1,18 @@
+== 프로세서 ==
+프로세서 혹은 프로세서 플러그인은 모니위키의 고급기능중의 하나로서, 중괄호 {{{{{{ }}} }}}로 감싼 코드 블럭 영역에 대해서 특별 처리를 해줍니다.
+
+다음과 같이 코드 블럭 영역 최 상단에 {{{#!}}}로 시작하는 프로세서 이름을 써 넣으면, 예를 들어 {{{#!python}}}이라고 하면 그 코드블럭 영역은 {{{plugin/processor/python.php}}}에 정의된 processor_python()이라는 모니위키의 플러그인에 의해 처리되게 됩니다. {{{#!python}}}은 유닉스의 스크립트 해석기를 지정하는 이른바 ''bang path'' 지정자 형식과 같으며, 유닉스에서 사용하는 목적과 동일한 컨셉트로 작동됩니다. (즉, 스크립트의 최 상단에 지정된 스크립트 지정자에 의해 스크립트의 파일 나머지 부분이 해석되어 집니다.)
+
+이러한 방식으로 모니위키는 여러가지 다양한 프로세서 플러그인을 지원하고 있습니다.
+
+Please see HelpOnEditing [MoniWikiProcessors]
+=== CodeColoringProcessor ===
+프로세서중에 특별히 코드 블럭의 문법을 강조해주는 코드 컬러링 기능을 가진 프로세서를 가리켜 CodeColoringProcessor라고 불리입니다.
+
+예:
+{{{#!python
+if lines[0].contains("python"):
+    print "colors!"
+}}}
+----
+[[Navigation(HelpOnEditing)]]

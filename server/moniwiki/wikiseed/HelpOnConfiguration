@@ -1,0 +1,73 @@
+MoniWiki는 `[config.php]`에 있는 설정을 입맛에 맛게 고칠 수 있다. config.php는 MoniWiki본체 프로그램에 의해 `include`되므로 PHP의 include_path변수로 설정된 어느 디렉토리에 위치할 수도 있다. 특별한 경우가 아니라면 MoniWiki가 설치된 디렉토리에 config.php가 있을것이다.
+
+== 기본 설정 ==
+모니위키를 설정는데 필수적인 설정 및 기본적으로 확인해야 할 설정입니다. [[config.php]] 설정파일을 수동으로 고치거나 MoniSetup을 통해 고칠 수 있습니다.
+
+아래에 나오는 설정 변수 정보는 간략하게만 나와있으며 자세한 설정은 각 설정변수 문서를 참조하시기 바랍니다.
+=== [[$sitename]] ===
+위키사이트의 이름을 지정합니다. 기본값은 {{{UnnamedWiki}}}입니다.
+=== [[$charset]] ===
+위키위키의 문자세트를 지정합니다. 기본값은 {{{UTF-8}}}입니다.
+=== [[$lang]] ===
+기본 언어를 설정합니다. 기본값은 {{{auto}}}이며 브라우져의 설정값에 따라서 메뉴가 영문 혹은 한글이 나오게 됩니다.
+=== [[$path]] ===
+모니위키의 몇몇 플러그인중 외부 프로그램을 사용하는 프로그램은 환경변수 PATH를 참조하여 외부 프로그램을 호출하게 된다. 이때 PATH의 설정이 제대로 맞지 않아 외부 프로그램이 제대로 실행되지 않는 경우가 있다. 이 경우 config.php에서 `$path`를 고쳐보라.
+
+See also:
+ * LatexProcessor
+ * VisualTour
+ * VimProcessor 혹은 CodeColoringProcessor
+=== RCS ===
+{{{RCS}}}는 모니위키에서 버전관리를 {{{RCS}}}를 통해 제공하고 있다. [[MoniWikiRCS]] 페이지 참조.
+
+만약 시스템 차원에서 rcs를 지원하지 않는다면 rcs를 컴파일해서 사용해보라. 예를 들어 모니위키가 설치된 디렉토리가 {{{moniwiki}}}이고
+그 하위에 {{{bin}}} 디렉토리를 새롭게 만든 후에 {{{rcs}}}관련된 실행파일([[MoniWikiRCS]] 페이지 참조)을 {{{moniwiki/bin}}}아래에 복사하고
+{{{$path}}}에 {{{./bin}}} 디렉토리를 추가한다.
+
+{{{
+$path='/usr/bin:/bin:/usr/local/bin:./bin'; # 유닉스의 기본 실행파일 디렉토리 + ./bin
+}}}
+혹은
+{{{
+$path='/usr/bin:/bin:/usr/local/bin:/home/to_your_public_html/moniwiki/bin'; # 유닉스의 기본 실행파일 디렉토리 + bin의 full path
+}}}
+=== VimProcessor ===
+윈도우에서 gvim을 사용하여 작동된다. 이 경우 {{{$path}}}설정을 제대로 해주어야 하는데, 예를 들어 다음과 같은 식으로 `[[config.php]]`에 설정을 한다.
+{{{
+$path='./bin;c:/windows/command;c:/Program Files/gnuplot;c:/Program Files/vim/vim71'; # for win32
+}}}
+
+윈도우에서는 패스의 구분기호가 콜론(:)이 아닌 세미콜론(;)임에 유의하자.
+
+== Security 설정 ==
+[[config.php]]에 `$security_class="needtologin";`를 추가하면 로그인 하지 않은 사람은 위키 페이지를 고칠 수 없게 된다. 로그인을 하지 않고 편집을 하려고 하면 경고 메시지와 함께, 가입을 종용하는 간단한 안내가 나온다.
+
+`needtologin`이외에도 몇가지 유용한 미리 설정된 SecurityPlugin이 더 있으며 SecurityPlugin 문서를 참조하여 고칠 수 있다.
+
+See also:
+ * SecurityPlugin
+ * MoniWikiACL
+
+== 대문 및 로고(혹은 배너) 설정 ==
+메뉴의 대문(FrontPage)및 로고 그림이 연결하고 있는 페이지는 config.php의 다음 변수를 설정한다.
+ * $frontpage='FrontPage';
+ * $logo_page=$frontpage;
+위의 값은 기본 값이며, 각각 다르게 설정할 수 있다.
+ * `$logo_string`과 `$logo_img` - 
+$logo_img를 간단히 조정하거나, $logo_string을 통해서 미세한 조정을 할 수 있다.
+----
+/!\ wiki.php에 정의되어 있는 WikiDB 클래스를 보면, 우선 하드코딩된 기본 설정이 있고, [[config.php]]에서 읽은 설정 사항을 그 위에 덧씌우는 방식이다. 
+
+/!\ monisetup.php은 config.php를 변경할 수 있으나, 간단한 변경만 지원하고 세세한 변경은 지원하지 않는다. 최근 1.1.3 버전부터는 여러줄의 config.php 설정을 읽고 수정할 수 있다. 단, monisetup.php를 사용할 경우 코멘트는 모두 제거가 되므로 주의해야 한다.
+== 기타 설정 가능한 것 ==
+ * $kbd_script='';로 지정하면 HotKeys를 쓰지 않는다.
+ * $hr='';로 지정하면, 페이지 상단의 <hr />과 하단의 <hr />이 출력되지 않는다.
+== 메뉴 설정 ==
+config.php에서 $menu, $icon, $icons를 설정할 수 있습니다.
+----
+See also:
+ * MoniWikiOptions
+ * MoniWikiMarkets
+ * MoniWikiTips
+----
+[[Navigation(HelpOnAdministration)]]

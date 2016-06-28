@@ -118,18 +118,6 @@ function processgroupmessage(type,socket,data){
     else if(cmd=='SEND')typechat.iterateclientlist(groupname,forwardmessage,message);//같은 그룹 메시지 보내기        
 }
 
-rl.on('line', function(cmd) {// only gets triggered by ^C or ^D
-    if(cmd=='quit'){
-    typechat.iterateclientlist("KANG",forwardmessage,"Server close after 5 seconds");
-    
-    setTimeout(function(){process.exit(0)},5000);
-        return;
-    }
-});
-rl.on('close', function() {
-    console.log('Good-bye server');
-    process.exit(0);
-});
 
 if(valtable.udp)udpserver.setJsonCallback(jsonrpcserver.HandlingObjectAsync,processgroupmessage,modifyparameter/*,jsonrpcserver.HandlingObject,jsonrpcserver.HandlingJSONdataAsync,jsonrpcserver.HandlingJSONLinesAsync*/);
 socketServer.setJsonCallback(jsonrpcserver.HandlingObjectAsync,processgroupmessage,modifyparameter/*,jsonrpcserver.HandlingObject,jsonrpcserver.HandlingJSONdataAsync,jsonrpcserver.HandlingJSONLinesAsync*/);
@@ -158,3 +146,28 @@ if(valtable.pingserver)pingserver.setbroadcastcallback(processgroupmessage);
 
 var getlogdata=require('./getlogdata');
 getlogdata.register(jsonrpcserver.onAsync);
+
+
+
+
+rl.on('line', function(cmd) {// only gets triggered by ^C or ^D
+    if(cmd=='quit'){
+        socketServer.logger2.warn("close server");
+        typechat.iterateclientlist("KANG",forwardmessage,"Server close after 5 seconds");
+        
+        setTimeout(function(){process.exit(0)},5000);
+        return;
+    }
+});
+rl.on('close', function() {
+    console.log('Good-bye server');
+    process.exit(0);
+});
+
+var proc=require('child_process');
+var electronexe=require('../node_modules/electron-prebuilt/');
+
+var electron_path="C:\\cygwin\\home\\audah\\electron\\electron-quick-start\\node_modules\\electron-prebuilt\\dist\\electron.exe"; //C:\\cygwin\\home\\audah\\electron\\electron-quick-start\\main.js";
+function elec_client(){proc.spawn(electron_path,["C:\\cygwin\\home\\audah\\electron\\electron-quick-start\\main.js"], {stdio: 'inherit'})}
+
+elec_client();

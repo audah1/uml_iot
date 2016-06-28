@@ -1,0 +1,8 @@
+전체 [[PageCount]] 페이지가 있습니다
+
+----
+[[RecentChanges(notitle,comment,days=30,item=100,board,hits,showhost,js,timesago,change,allusers,editrange)]]
+
+|||| [[Icon(diff)]] || 백업이 여러개 있는 페이지 (클릭하면 바뀐점)||
+|||| [[Icon(updated)]] || 북마크를 한 시점에서 새로 바뀐점이 있는 페이지 (클릭하면 북마크 이후 바뀐점)||
+|||| [[Icon(new)]] || 북마크 시점 이후에 새로 만들어지고 그 뒤로 편집이 안된 페이지||

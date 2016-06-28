@@ -1,0 +1,42 @@
+#format plain
+# $Id: AliasPageNamesDefaultKo,v 1.1 2009/01/02 17:26:39 root Exp root $
+# $Date: 2009/01/02 17:26:39 $
+# config.php 파일에 다음과 같은 설정을 넣어주시면 별명 기능이 활성화됩니다.
+# ---
+# $use_alias=1;
+# $aliaspage=$data_dir.'/text/AliasPageNames';
+# 이 페이지 이름을 가리킵니다.
+# ---
+# 또한, 별명으로 가리킨 페이지가 단 하나의 페이지일 경우에 연결이 바로되기를 원하시면
+# $use_easyalias=1;
+#
+# InterMap에는 TwinPages가 정의되어 있는지 확인하시기 바랍니다.
+#
+# 없는페이지이름>있는페이지1,있는페이지2
+안녕>HelloWorld,helloworld
+사랑하면알게되고알면보이나니그때에보이는것은전과같지않으리라>안녕
+#
+DeleteThisPage,DeletePage,DeleteMe
+# 있는페이지<없는페이지1,없는페이지2
+# 혹은
+# 있는페이지,없는페이지,없는페이지
+DueDateMacro<DueDate,Due Date Macro,"Due Date Macro"
+InterMap<InterWikiMap
+WikiName,위키네임,위키이름
+MoniWiki,Moni위키,모니위키
+MoinMoin,모인모인
+ExtendedWikiName,확장위키네임,확장위키이름
+Linux,리눅스
+Gnome,GNOME,gnome
+WindowManager,창관리자
+Cairo,cairo,카이로
+# 위키위키 관련
+WikiSandBox,위키모래상자,모래상자
+HelpOnProcessors,ProcessorPlugin,Processor,Processors,프로세서
+HelpOnMacros,MacroPlugin,매크로
+WikiWikiWeb,위키위키웹
+# 존재하는 페이지에는 인터위키(자매 페이지) 혹은 URL도 가능합니다.
+# 자매 페이지 연결
+MoniWikiACL>MoniWiki:MoniWikiACL,SecurityPlugin
+MoniWiki>MoniWiki:MoniWiki
+모니위키>MoniWiki:MoniWiki

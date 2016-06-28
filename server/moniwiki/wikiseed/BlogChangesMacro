@@ -1,0 +1,11 @@
+특정 페이지에 대한 blog rss
+ * {{{?action=rss_blog}}}
+ * {{{?action=blogrss}}}
+----
+전체 페이지에 대한 BlogChanges
+
+{{{[[BlogChanges(all)]]}}}
+----
+특정 페이지에 대한 BlogChanges
+/!\ cvs
+{{{[[BlogChanges("MyPage",all)]]}}}

@@ -1,0 +1,13 @@
+[[Draw(hello3)]]
+----
+gif 그림을 그릴 수 있게 해주는 애플릿
+
+Q: Mac 에서는 편집이후에 drawing 화면이 없어지지 않습니다. 
+
+== 설치 ==
+{{{applets/TWikiDrawPlugin/}}}로 가서 {{{gmake}}} 혹은 {{{make}}} 명령을 하여 설치한다.
+
+윈도우즈의 경우는 다음의 파일을 받아서 직접 압축을 풀어준다. {{{applets/TWikiDrawPlugin/}}}twikidraw.jar 및 *gif 파일이 있게끔 해야 한다.
+
+http://twiki.org/p/pub/Plugins/TWikiDrawPluginDev/TWikiDrawPlugin.zip
+

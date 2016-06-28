@@ -1,0 +1,30 @@
+적수네 동네에 있던 기능을 GnomeKorea, KLE에서 쓰도록 개선시킨 것을 내장시켰다.
+
+마우스 없이 거의 모든 기본적인 동작을 HotKeys로 쓸 수 있다.
+
+   || '''핫키''' || '''액션''' || '''비고''' ||
+   ||L||action=LikePages || ||
+   ||A||action=randompage || ||
+   ||B||action=bookmark || ||
+   ||K||action=keywords || ||
+   ||D||action=diff ||[[Icon(diff)]] 입체안경||
+   ||I||action=info ||[[Icon(info)]] 파란색 i||
+   ||E 또는 W||action=edit ||[[Icon(edit)]] 메모지와 펜||
+   ||P||action=print ||[[Icon(print)]] 프린터||
+   ||F 또는 H||action=home ||FrontPage ||
+   ||R(not Safari)||action=show ||Refresh||
+   ||Q, S, R(Safari only)[[BR]]또는 F3(Firefox only)|| ||[[Icon(search)]] FindPage ||
+   ||F1(Firefox only)|| ||[[Icon(help)]] HelpContents ||
+   ||U|| ||UserPreferences ||
+   ||C|| ||RecentChanges ||
+   ||T|| ||TitleIndex ||
+   ||``<ESC>``||Go 'into'/'out of' the 'Go' form|| ||
+   ||Z + ``<BACKSPACE>``||Go 'into' the 'Go' form|| ||
+   ||/ + ``<BACKSPACE>``||FullSearch mode || ||
+   ||? + ``<BACKSPACE>``||TitleSearch mode || ||
+   ||ctrl + ''<ENTER>''|| Save || ||
+== See also ==
+ * http://unixpapa.com/js/key.html
+ * MoinMoin:MoinMoinExtensions/Hotkeys
+ * [Nsmk:양손항해]
+ * AccesskeyStandards

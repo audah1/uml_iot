@@ -1,0 +1,1502 @@
+@import url("../../../css/_base.css");
+@import url("../../../css/_extra.css");
+@import url("../../../css/_calendar.css");
+
+html { height: 100%; }
+body {
+  font-family: 'Lucida Grande', Verdana, 'Bitstream Vera Sans', Arial, sans-serif;
+  font-size:12px;
+  color:#000;
+  margin-left:0px;
+  margin-right:0px;
+  margin-top:0px;
+  margin-bottom:0px;
+  height:100%;
+  background-color:#f2f2f2;
+}
+
+ul {
+  margin:0; padding:0;
+  padding:0.5em 0.5em 0.5em 1.8em;
+}
+
+#mainBody {
+/* top:15px; /* */
+/* padding-left:100px;
+  padding-right:100px; */
+  min-width:750px;
+  margin: 0px auto 0px auto;
+  width: 80%;
+  min-height:400px;
+  height: auto !important; /* IE min-height hack */
+  background-color:#ffffff;
+}
+
+div {
+/* border:1px solid red; /* */
+}
+
+#topHeader {
+  padding-left:15px;
+  padding-top:2px;
+  color:white;
+  font-family:Tahoma,Verdana,sans-serif;
+  font-size:11px;
+  font-weight:bold;
+}
+
+#topHeader a{
+  color:white;
+  text-decoration:none;
+}
+
+#topBanner {
+  height:48px;
+  font-size:40px;
+  font-family:Tahoma,sans-serif;
+  color:white;
+  padding-left:8px;
+  padding-top:10px;
+  padding-bottom:0px;
+  margin:0px;
+  overflow-y:hidden;
+  /* overflow:hidden; does not work correctly in the mozilla */
+}
+
+#pTopLeft {
+  background: url("../imgs/ntl.png") no-repeat;
+  z-index:4;
+}
+
+#pTopRight {
+  background: url("../imgs/ntr.png") no-repeat right top;
+  z-index:4;
+}
+
+#pBanSpace {
+  height:3px;
+}
+
+#pBanner {
+  height:50px;
+  padding:0px;
+  font-size:36px;
+  text-align:center;
+  font-family:Trebuchet MS,Tahoma,Lucida,sans-serif;
+  margin:0;
+  line-height:20%;
+}
+
+#pBanner p {
+  padding:0;
+  margin:0;
+  font-size:12px;
+}
+
+#pBanner img {
+  vertical-align:middle;
+}
+
+#pBanLeft {
+  padding:0;
+  margin:0;
+}
+
+#pBanRight {
+  padding:0;
+  margin:0;
+}
+
+#pTitle {
+  padding:0px;
+  _height:0px;
+}
+
+#pTitle img {
+  vertical-align:middle;
+}
+
+#pBottomMargin {
+  height:20px;
+}
+
+#pBottomLeft {
+  background: url("../imgs/nbl.png") no-repeat left bottom;
+  z-index:1;
+  padding:0;
+  height:100%;
+}
+#pBottomRight {
+  background: url("../imgs/nbr.png") no-repeat right bottom;
+  z-index:1;
+  padding:0;
+  height:100%;
+}
+
+.pBodyTopLeft {
+  background: url("../imgs/nl.png") repeat-y left;
+  z-index:-5;
+}
+.pBodyTopRight {
+  background: url("../imgs/nr.png") repeat-y right;
+  z-index:-5;
+}
+
+.pBodyLeft {
+  background: url("../imgs/nl.png") repeat-y left;
+  z-index:-5;
+  height:100%;
+}
+.pBodyRight {
+  background: url("../imgs/nr.png") repeat-y right;
+  z-index:-5;
+  height:100%;
+}
+
+#wikiSplash {
+  height:80px;
+  background: url("../imgs/favorite.png") repeat-x;
+  padding:0;
+  margin:0;
+  margin-left:20px;
+  margin-right:22px;
+}
+
+#goFormUpper {
+  float:right;
+  padding: 3px 6px;
+}
+
+form {
+  margin-bottom:0px; /* IE hack */
+}
+
+#wikiPage, #wikiHeadPage {
+  margin-left:13px;
+  margin-right:15px;
+}
+
+#wikiHeadPage {
+  padding-top:10px;
+}
+
+#wikiPage {
+  padding-top:5px;
+  min-height:400px;
+  height: 100% !important; /* IE min-height hack */
+  height:100%;
+  padding-bottom:10px;
+}
+
+#wikiBanner {
+  padding-top:5px;
+  text-align:center;
+  font-family: "Trebuchet MS",Georgia,sans-serif;
+}
+
+a:link { color: #0686db;}
+a:visited { color: #000000;}
+/* a:hover {background-color:#999966;color:white} /* */
+span.wikiTitle {
+  padding-left:10px;
+  font-family:Trebuchet MS,Tahoma,Lucida,sans-serif;
+  font-size:22px;
+  font-weight:bold;
+  text-decoration: none;
+  display:inline;
+}
+
+.wikiTitle a,.wikiTitle a:active,.wikiTitle a:visited {
+  color: #333333;
+  text-shadow: #c3c3c3 1px 1px 1px;
+}
+
+.wikiTitle a:hover {
+  color: #0686db;
+  text-decoration: underline;
+}
+
+#wikiTitle {
+  padding-top:5px;
+  padding-left:0px;
+  overflow:hidden;
+  padding-right:5px;
+  margin-right: -1px;
+  margin-left:1px;
+  _margin-right: 0;
+}
+
+tt.wiki {font-family:Monotype,Lucida Console,lucida,monospace;font-size:12px;}
+tt.foot {
+  font-family:Tahoma,lucida,monospace;
+  font-size:11px;
+  vertical-align: super;
+}
+
+tt.sister {
+  font-family:Tahoma,lucida,monospace;
+  font-size:11px;
+  vertical-align: super;
+  text-decoration: none;
+}
+
+pre {
+  white-space:pre-wrap;
+  white-space: -moz-pre-wrap;
+  overflow: auto;
+}
+
+pre.wiki {
+  padding-left:6px;
+  padding-top:6px; 
+  font-family:"Bitstream Vera Sans Mono", Courier, GulimChe, monospace !important;
+  background-color:#000000;
+  color:#c0c0c0;
+  border:1px solid #ececec;
+  border-left:10px solid #ececec;
+  padding:10px;
+  white-space:pre;
+  white-space: -moz-pre-wrap;
+  overflow-x: auto;
+}
+
+pre.console {
+  background-color: #000000;
+  color: #E0E0E0;
+  padding: .25em ;
+  border: 2px inset #808080;
+}
+
+pre.quote {
+  padding-left:6px;
+  padding-top:6px;
+  white-space:pre-wrap;
+  white-space: -moz-pre-wrap; 
+  font-family:Georgia,monotype,lucida,monospace;font-size:14px;
+  background-color: #E9ECEF;
+}
+
+.wikiSyntax {
+  border:1px solid #ECECEC;
+  border-left:10px solid #ECECEC;
+  padding: 10px 0;
+}
+
+.line.alt {
+  background-color:#272727;
+}
+
+.line {
+  padding-left:10px;
+}
+
+table.wiki {
+  border-collapse: collapse;
+/* background-color:#E2ECE5;
+  background-color: #F8F7F0;
+  border: 0px outset #ddddb0; */
+}
+
+table.wiki tr {
+/* background-color: #F8F8F8; */
+/* border-collapse: collapse; */
+/* border: 0px inset #EAF2F4; */
+}
+
+table.wiki td {
+  border: 1px solid #969696;
+  padding:5px;
+}
+
+textarea.wiki { width:98%; }
+
+td.info, th.info {
+  background:#E2E2E2 url("../imgs/infotrbg.png") repeat-x;
+}
+
+#wikiContent h1, #wikiContent h2 {
+  font-family:Arial,Tahoma,sans-serif;
+  padding-left:2px;
+  border-bottom:1px solid #dddddd;
+  padding-bottom:0.2em;
+  margin-left:-5px;
+  padding-left: 5px;
+  border-left:3px solid #dddddd;
+}
+
+#wikiContent h3 {
+  margin-left:-10px;
+  padding-left: 5px;
+}
+
+#wikiContent h3, h4, h5 {
+  font-family:Arial,sans-serif;
+}
+
+#wikiContent h1 { font-size:22px; }
+#wikiContent h2 { font-size:1.6em; }
+#wikiContent h3 { font-size:1.4em; }
+#wikiContent h4 { font-size:1.2em; }
+#wikiContent h5 { font-size:1.0em; }
+
+h1 a, h2 a, h3 a, h4 a, h5 a {
+  text-decoration:none;
+}
+
+ul {
+  list-style-image: url(../imgs/li1.png);
+}
+
+ul>li ul>li {
+  list-style-image: url(../imgs/li2.png);
+}
+
+ol {
+  list-style-image: none;
+}
+
+h2,h1 {
+  padding-top:0.1em;
+}
+
+* html a.perma:visited { /* IE hack */
+  color:#000;
+}
+
+div.message {
+  margin-top: 3pt;
+  padding:0px 5px;
+  /* background: #FFF1B9 url(../imgs/warn.png) 10px 10px no-repeat; */
+  background: #E0E0E0 url(../imgs/msgbg.png) repeat-x; /* */
+  min-height: 60px;
+  height: auto !important;
+  height:60px;
+  /* border-color:#FF9853; /* */
+  /* border-width:2px 0 0px 0; /* */
+  border-width:0;
+  margin:0px 15px;
+}
+
+div.message h3 {
+  margin:0px;
+  border:0px;
+  font-family:Trebuchet MS,sans-serif;
+  font-size:20px;
+  line-height:300%;
+}
+
+pre.errlog {
+  padding-left:55px;
+  background: #FFE784 url(../imgs/error.png) 10px 10px no-repeat;
+  min-height: 40px;
+  height: auto !important;
+  border-width:2px 0 2px 0;
+  height:40px;
+}
+
+.highlight {
+  background-color:#FFFF40;
+}
+
+#wikiGoto {
+  font-family:Tahoma,Lucida,sans-serif;
+  font-size:11px;
+}
+
+input, option, select {
+  font-size:12px;
+  padding:1px;
+  margin:1px;
+}
+
+#wikiGoto input[type="text"] {
+  font-family:Tahoma,Lucida,sans-serif;
+  font-size:11px;
+  width:100px;
+}
+
+input[value="Go"] {
+  font-family:Tahoma,Lucida,sans-serif;
+  font-size:10px;
+  width:26px;
+}
+
+input[value="OK"] {
+  font-family:Tahoma,Lucida,sans-serif;
+  font-size:10px;
+  width:26px;
+}
+
+/* input submit button styling */
+
+span input.save-button,
+span input.button {
+  height:24px;
+  margin:0px;
+  padding:0px;
+  padding-top:0px;
+  background: transparent url('../imgs/btn_default.png') no-repeat right top;
+  border:0px;
+  position:relative;
+  left:2px;
+  display:inline-block;
+  padding-right:5px;
+  padding-left:4px;
+
+  _display:inline;
+  _overflow:visible;
+  _padding-top:2px;
+  _left:4px;
+  *padding-top:2px;
+}
+
+span.button {
+  display:inline-block;
+  height:24px;
+  background: transparent url('../imgs/btn_default.png') no-repeat left top;
+  position:relative;
+  padding:0px;
+  margin:0px;
+  margin-right:2px;
+
+  _display:inline;
+  _overflow:visible;
+  left:1px;
+}
+
+/* from devcenter */
+a.button-small {
+  background:transparent url(../imgs/btn_mini.png) no-repeat left top;
+  color:#666666;
+  display:inline-block;
+  height:18px;
+  margin:1px 2px 0 0;
+  text-decoration:none !important;
+  margin-left:-3px;
+}
+
+a.button-small span {
+  background:transparent url(../imgs/btn_mini.png) no-repeat right top;
+  color:#666666;
+  cursor:pointer;
+  display:inline-block;
+  font-family:sans-serif;
+  font-size:11px;
+  font-weight:normal;
+  height:17px;
+  line-height:17px; /* 20px */
+  text-align:center;
+  text-decoration:none;
+  min-width:20px;
+  padding-left:3px;
+  padding-right:6px;
+  margin-left:3px;
+  _overflow:hidden;
+}
+
+#editor_info li {
+  *padding:0; /* IE6 magic;;; */
+}
+
+table span.button {
+  _display:inline-block; /* IE6 magic;; */
+}
+
+
+/* button styling */
+button {
+  font-family:Tahoma,Lucida,sans-serif;
+  font-size:12px;
+  padding:2px;
+  vertical-align:top;
+}
+button, x:-moz-any-link, x:default {padding:0px;}
+
+button {
+  position:relative;
+  background: transparent url('../imgs/btn_default.png') no-repeat left top;
+  height: 24px;
+  display:inline-block;
+  margin:0;
+  padding:0;
+  border:0;
+  text-align:center;
+  overflow:visible;
+  cursor:pointer;
+  vertical-align:top;
+
+  margin-left:2px;
+
+  _overflow-y:hidden;
+  _margin-right:3px;
+  padding-left:2px;
+}
+
+
+button span {
+  position:relative;
+  height:22px;
+  white-space:nowrap;
+  display:inline-block;
+  padding: 0 13px 0 6px;
+  border:none;
+  background: transparent url('../imgs/btn_default.png') no-repeat right top;
+
+  line-height:19px;
+  padding-top: 2px;
+  vertical-align:top;
+  overflow:visible;
+  left:2px;
+  _margin-right:0px;
+}
+
+*+html #wikiBody button span {
+  margin-right:0;
+}
+
+/* firefox magic */
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner {
+  padding:0;
+  margin:0;
+  border: none;  /* overrides extra padding in Firefox */
+}
+
+html>/**/body button span, x:-moz-any-link, x:default {
+  /* left:0px; /* FF 3.5.x */
+}
+
+input[type="submit"] {
+  font-family:Tahoma,Lucida,sans-serif;
+  padding:2px 3px;
+  font-size:12px;
+}
+
+html>/**/body input[type="submit"], x:-moz-any-link, x:default {
+  padding:1px 2px 0px 2px;
+}
+
+.searchResult input[value="Go"] {
+  font-size:2em;
+  width:auto;
+}
+
+.searchResult { text-align:center; }
+
+.searchResult input {
+  font-size: 2em;
+  font-weight:bold;
+  font-family: Trebuchet MS, "Times New Roman", Times, serif;
+}
+
+table.closure, td.closure{
+  background-color: #E9ECEF;
+}
+
+/*  */
+.wikiHr {
+  border:0px solid;
+  padding: 0px 0px; /* */
+  margin-top:0px;
+  height:1px;  
+/* background: #000 url(hr1.gif) no-repeat scroll center; */
+}
+
+.separator hr {
+  height:2px;
+  color:#ccc;
+  border:0px solid;
+  background-color:#ccc;
+}
+
+.diff-added hr {
+  background-color:#aaf0aa;
+}
+
+.diff-removed hr {
+  background-color:#f05050;
+}
+
+.foot .separator {
+  border-bottom: 2px solid #eee;
+  width:70px;
+}
+
+.foot .separator tt {
+  display:none;
+}
+
+div.foot ul li {
+  list-style:none;
+  list-style-image: none;
+}
+
+.foot tt.foot {
+  vertical-align:bottom;
+  font-family: Trebuchet MS, sans-serif;
+  font-size:12px;
+}
+
+.foot ul li:target {
+  background-color: #eee;
+}
+
+.foot ul li:target a {
+  font-weight:bold;
+}
+
+.foot a:target {
+  background-color: #def;
+  font-weight:bold;
+}
+
+#wikiTrailer {
+  display:inline-block;
+  height:25px;
+  padding:0;
+  margin-right:20px;
+  text-align:left;
+  font-family: "Trebuchet MS",Georgia,sans-serif;
+  padding-left: 20px;
+}
+
+#wikiTrailer p {
+  background: transparent url("../imgs/bg_pane.png") no-repeat left top;
+  display:inline-block;
+  height:25px;
+  margin:0;
+  padding:0;
+  float:left;
+}
+
+#wikiTrailer p span {
+  background: transparent url("../imgs/bg_pane.png") no-repeat right top;
+  display:inline-block;
+  margin:0;
+  margin:0 0 0 15px;
+  padding:4px 15px 3px 0;
+}
+
+#wikiTrailer p span span.separator {
+  background: none;
+  margin: 0;
+  padding: 0 0.5em;
+}
+
+#wikiTrailer a {
+  color: #777777;
+  text-decoration: none;
+}
+
+#wikiTrailer a:hover {
+  color: #3c3c3c;
+  text-decoration: underline;
+}
+
+.wikiNavigation {
+  background-color:#E0E0E0; 
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#wikiOrigin {
+  background-color:#fafafa; 
+  padding-left: 20px;
+  padding-top:3px;
+  padding-bottom:3px;
+}
+
+#wikiHeader {
+/*  border-left: 0.8em solid #7B9AC5; /* */
+/*  border: 1px solid #7B9AC5; /* */
+  clear:both;
+  color: #000000;
+  padding: 0;
+  margin-left:5px;
+}
+
+#wikiHeader a:link {color:#000000;}
+#wikiHeader a:visited {color:#000000;}
+
+#wikiMenuBar {
+  padding:2px;
+  padding-top:3px;
+  height:41px; /* important !!! for IE */
+  padding-bottom:0;
+  margin:0;
+  margin-left:5px;
+  margin-right:4px;
+}
+
+#wikiIcon {
+  float:right;
+  padding: 7px 15px;
+  text-align: right;
+  vertical-align: middle;
+}
+
+#wikiIcon a {
+  text-decoration: none;
+}
+
+#wikiIcon img {
+  visibility:hidden;
+  _visibility:visible;
+}
+
+#wikiIcon:hover img {
+  visibility:visible;
+}
+
+#wikiMenu {
+  background: url("../imgs/bg_menu.png") no-repeat right top;
+  margin:0;
+  padding:0;
+  padding-left:4px;
+  margin-left:4px;
+}
+
+#wikiMenu ul {
+  display:inline-block;
+  list-style:none;
+  background: url("../imgs/bg_menu.png") no-repeat left top;
+  height:40px;
+  margin:0;
+  padding:0;
+  margin-left:0;
+  padding-bottom:3px !important; /* for FF */
+  padding-bottom:2px;
+  margin-left:-6px;
+}
+
+#wikiMenu li.first {
+  margin-left:5px;
+}
+
+#wikiMenu li {
+  display:inline-block;
+  height:41px;
+  margin:0px;
+  padding:1px 0 0 0;
+
+  float: left;
+}
+
+#wikiMenu li a {
+  background: transparent url("../imgs/mi.png") no-repeat right top;
+  display:inline-block;
+  margin-top:1px;
+  padding:11px 10px;
+}
+
+#wikiMenu li a.main {
+  padding:0px;
+  background:none;
+}
+
+#wikiMenu li a:hover, #wikiMenu li.current a:hover {
+  background-color: #98D3FC; /* default */
+  /* background-color: #355F88; /* dark blue */
+  /* background-color: #F2B568; /* orange */
+  text-decoration: none;
+  background: transparent url("../imgs/mih.png") no-repeat right top;
+}
+
+#wikiMenu li.current a {
+  text-decoration: none;
+  background: transparent url("../imgs/mic.png") no-repeat right top;
+}
+
+#wikiMenu li:hover a{
+/* color: #1999ee; /* */
+  color: #ffffff; /* */
+}
+
+#wikiMenu li a:active {
+  text-decoration: none;
+}
+
+#wikiMenu a, #wikiMenu a:visited, #wikiMenu a:link {
+  margin: 0;
+  text-decoration: none;
+  color:white;
+}
+
+#wikiMenu a{
+  color:white;
+  font-size:11px;
+  font-weight:bold;
+  font-family: Dotum,Verdana,sans-serif;
+  text-decoration:none;
+}
+
+#wikiAction {
+  background: transparent url("../imgs/bg_pane.png") no-repeat left top;
+  padding-left:10px;
+  float:left;
+}
+
+#wikiAction ul {
+  list-style:none;
+  padding:0;
+  margin:0;
+  white-space:nowrap;
+  background: transparent url("../imgs/bg_pane.png") no-repeat right top;
+  float:left;
+  height:25px;
+  padding-right:10px;
+}
+
+#wikiAction li {
+  display:inline-block;
+  padding:5px;
+  float:left;
+  _padding-top:7px;
+  _padding-bottom:4px;
+}
+
+#wikiAction a {
+  font-size:12px;
+  text-decoration:none;
+  color: #777777;
+}
+
+#wikiAction a:hover {
+  text-decoration:underline;
+  color: #3c3c3c;
+}
+
+#wikiBody {
+  margin-left:10px;
+  color: black;
+/*  background-color: #fff; /* */
+  overflow: hidden; /* magic XXX */
+/*  border: 1px dotted #c0c0c0; /* */
+/*  border-left: 0.8em solid #E2ECE2;
+  border-right: 0.8em solid #E2ECE2; */
+/*  border-left: 0.8em dotted; /*solid #6A2525; */
+/*  border-right: 0.8em solid #6A2525; */
+/*  text-transform: lowercase; /* */
+/*  margin: 10px 10px 0px 10px; */
+/*  padding: 5px 1em 5px 1em; */
+/*  margin-left: 20px; */
+/*  padding-left: 1em; /* */
+/*  text-indent: 10px; */
+/*  border: 0px outset #E2ECE5; */
+/*  font-size:16px; 
+  border-collapse:collapse; */
+  left:1px;
+  padding-right:10px;
+/* border-right:1px solid #f0f0f0; /* */
+  margin-right: 10px;
+  margin-top:0;
+  padding-top:10px;
+  padding-right:10px;
+  margin-right:0;
+  _display:inline-block;
+}
+
+#wikiBody a:link {
+  text-decoration:none;
+  color: #125Fab;
+}
+
+#wikiBody a:visited {
+  /* border-bottom: 1px dotted #bbb; */
+  color: #125fab;
+}
+
+#wikiBody a:hover {
+  color: #2285E8;
+  text-decoration:none;
+}
+
+#wikiContent {
+  padding-left: 10px;
+}
+
+#wikiExtra {
+/*  padding-top: 1em; /* */
+}
+
+#wikiFooter {
+  clear:both;
+  padding: 0.5em 2em;
+  height:35px;
+/*  background-color:yellow; */
+}
+
+.wikiHints {
+  padding: 7px 0px 0px 0px;
+}
+
+.wikiHints .space {
+  font-family: monospace;
+  background: #ffc url("../../../imgs/misc/space.gif") no-repeat left bottom;
+  display:inline-block;
+  width:11px;
+  height:12px;
+  white-space:pre;
+}
+
+.wikiHints .head {
+  font-family: Dotum, sans-serif;
+  letter-spacing: -1px;
+  font-size: 11px;
+  padding: 0px 12px 0px 12px;
+}
+
+.wikiHints .head .tutorial-link {
+  float: left;
+}
+
+.wikiHints .head .open-button,
+.wikiHints .head .close-button {
+  float: right;
+}
+
+.wikihints .head .clear {
+  clear: both;
+}
+
+/* question mark(?) and close mark(x) for wikiHints */
+.wikiHints .head .mark {
+  color: #ff621a;
+  font-weight: bold;
+}
+.wikiHints .head .close-button .mark {
+  font-size:12px;
+}
+
+.wikiHints .head .message {
+}
+
+/* a rule between head and content of wikiHints */
+#wikiHints_opened_head {
+}
+
+#wikiHints_content {
+  background-color:#fafafa;
+  border: 1px solid #e5e5e5;
+  font-size:12px;
+  font-family: 'Bitstream Vera Sans', Courier New, monospace;
+  color: #5f5f5f;
+  line-height:160%;
+  padding: 10px;
+  margin:0px;
+}
+
+#wikiSister {
+/*  background-color:lightgreen; /* */
+}
+
+#wikiPreview {
+  border: 2px solid #a0a0a0;
+  margin: 5px 5px 5px 5px;
+  padding: 5px 1em 5px 1em;
+}
+
+
+div.indent {
+  margin-top: 3px;
+  padding-left: 22px;
+}
+
+div.quote {
+  background: transparent url("../imgs/quote-open.png") no-repeat;
+  padding: 5px 5px 5px 20px;
+  background-color: #f8f8f8; /* */
+}
+
+div.diff-sep {
+  text-shadow: 0 1px 0 #fff;
+  padding: 5px 10px;
+  background-image: linear-gradient(#fafafa, #eaeaea);
+  border: 1px solid #ccc;
+}
+
+div.diff-removed {
+  background-color:#EEBfbb;
+  background-color:#fdd;
+}
+
+del.diff-removed {
+  color: #999999;
+  background-color:white !important; /* */
+  /* background-color:#f0f0f0; /* */
+  border-right:2px solid #f0f0f0;
+  border-left:2px solid #f0f0f0;
+  text-decoration:line-through;
+}
+
+div.diff-added {
+  background-color:#dfd;
+}
+
+ins.diff-added {
+  background-color:#aaffaa;
+}
+
+span.diff-added {
+  background: url("../../../imgs/misc/diffbg.png") repeat-x;
+}
+
+span.diff-removed {
+  background: url("../../../imgs/misc/diffbg.png") repeat-x;
+  background-position:left -25px;
+}
+
+table.info td {
+  font-family:courial new,sans-serif;
+}
+
+th.rev {
+  font-family:courial new,sans-serif;
+}
+
+div.hint { font-size: 10px; background-color: #369; color:white;}
+a.purple { font-size: 10px; text-decoration:none;}
+
+/* Blog CSS */
+a.purple { font-size: 10px; text-decoration:none;}
+div.blog { width:90%; padding: 0em 1em 0em 1em; }
+div.blog-title { font-size:16px; font-weight:bold; }
+div.blog-comments { }
+div.blog-comment { padding:1em 1em 1em 2em; margin-bottom:5px;border-left: 4px solid #E4F1F4; background-color:#F0F6F8;}
+div.blog-comments .separator { display:none;}
+div.blog-action { font-family:Dotum,Trebuchet MS,sans-serif; text-align:right; font-size:11px; }
+div.blog-action .bullet { font-family:Arial,sans-serif; font-size:11px; }
+div.blog-action .count { font-family:Arial,sans-serif; font-weight:bold; color:#fa6f46; font-size:11px; }
+
+div.blog-date { font-size:18px; font-weight:bold; padding-bottom:5px;}
+div.blog-user, span.blog-user { font-family:Dotum,Arial,sans-serif; font-size:11px; padding-bottom:5px; }
+
+div.blog-summary { margin-bottom:11px;}
+
+div.trackback-hint { font-family:Dotum,sans-serif; font-size: 11px; padding: 1em 1em 1em 1em;background-color: #eee;}
+
+/* SWFUpload */
+#wikiBody #mmUploadFileListing li {
+  font-family:Dotum, sans-serif;
+}
+
+/* Calendar */
+td.day { background: #e0e0e0; text-align: center;}
+td.today { background:#ffffff; text-align: center;}
+span.blogged {
+  text-decoration:none;
+  font-weight:bold; color:#000000; text-align: center;
+}
+
+.Calendar a{text-decoration:none;color:black;}
+
+caption.month {
+  font-weight:bold;
+  white-space:nowrap;
+}
+
+/* HierarchicalWiki */
+.wikiGroup {
+  font-weight:bold;
+  padding-left:10px;
+  font-family:Tahoma,Lucida,sans-serif;
+  font-size:x-small;
+  color: #0686db;
+}
+
+/* login */
+#wikiSideMenu #wikiLogin {
+  font-family:Dotum,Tahoma,sans-serif;
+  font-size:11px;
+  font-weight:bold;
+  text-align:center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+#wikiSideMenu #wikiLogin input {
+  font-family:Dotum,Tahoma,sans-serif;
+  font-size:11px;
+  font-weight:normal;
+
+  padding-top:1px;
+  _padding-top:3px;
+}
+
+#wikiSideMenu #wikiLogin:lang(ko) {
+  letter-spacing:-1px;
+}
+
+#wikiSideMenu #wikiLogin:lang(ko) input {
+  letter-spacing:-1px;
+}
+
+#wikiLogin a, #wikiLogin a:visited {
+  text-decoration: none;
+  color: #ccc;
+}
+
+#wikiLogin a:hover {
+  text-decoration: none;
+  color: #0686d8;
+}
+
+.popup #wikiLogin {
+  margin: 5px auto;
+  padding: 1em;
+  width: 260px;
+  background: white;
+  -webkit-box-shadow: rgba(200,200,200,0.7) 0 4px 10px -1px;
+  box-shadow: rgba(200,200,200,0.7) 0 4px 10px -1px;
+}
+
+.popup #wikiLogin td {
+  vertical-align: middle;
+  font-weight: bold;
+  color: #333;
+}
+
+.popup #wikiLogin td.label {
+  text-align: right;
+}
+
+.popup #wikiLogin input[type="password"],
+.popup #wikiLogin input[type="text"] {
+  font-weight: 200;
+  font-size: 24px;
+  line-height: 1;
+  padding: 3px;
+  margin: 10px 5px;
+  border: 1px solid #e5e5e5;
+  background: #fbfbfb;
+  outline: 0;
+  -webkit-box-shadow: inset 1px 1px 2px rgba(200,200,200,0.2);
+  box-shadow: inset 1px 1px 2px rgba(200,200,200,0.2);
+}
+
+.popup #wikiLogin td.submit {
+  text-align: right;
+  padding-right: 8px;
+}
+
+#commentForm {
+  padding:5px;
+  background-color:#eeeeee;
+}
+
+#commentForm input {
+  /* border:1px solid #848284; /* */
+  font-size:x-small;
+  font-family:Verdana,sans-serif;
+  outline:none;
+}
+
+/* enscript syntax */
+div.wikiPre i,div.wikiPre b{
+  font-weight: normal;
+  font-style: normal;
+}
+
+img.imgLeft {
+  margin-right : 15px;
+  margin-bottom : 5px;
+}
+
+img.imgRight {
+  margin-left : 10px;
+  margin-bottom : 5px;
+}
+
+span.externalLink {
+  display: none;
+}
+
+span.lineNumber {
+  color:#c0c0c0;
+  /* color:#ffff00; /* */
+}
+
+math, math[mode="inline"] {
+  font-family: CMSY10, CMEX10, Symbol, Times;
+}
+
+.sectionEdit span {
+  color:#3D9CB4;
+  /* background:url(../imgs/se.png) no-repeat left top; /* */
+  /* padding:5px 16px;
+  height:26px; */
+  font-size:12px;
+  top:10px;
+}
+
+.sectionEdit span:hover {
+  /* background:url(../imgs/se.png) no-repeat left bottom; /* */
+}
+
+.sectionEdit a:link {
+}
+
+.sectionEdit a span {
+  padding:0px;
+  /* visibility:hidden; */
+}
+
+/* .sectionEdit span.sep { display:none; } */
+
+.commentForm textarea.wiki {
+  align:right;
+  width:412px; height:136px;
+  background:url(../imgs/commentarea.png) no-repeat left top;
+  border:none;
+  outline:none; /* webkit */
+  resize: none; /* webkit */
+  padding:4px 8px;
+}
+
+* html .commentForm textarea.wiki { /* IE fix */
+  background:url(../imgs/commentarea.png) no-repeat left top fixed;
+  padding-right:20px;
+}
+
+.commentForm textarea.wiki:hover { background-position:left bottom;}
+
+#goFormUpper input.goto {
+  width:174px !important; 
+  height:25px;
+  background:url(../imgs/goinput2.png) no-repeat left top;
+  border:none;
+  outline:none;
+  padding:6px 7px;
+  font-family: "Trebuchet MS",Georgia,sans-serif;
+  font-size:16px;
+  line-height:130%;
+}
+
+* html #goFormUpper input.goto { /* IE fix */
+  background:url(../imgs/goinput2.png) no-repeat left top fixed;
+}
+
+#goFormUpper input.goto:hover {
+  background-position:left bottom;
+}
+
+#goFormUpper input.submitBtn {
+width:40px !important;
+height:35px;
+color:#FFF;
+font-weight:bold;
+margin-top:0px;
+padding:5px 5px;
+font-size:11px;
+background:url(../imgs/gobutton2.png) no-repeat left top;
+cursor:pointer;
+border:none;}
+
+#goFormUpper input.submitBtn:hover {
+  background-position:left bottom;
+}
+
+/* goform on the menubar */
+#goForm {
+  float:right;
+  padding: 1px 5px 0 0;
+  _padding: 0px 7px 0 0; /* IE fix */
+}
+
+#goForm input.goto {
+  width:136px !important;
+  height:14px;
+  background:url(../imgs/goinput.png) no-repeat left top;
+  border:0px;
+  outline:none;
+  padding:9px 7px;
+  font-family: "Trebuchet MS",Georgia,sans-serif;
+  font-size:12px;
+}
+
+* html #goForm input.goto { /* IE fix */
+  background:url(../imgs/goinput.png) no-repeat left top fixed;
+}
+
+#goForm input.goto:hover {
+  background-position:left bottom;
+}
+
+#goForm input.submitBtn {
+  width:33px; height:32px;
+  color:#FFF;
+  font-weight:bold;
+  padding:1px 4px 1px 0px !important;
+  padding:2px 4px;
+  background:url(../imgs/gobutton.png) no-repeat left top;
+  cursor:pointer;
+  margin:0px;
+  margin-top:0px;
+  border:0px;
+  font-size:11px;
+  font-family: Verdana,Tahoma,sans-serif;
+  _background:url(../imgs/gobutton.png) no-repeat 2px top;
+}
+
+#goForm input.submitBtn:hover {
+  background-position:left bottom;
+}
+
+#container {
+  margin: 0 auto;
+  height:100%;
+  overflow:hidden;
+  background-image: url("../imgs/bg_sidemenu.png"); /* */
+  background-repeat: repeat-y;
+  background-position: 100% top;
+}
+
+#mycontent { /* theme specific */
+/*  margin-right:140px; /* */
+  padding-right:0;
+  height:100%;
+}
+
+#wikiSideMenuContainer {
+  display:inline-block;
+  overflow:visible;
+  float:right;
+  max-width:160px;
+  width:auto !important;
+  _width:10px; /* IE6 magic */
+  height:100%;
+  margin-left:10px;
+  _margin-left:0;
+}
+#wikiSideMenu {
+  display:inline-block;
+  overflow:visible;
+  float:right;
+  width:150px;
+  padding:10px;
+  margin:0;
+}
+
+.randomQuote {
+  font-family: Georgia,Verdana,Tahoma,sans-serif;
+  font-weight:bold;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px 0px 10px 0px;
+}
+
+.wikiFortune {
+  border: 1px solid #f0f0f0;
+  padding: 15px;
+}
+
+.randomPage {
+  font-family: Trebuchet MS,sans-serif;
+/*  border-bottom: 1px solid #e0e0e0; /* */
+  padding: 0px 0px 10px 0px;
+}
+
+.calendar {
+  font-size:11px;
+  font-family: Trebuchet MS,sans-serif;
+}
+
+#topIcon {
+  text-align:right;
+  padding-right:20px;
+}
+
+.resizable-textarea .grippie {
+  height: 14px;
+  background: #F0F0F0 url(../imgs/grippie.png) no-repeat 100% 100%;
+  border: 1px solid #E7E7E7;
+  margin:0;
+  margin-top:-3px;
+  _margin-top:-1px;
+  border-top-width: 0;
+  cursor: s-resize;
+}
+
+.resizable-textarea textarea {
+  margin:0;
+}
+.resizable-textarea {padding-bottom:0.3em;}
+
+#toTop {
+  float:right;
+}
+
+#subMain ul {
+  list-style:none;
+  padding-left:5px;
+}
+
+#subMenu ul {
+  padding-left:15px;
+}
+
+.scrap li {
+  list-style: none;
+  padding-left:0px;
+}
+
+.scrap ul {
+  list-style: none;
+  padding-left:0px;
+}
+
+.scrap {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+#save_state {
+  background-color: #ffffca;
+}
+
+.recentChanges .date, .recentChanges .hits {
+  font-family:Trebuchet MS,Tahoma,Lucida,sans-serif;
+}
+.recentChanges .hits, .recentChanges .editinfo {
+  text-align:right;
+}
+.recentChanges .user, .recentChanges .editinfo {
+  font-family:Trebuchet MS,Tahoma,Lucida,sans-serif;
+}
+
+.recentChanges tr.alt {
+  background-color: #f5f5f5;
+}
+
+.recentChanges td {
+  padding: 3px;
+}
+
+.recentChanges span.diff-added {
+  padding-left: 2px;
+  padding-right: 2px;
+  margin-left: 3px;
+}
+
+.recentChanges span.diff-removed {
+  margin-left: 1px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+#editor_info ul li {
+  list-style-image:none;
+}
+
+.author img {
+  padding-right: 2px;
+}
+
+td.author {
+  width: 300px;
+}
+
+td.date {
+  width: 100px;
+}
+

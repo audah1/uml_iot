@@ -1,0 +1,23 @@
+== MoniWiki 관리하기 ==
+열거된 페이지는 위키를 관리하기 위한 여러가지 정보를 담고있습니다.~
+
+설치와 업그레이드:
+ * HelpOnInstallation - 설치하려면
+  * HelpOnInstallation/MultipleUser - 한 시스템에 여러 개의 모니위키 사용할 때
+  * HelpOnInstallation/SetGid
+ * HelpOnConfiguration - 설정하려면
+ * HelpOnUpdating - 예전에 설치된 것을 새로운 버전으로 업데이트 하려면
+----
+ * HelpOnCvsInstallation - CVS 개발버전으로부터 다운받아서 설치하려면 ( /!\ 1.1.5 버전 이전)
+ * HelpOnGitInstallation - GIT 개발 레포지터리로부터 다운받아서 설치하려면 ( /!\ 1.2.0 버전부터)
+
+== Moniwiki 백업하기 ==
+ * MoniWikiBackup
+ * MoniWikiBackupRestore
+
+== 웹 서비스 설정 ==
+MoniWiki를 실행하기 위한 환경 구성을 위한 문서 링크입니다.
+
+ * [nginx.conf]
+----
+[[Navigation(HelpOnAdministration)]]

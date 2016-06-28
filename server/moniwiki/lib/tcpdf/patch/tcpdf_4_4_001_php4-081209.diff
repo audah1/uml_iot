@@ -1,0 +1,191 @@
+--- tcpdf.php.orig	2008-12-08 23:06:56.474691050 +0900
++++ tcpdf.php	2008-12-09 12:20:22.861302550 +0900
+@@ -2504,17 +2504,21 @@
+ 		* @since 2.4.000 (2008-03-06)
+ 		*/
+ 		function GetCharWidth($char) {
++			$cdw = (($this->CurrentFont['type'] == 'TrueTypeUnicode') OR ($this->CurrentFont['type'] == 'cidfont0')) ? 1:0;
+ 			$cw = &$this->CurrentFont['cw'];
+ 			if (isset($cw[$char])) {
+ 				$w = $cw[$char];
+-			} elseif (isset($this->CurrentFont['dw'])) {
+-				// default width
++			} elseif ($cdw and isset($this->CurrentFont['dw'])) {
+ 				$w = $this->CurrentFont['dw'];
+-			} elseif (isset($cw[32])) {
+-				// default width
+-				$dw = $cw[32];
+ 			} else {
+-				$w = 600;
++				$key = key($this->fonts); // first default unicode font
++				if (isset($this->fonts[$key]['cw'][$char])) {
++					$w = $this->fonts[$key]['cw'][$char];
++				} elseif (isset($this->fonts[$key]['dw'])) {
++					$w = $this->fonts[$key]['dw'];
++				} else {
++					$w = 500; // default width
++				}
+ 			}
+ 			return ($w * $this->FontSize / 1000);
+ 		}
+@@ -2995,7 +2999,76 @@
+ 			$this->checkPageBreak($h);
+ 			$this->_out($this->getCellCode($w, $h, $txt, $border, $ln, $align, $fill, $link, $stretch));
+ 		}
++
++		function _is_unicode($str) {
++			global $utf8tolatin;
++			if (!$this->isunicode) {
++				return false; // string is not in unicode
++			}
++			$unicode = $this->UTF8StringToArray($str); // array containing UTF-8 unicode values
++			foreach ($unicode as $char) {
++				if ($char < 256 or array_key_exists($char, $utf8tolatin) or $char == 0xFFFD) {
++					continue;
++				} else {
++					return true;
++				}
++			}
++			return false;
++		}
+ 		
++		function _chunkText($str, $check = 0) {
++			global $utf8tolatin;
++			if (!$this->isunicode) {
++				return $str; // string is not in unicode
++			}
++			$chunk = '';
++			$chunks = array(); // chunks to be returned
++			$u = 0; // flag
++			$unicode = $this->UTF8StringToArray($str); // array containing UTF-8 unicode values
++			foreach ($unicode as $char) {
++				if ($char == 32) {
++					$chunk .= chr($char);
++				} elseif ($char < 256) {
++					if ($u) {
++						$chunks[] = $chunk;
++						$chunk = '';
++						$u = 0;	
++					}
++					$chunk .= chr($char);
++				} elseif (array_key_exists($char, $utf8tolatin)) {
++					// map from UTF-8
++					if ($u) {
++						$chunks[] = $chunk;
++						$chunk = '';
++						$u = 0;	
++					}
++					$chunk .= chr($utf8tolatin[$char]);
++				} else {
++					if (!$u) {
++						$chunks[] = $chunk;
++						$chunk = '';
++						$u = 1;	
++					}
++					if ($check) return false;
++					$chunk .= $this->unichr($char);
++				}
++			}
++			if (!empty($chunk)) $chunks[]=$chunk;
++			return $chunks;
++		}
++
++		function __chunkText($txt) {
++			$chunks = preg_split("/((?:[\x09\x0A\x0D\x20]|[\xC2-\xDF][\x80-\xBF]|"
++				."\xE0[\xA0-\xBF][\x80-\xBF]|"
++				."[\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}|"
++				."\xED[\x80-\x9F][\x80-\xBF]|"
++				."\xF0[\x90-\xBF][\x80-\xBF]{2}|"
++				."[\xF1-\xF3][\x80-\xBF]{3}|\xF4[\x80-\x8F][\x80-\xBF]{2})+|[\x20-\x7E]+)/",
++				$txt,-1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
++
++			return $chunks;
++		}
++
+ 		/**
+ 		* Returns the PDF string code to print a cell (rectangular area) with optional borders, background color and character string. The upper-left corner of the cell corresponds to the current position. The text can be aligned or centered. After the call, the current position moves to the right or to the next line. It is possible to put a link on the text.<br />
+ 		* If automatic page breaking is enabled and the cell goes beyond the limit, a page break is done before outputting.
+@@ -3132,13 +3205,16 @@
+ 				if ($this->ColorFlag) {
+ 					$s .= 'q '.$this->TextColor.' ';
+ 				}
+-				$txt2 = $this->_escapetext($txt);
+ 				if ($this->rtl) {
+ 					$xdk = ($this->x - $dx - $width) * $k;
+ 				} else {
+ 					$xdk = ($this->x + $dx) * $k;
+ 				}
++
++				$txt2 = $this->_escapetext($txt);
++
+ 				// Justification
++				$justify = 0;
+ 				if ($align == 'J') {
+ 					// count number of spaces
+ 					$ns = substr_count($txt, ' ');
+@@ -3148,6 +3224,7 @@
+ 						// calculate average space width
+ 						$spacewidth = ($w - $width - (2 * $this->cMargin)) / ($ns?$ns:1) / $this->FontSize / $this->k;
+ 						// set word position to be used with TJ operator
++						$justify = 1;
+ 						$txt2 = str_replace(chr(0).' ', ') '.(-2830 * $spacewidth).' (', $txt2);
+ 					} else {
+ 						// get string width
+@@ -3159,8 +3236,43 @@
+ 				// calculate approximate position of the font base line
+ 				//$basefonty = $this->y + (($h + $this->FontAscent - $this->FontDescent)/2);
+ 				$basefonty = $this->y + ($h/2) + ($this->FontSize/3);
+-				// print text
+-				$s .= sprintf('BT %.2f %.2f Td [(%s)] TJ ET', $xdk, (($this->h - $basefonty) * $k), $txt2);
++
++				if ($this->isunicode
++					and ($this->CurrentFont['type'] != 'TrueTypeUnicode') and ($this->CurrentFont['type'] != 'cidfont0')
++						and $this->_is_unicode($txt)) {
++					$uf = key($this->fonts); // first default font
++					$ui = $this->fonts[$uf]['i'];
++					$ci = $this->CurrentFont['i'];
++
++					$fu =sprintf(' /F%d %.2f Tf', $ui, $this->FontSizePt);
++					$fc =sprintf(' /F%d %.2f Tf', $ci, $this->FontSizePt);
++					$strs = $this->_chunkText($txt);
++
++					$ret='';
++					foreach ($strs as $str) {
++						if (empty($str)) continue;
++						if ($this->_is_unicode($str)) {
++							$str = $this->_escapetext($str, false);
++							$is_u = 1;
++						} else {
++							$str = $this->_escapetext($str);
++							$is_u = 0;
++						}
++						if ($justify) 
++							$str= str_replace(chr(0).' ', ') '.(-2830 * $spacewidth).' (', $str);
++						$str = ' [('.$str.')] TJ';
++
++						if ($is_u)
++							$str = $fu.$str.$fc;
++
++						$ret .= $str;
++					}
++					$s.= sprintf('BT %.2f %.2f Td %s ET', $xdk, (($this->h - $basefonty) * $k), $ret);
++				} else {
++					// print text
++					$s .= sprintf('BT %.2f %.2f Td [(%s)] TJ ET', $xdk, (($this->h - $basefonty) * $k), $txt2);
++				}
++
+ 				if ($this->rtl) {
+ 					$xdx = $this->x - $dx - $width;
+ 				} else {
+@@ -5661,9 +5773,9 @@
+ 		* @return string escaped string.
+ 		* @access protected
+ 		*/
+-		function _escapetext($s) {
++		function _escapetext($s, $force = true) {
+ 			if ($this->isunicode) {
+-				if (($this->CurrentFont['type'] == 'core') OR ($this->CurrentFont['type'] == 'TrueType') OR ($this->CurrentFont['type'] == 'Type1')) {
++				if ($force and ($this->CurrentFont['type'] == 'core') OR ($this->CurrentFont['type'] == 'TrueType') OR ($this->CurrentFont['type'] == 'Type1')) {
+ 					$s = $this->UTF8ToLatin1($s);
+ 				} else {
+ 					//Convert string to UTF-16BE and reverse RTL language

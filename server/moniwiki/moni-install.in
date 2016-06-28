@@ -1,0 +1,43 @@
+#!/bin/sh
+echo
+echo "+------------------------------------+"
+echo "|    MoniWiki installation script    |"
+echo "+------------------------------------+"
+echo
+
+if [ -z $INSTDIR ]; then
+  INSTDIR=@@INSTDIR@@
+fi
+
+if [ -z $MAIN ]; then
+  MAIN=wiki.php
+fi
+
+DATAFILES="intermap.txt
+mime.types
+PeignotNum.ttf
+"
+
+LINKS="imgs images theme css local locale plugin lib applets"
+
+for x in LINKS; do
+  [ ! -d $x ] && [ -d $INSTDIR/$x ] && ln -s $INSTDIR/$x .
+done
+
+#[ ! -d data ] && cp -a $INSTDIR/data .
+[ ! -d data ] && mkdir data && (cd data; for x in $DATAFILES; do ln -s $INSTDIR/data/$x .; done)
+[ ! -d config ] && mkdir config && cp -a $INSTDIR/config/* config/
+[ ! -f config.php.default ] && ln -s $INSTDIR/config.php.default .
+[ ! -f monisetup.php ] && ln -s $INSTDIR/monisetup.php .
+conf=`ls $INSTDIR/config.php.*|grep -v config.php.default`
+cp -a $INSTDIR/monisetup.sh $INSTDIR/secure.sh .
+if [ -n "$conf" ]; then
+	cp -a $conf .
+fi
+
+if [ ! -f index.php ]; then
+  cat <<PHP >index.php
+<?php
+include("$INSTDIR/$MAIN");
+PHP
+fi

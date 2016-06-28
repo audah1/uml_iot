@@ -1,0 +1,62 @@
+--- tcpdf.php.orig	2008-12-10 12:40:49.657104686 +0900
++++ tcpdf.php	2008-12-10 19:04:34.338545171 +0900
+@@ -3732,7 +3732,10 @@
+ 							if (($this->rtl AND ($this->x <= ($this->w - $this->rMargin - $chrwidth)))
+ 								OR ((!$this->rtl) AND ($this->x >= ($this->lMargin + $chrwidth)))) {
+ 								// print a void cell and go to next line
+-								$this->Cell($w, $h, '', 0, 1);
++								// block mode XXX
++								$this->Cell(0, $h, '', 0, 1,0,$fill);
++								//$this->Cell(0, $h, '', 0, 1);
++								// $this->Cell($w, $h, '', 0, 1);
+ 								$linebreak = true;
+ 								if ($firstline) {
+ 									return ($this->UTF8ArrSubString($chars, $j));
+@@ -3782,7 +3785,9 @@
+ 									$this->cMargin = 0;
+ 								}
+ 							}
+-							$this->Cell($w, $h, $this->UTF8ArrSubString($chars, $j, ($sep + $endspace)), 0, 1, $align, $fill, $link, $stretch);
++							// block mode or inline mode XXX
++							$this->Cell(0, $h, $this->UTF8ArrSubString($chars, $j, ($sep + $endspace)), 0, 1, $align, $fill, $link, $stretch);
++							//$this->Cell($w, $h, $this->UTF8ArrSubString($chars, $j, ($sep + $endspace)), 0, 1, $align, $fill, $link, $stretch);
+ 							if ($firstline) {
+ 								$this->cMargin = $tmpcmargin;
+ 								return ($this->UTF8ArrSubString($chars, ($sep + $endspace)));
+@@ -11195,6 +11225,17 @@
+ 					break;
+ 				}
+ 				case 'br': {
++					$fix_y = 0;
++					if (!empty($parent)) {
++						$blocks=array('pre','blockquote','div');
++						$k=$dom[$key]['parent'];
++						while($k and ($p=$dom[$k]) and !in_array($p['value'],$blocks))
++							$k=$dom[$k]['parent'];
++						if (in_array($p['value'],$blocks) and $p['bgcolor']) {
++							$this->SetFillColorArray($p['bgcolor']);
++							$this->Cell(0, 0, '', 0, 0, 0, true); // XXX block mode
++						}
++					}
+ 					$this->Ln('', $cell);
+ 					break;
+ 				}
+@@ -11448,10 +11489,18 @@
+ 					break;
+ 				}
+ 				case 'div': {
++					if (!empty($tag['bgcolor']) and !empty($this->FillColor)) // XXX block
++						$this->Cell(0, 0, '', 0, 0, 0, true);
++					$this->FillColor = '';
++
+ 					$this->addHTMLVertSpace(1, $cell, '', $firstorlast, $tag['value'], true);
+ 					break;
+ 				}
+ 				case 'blockquote': {
++					if (!empty($tag['bgcolor']) and !empty($this->FillColor)) // XXX block
++						$this->Cell(0, 0, '', 0, 0, 0, true);
++					$this->FillColor = '';
++
+ 					if ($this->rtl) {
+ 						$this->rMargin -= $this->listindent;
+ 					} else {

@@ -1,0 +1,29 @@
+{{{
+[[TableOfContents]]
+== 제목 1 ==
+== 제목 2 ==
+=== 작은 제목 1 ===
+=== 작은 제목 2 ===
+== 제목 3 ==
+}}}
+
+'''결과'''
+
+[[TableOfContents]]
+== 제목 1 ==
+== 제목 2 ==
+=== 작은 제목 1 ===
+=== 작은 제목 2 ===
+== 제목 3 ==
+
+Please see HelpOnHeadlines
+----
+TableOfContentsMacro를 페이지의 상단에 {{{[[TableOfContents]]}}} 와 같이 넣으면,
+제목줄을 찾아서 목차를 만들어 줍니다.
+
+'''특징'''
+ * TableOfContentsMacro를 쓰지 않으면 제목줄에 번호가 붙지 않고, 이 매크로를 쓰면 제목에 번호가 붙습니다.
+'''선택사항'''
+ * ''simple'' : 목차의 링크는 번호에만 걸리게끔 기본적으로 되어있으나, simple을 옵션으로 쓰면 목차 전체가 링크가 걸린다.
+ * ''toggle'' : 목차를 보여주거나 감출 수 있게 한다. {{{[[TableOfContents(toggle)]]}}}
+ * ''title'' : 목차의 제목을 다르게 바꿀 수 있다. {{{[[TableOfContents(title=차례)]]}}}

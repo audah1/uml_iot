@@ -1,0 +1,86 @@
+Ko:MoniWikiPlugins
+----
+모니위키는 MoinMoin과 호환하는 Macro를 가지고 있으며, 그 매크로에 상응하는 action을 각각 가지고 있는 경우 혹은 액션만 있고 매크로는 없는 경우가 있습니다.
+
+== 모인모인 호환 플러그인(매크로) ==
+ * FullSearch
+ * GetText
+ * [Include]
+ * LikePages
+ * RecentChanges
+ * SystemInfo
+ * WantedPages
+ * WordIndex
+액션:
+ * rss_rc
+ * print
+ * goto
+== 모인모인에서 내장 함수였던 것을 매크로로 분리 구현한 것 ==
+ * Attachment
+ * Anchor
+ * PageHits
+ * Fortune
+ * UploadFile
+ * UploadedFiles
+ * download
+ * bookmark
+ * userform
+ * Draw /!\ Hotdraw (1.0.9 cvs에서 다시 작동함)
+== 사용자 인터페이스 관련 ==
+ * css
+ * theme
+ * SmileyChooser
+ * login
+ * minilogin
+ * new
+ * quicklinks
+ * subscribe
+== MoniWiki용 플러그인 ==
+액션 혹은 매크로만 각각 지원하거나 모두 지원하는 경우도 있다.
+=== 블로그 관련 ===
+ * Blog
+ * BlogChanges
+ * Calendar
+ * blogrss == rss_blog
+ * rss_blog (RSS 2.0)
+ * rdf_blog (RSS 0.91)
+ * sendping
+ * trackback
+=== 관리자 기능 ===
+ * rcspurge
+ * rename
+ * chmod /!\ 미완
+ * restore
+ * backup
+ * Admin
+ * Board /!\ 미완
+ * PostPage /!\ 미완 ?
+----
+ * DueDate
+ * Echo
+ * FastSearch (bsd해쉬를 이용한 빠른 FullSearchMacro)
+ * Gallery 간단한 갤러리(UploadFile매크로 이용)
+ * ISBN
+ * Icon
+ * Img
+ * ImportUrl
+ * OeKaki 그림그리기용
+ * RandomBanner
+ * RandomQuote
+ * TwinPages
+ * EngDic /!\ 데모용
+ * Test /!\ 데모용
+ * UWL /!\ 데모용
+ * VisualTour
+ * Vote
+ * dot
+ * foaf
+ * moniedit
+ * moztab
+ * rss :rss reader
+ * urlencode
+ * whois 간단한 whois
+== 기타 ==
+ * format: 프로세서를 액션으로 이용하기위한 인터페이스 액션 (모인모인도 이 방법을 쓴다)
+----
+ * man_get: man 번역용 플러그인

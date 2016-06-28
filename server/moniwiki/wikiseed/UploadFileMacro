@@ -1,0 +1,60 @@
+모니위키는 파일 업로드를 위한 3가지의 업로드 폼을 매크로로 지원하고 있다.
+
+{{{[[UploadFile]]}}}: 이것은 자바스크립트를 전혀 쓰지 않는다. 그 대신에 간단한 여러개의 파일을 올릴 수 있는 방법을 제공한다.
+
+[[UploadFile]]
+----
+{{{[[UploadForm]]}}} 혹은 {{{[[UploadFile(js)]]}}}: 이 매크로는 여러개의 파일을 올릴 수 있는 폼을 자바스크립트를 사용하여 만들어준다.
+
+[[UploadForm]]
+----
+{{{[[SWFUpload]]}}}  혹은 {{{[[UploadFile(swf)]]}}}: 이 매크로는 모니위키 1.1.3CVS부터 지원하며 다중 파일 업로드를 지원한다. (Flash 10 지원)
+
+[[SWFUpload]]
+----
+모니위키의 {{{[[UploadFile]]}}} 매크로는 업로드 된 파일을 {{{$upload_dir}}}로 정의된 디렉토리에 각 페이지별 디렉토리를 생성시키고, 그 디렉토리에 업로드된 파일을 저장한다.
+
+업로드가 성공하면 업로드된 파일을 다음과 같은 문법으로 연결할 수 있다.
+{{{
+attachment:filename.ext 혹은 attachment:페이지명:filename.ext
+}}}
+
+예를 들어, {{{MyPage}}}에 들어가서 {{{MyPage?action=UploadFile}}}을 하거나, MyPage에서 {{{[[UploadFile]]}}} 매크로를 사용하여 파일을 업로드를 하면 $upload_dir='pds';라고 되어있는 경우에 {{{pds/MyPage/}}}가 새롭게 만들어지고 거기에 올린 파일이 저장된다.
+== 업로드 제한 ==
+config.php의 $pds_allowed라는 변수를 조정하면 업로드가능한 파일을 제한을 걸 수 있다. $pds_allowed의 기본값은 다음과 같을 것이다.
+{{{
+$pds_allowed="png|jpg|jpeg|gif|mp3|zip|tgz|gz|txt|css|exe|hwp|pdf|flv";
+}}}
+== 안전하지 않은 파일 확장자 점검 ==
+/!\ 모니위키 1.1.3CVS부터 지원
+
+아파치 mod_mime의 문제점으로 인해서 안전하지 않은 파일 이름을 점검합니다.
+{{{
+$pds_protected="pl|cgi|php"; # config.php에 정의하지 않았을 때의 기본값.
+}}}
+
+예를 들어 아파치의 mod_mime이 hwp 확장자를 인식하지 못하는데, {{{my.php.hwp}}}와 같은 파일이름을 업로드할 경우, 아파치의 mod_mime모듈은 my.php.hwp를 hwp가 아닌 php파일로 인식하게 됩니다.
+
+$pds_protected를 설정해 놓으면 {{{my.php.hwp}}} 파일 이름이 my.php.txt.hwp로 이름이 바뀌면서 파일이 업로드 됩니다.
+== $upload_masters ==
+/!\ 모니위키 1.1.3CVS부터 지원
+
+$upload_masters=array('Foobar','Babo'); 여기에 등록된 모든 사용자는 파일 확장자와 무관하게 모든 종류의 파일을 업로드 할 수 있습니다.
+== $use_filetype ==
+/!\ 모니위키 1.1.3CVS부터 지원
+
+이 값을 1로 설정하였을 경우, 업로드 할 때의 정보를 이용해서 파일 타입을 판별합니다.
+안전한 업로드가 이미 보장 된 경우 사용하실 수 있을 것입니다.
+== 주의사항 ==
+모니위키에서는 모든 업로드 된 파일이 {{{$upload_dir='pds'}}} 하위 디렉토리에 보존된다. 즉 {{{pds/*/}}}에 1단계 하위 디렉토리들이 생성된다. (2단계 이상은 지원하지 않습니다.)
+
+그러나 노스모크 모인모인에서는 {{{pds/*}}} 하위 디렉토리로 모든 파일이 저장된다. 노스모크 모인모인과 호환을 보장하기 위해서 UploadFile액션은 특별히 {{{UploadFile}}}이라는 페이지에서 파일을 업로드하면 {{{pds/UploadFile}}}라는 디렉토리가 만들어지지 않고 pds 아래로 바로 업로드 되게끔 하였다.
+
+pds 바로 밑으로 저장된 pds/* 파일을 연결하려면 {{{attachment:/foobar.png}}} 문법을 쓴다. 즉, "/"를 맨 앞에 붙여준다.
+== 기타 ==
+=== 공백이 들어있는 파일 이름 ===
+공백이 들어있는 파일을 링크를 걸 경우는 {{{attachment:"hello world.png"}}}와 같이 링크를 걸어 준다.
+
+See also
+ * AttachmentMacro
+ * UploadedFiles

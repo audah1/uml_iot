@@ -1,0 +1,18 @@
+== Examples ==
+ * {{{[[FootNote(HelloWorld)]]}}}
+ * {{{[[FootNote([1])]]}}}
+ * {{{[[FootNote([tag] blah blah WikiName)]]}}}
+ * {{{[[FootNote(** blah blah blah)]]}}}
+== 모니위키 확장 ==
+매크로를 쓰지 않고 {{{[* Hello World]}}}같은 식으로 집어넣으면 FootNote가 들어갑니다. 여러가지 사용 예는 FootNotes 참조.
+
+== 자동으로 넣기 ==
+config.php에 다음과 같은 식의 설정을 넣으면 모든 페이지에 {{{[[FootNote]]}}}매크로가 자동 삽입됩니다.
+{{{
+$extra_macros=array('FootNote','Comment');
+}}}
+/!\ 1.0.9부터 지원
+
+/!\ 1.1.5부터는 FootNote의 경우 [[$extra_macros]] 설정이 필요없이 자동으로 삽입됩니다.
+----
+CategoryMacro

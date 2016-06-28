@@ -1,0 +1,50 @@
+--- tcpdf.php.orig	2013-05-13 00:16:37.739013279 +0900
++++ tcpdf.php	2013-05-13 00:51:46.054480998 +0900
+@@ -1267,6 +1267,11 @@
+ 			$this->utf8Bidi(array(''));
+ 			// set default font
+ 			//$this->SetFont($this->FontFamily, $this->FontStyle, $this->FontSizePt);
++
++			if (!defined('PHP_VERSION_ID')) {
++				$version = explode('.', PHP_VERSION);
++				define('PHP_VERSION_ID', (($version[0] * 10000) + ($version[1] * 100) + $version[2]));
++			}
+ 		}
+ 		
+ 		/**
+@@ -4000,7 +4008,7 @@
+ 					$type = 'jpeg';
+ 				}
+ 				$mqr = get_magic_quotes_runtime();
+-				set_magic_quotes_runtime(0);
++				if (PHP_VERSION_ID < 50300) @set_magic_quotes_runtime(0);
+ 				// Specific image handlers
+ 				$mtd = '_parse'.$type;
+ 				// GD image handler function
+@@ -4046,7 +4054,7 @@
+ 					//If false, we cannot process image
+ 					return;
+ 				}
+-				set_magic_quotes_runtime($mqr);
++				if (PHP_VERSION_ID < 50300) @set_magic_quotes_runtime($mqr);
+ 				if ($ismask) {
+ 					// force grayscale
+ 					$info['cs'] = 'DeviceGray'; 
+@@ -5060,7 +5068,7 @@
+ 				$this->_out('endobj');
+ 			}
+ 			$mqr = get_magic_quotes_runtime();
+-			set_magic_quotes_runtime(0);
++			if (PHP_VERSION_ID < 50300) @set_magic_quotes_runtime(0);
+ 			foreach ($this->FontFiles as $file => $info) {
+ 				// search and get font file to embedd
+ 				$filepath = '';
+@@ -5098,7 +5106,7 @@
+ 					$this->_out('endobj');
+ 				}
+ 			}
+-			set_magic_quotes_runtime($mqr);
++			if (PHP_VERSION_ID < 50300) @set_magic_quotes_runtime($mqr);
+ 			foreach ($this->fonts as $k => $font) {
+ 				//Font objects
+ 				$this->fonts[$k]['n'] = $this->n + 1;

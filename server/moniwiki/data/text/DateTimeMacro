@@ -1,0 +1,14 @@
+@SIG''''''  혹은 @DATE''''''@ 같은 [[HelpOnVariables|위키변수]]는 페이지가 저장될 때에 다음과 같은 DateTimeMacro로 자동 변환됩니다.
+
+{{{[[DateTime(@date @)]]}}}
+
+{{{
+[[DateTime(2003-12-31T16:06:00)]]
+}}}
+
+ * {{{[[DateTime()]]}}} -> [[DateTime()]]
+ * {{{[[DateTime]]}}} -> [[DateTime]]
+ * {{{[[DateTime(2004-10-11T09:16:39)]]}}} -> [[DateTime(2004-10-11T09:16:39)]]
+
+----
+CategoryMacro

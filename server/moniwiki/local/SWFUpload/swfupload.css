@@ -1,0 +1,134 @@
+/* SWFUpload CSS */
+    
+#filesDisplay {
+  padding: 5px 10px 5px 10px;
+  background: #f9f9f9;
+  border: 1px solid #f3f3f3;
+  /* display: none; */
+  min-height:13px;
+  min-width:200px;
+  vertical-align: top;
+}
+
+#previewAlign {
+  text-align:center;
+}
+
+#filePreview {
+  /* width:100px; */
+  min-height: 64px;
+  min-width: 64px;
+  width: auto !important;
+  height: auto !important;
+  width: 64px;
+  height: 64px;
+  border: 1px solid #f3f3f3;
+  background: url(./images/photo.png) no-repeat;
+  
+}
+
+#filePreview img{
+  border: 2px solid #50a0d0;
+}
+
+#filePreview img:hover {
+  border: 2px solid #3077CC;
+}
+
+.fileList td {
+  vertical-align: top;
+}
+
+.fileList input {
+  vertical-align: top;
+  padding:auto;
+  padding-bottom:1px;
+  font-size:11px;
+  font-family:DotumChe, sans-serif;
+  letter-spacing:-1px;
+}
+    
+#SWFUpload {
+  margin:0px;
+  padding:0px;
+  height:1px;
+}
+
+#SWFUpload a {
+  height:1px;
+}
+    
+#mmUploadFileListing {
+  margin: 0;
+  padding: 0;
+}
+    
+#mmUploadFileListing li {
+  margin: 0;
+  padding: 2px;
+  /* border-bottom: 1px solid #f3f3f3; /* */
+/*
+  display: block;
+  float: left;
+  width: 150px;
+*/
+  font-family:sans-serif;
+  list-style-image: none;
+  list-style-type: none;
+  font-size: 11px;
+}
+
+.uploading { color: #CCC; }
+.uploadDone { color: #000; }
+.uploading a, .uploading a:hover { color: #CCC; }
+
+span.progressBar {
+  width: 100px;
+  display: block;
+  font-size: 10px;
+  height: 4px;
+  margin-top: 4px;
+}
+
+#fileProgressInfo {
+  width:100px;
+  min-height: 14px;
+  font-size:8px;
+  font-weight:bold;
+}
+
+a.SWFUploadLink {
+  /*
+  width: 300px;
+  height: 100px;
+  background: url(images/custom_button.png) no-repeat;
+  display: block;
+  */
+  width:1px;
+  height:1px;
+  display: none;
+}
+    
+a.SWFUploadLink:hover {
+  background: url(images/custom_button_over.png) no-repeat;
+}
+
+.alignImg {
+  border: 2px solid #e0e0e0;
+}
+
+.alignImg:hover {
+  border: 2px solid #65b4db;
+}
+
+.fileList .selected {
+  border: 2px solid #0084c4;
+  background-image: url(images/gray.gif);
+  filter:alpha(opacity=60);
+  -moz-opacity: 0.6;
+  opacity: 0.6;
+}
+
+/*
+ * vim:et:sts=2:sw
+ */

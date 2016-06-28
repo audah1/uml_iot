@@ -1,0 +1,203 @@
+#keywords moni wiki,기본값,설정
+config.php의 옵션.
+
+/!\ 새롭게 추가되는 다양한 옵션은 `config.php.default`에 들어있습니다.
+
+[[TableOfContents]]
+
+== 개요 ==
+모니위키의 기본 설정값은 [[config.php]]에 저장되며,
+초기값은 최초 모니위키 셋업을 할 때 [[monisetup.php]]에 의해서 `config.php.default`값이 복사되고, 일부 값은 [[monisetup.php]]에 의해서 자동으로 선택된다.
+
+모니위키가 버전을 거듭할 수록 이 설정의 개수가 많아져서
+복잡하고 무거워진다고 생각할 수도 있겠으나,
+ * 상당수의 옵션은 세밀한 컨트롤을 좀 더 쉽게 할 수 있도록 도와주며,
+ * 1.2.0의 옵션의 개수는 약 90개로서 [[도쿠위키]] 2013년 최신의 100여개의 옵션보다 많지 않고 대동소이한 수준으로 볼 수 있으며,
+ * [[미디어위키]]의 옵션 개수 약 700여개보다 훨씬 적다. ({{{$wg...}}} 변수)
+ * 세세한 옵션에 대한 설명은 단지 몇 줄의 설명으로는 부족해 보일 수 있다. 사용자가 해당 옵션을 완벽하게 이해하기 위해서 소스코드를 봐야할 수도 있다.
+ * [[도쿠위키]] [[미디어위키]] 모두 이러한 세밀한 옵션을 손쉽게 바꿀 방법을 제공하지 않고 있지만 모니위키는 [[monisetup.php]]를 통해 옵션 조정이 어느정도 가능하다.
+
+== 디자인 ==
+`'''$frontpage="페이지이름";'''` 대문 지정
+ * 대문을 지정한다. 기본값은 FrontPage.
+`'''$theme='테마이름';'''` 테마
+ * 테마를 지정한다. See also MoniWikiTheme
+`'''$theme_css'''`
+ * 값을 1로 설정하면 항상 테마의 기본 CSS만이 사용되도록 강제 설정. 
+ * 0으로 하면 테마의 CSS를 사용자가 변경 가능. (기본값 0)
+`'''$css_url'''`
+ * 기본 css의 경로를 설정한다. 기본값은 `$url_prefix.'/css/default.css'` `$theme`를 설정한 경우는 이 값의 초기 설정치가 자동 설정되며, $theme_css=0으로 세팅된 경우에만 CSS를 변경할 수 있다.
+
+`'''$iconset'''`
+ * 기본값은 `'moni2'`
+ * 지정할 수 있는 값으로는 moni,moni2 등이 있다. 디렉토리를 추가하고 파일이름을 똑같게 하면 아이콘을 모두 변경할 수 있다.
+`'''[[$icon_list]]'''`
+ * 기본 아이콘 리스트를 손쉽게 바꾸기 위해서 이 값을 조정한다.
+
+`'''$logo_page="페이지이름";'''`
+ * 로고를 클릭할 때 가는 페이지를 정한다. 기본값은 $frontpage.
+`'''$logo_string= '<img src="'.$logo_img.'" alt="" border="0" align="middle" />';'''`
+ * 로고 그림. 없애고 싶다면 빈 문자열을 넣는다.
+
+`'''[[$menu]]'''=array('MoniWiki'=>1,'FindPage'=>4,'TitleIndex'=>3,'BlogChanges'=>'','RecentChanges'=>2,'http://kldp.org KLDP'=>9);`
+ * 메뉴를지정한다. 숫자는 accesskey를 지정하기 위해 쓰이는 값이다. "alt-1, alt-4"라는 식으로 지정된다.
+
+`'''$menu_bra=""; $menu_cat="";'''`
+ * ( /!\ ''deprecated'')
+
+`'''$menu_sep'''`
+ * 메뉴의 구분자를 설정한다. 기본값은 `'|'` ( /!\ ''deprecated'')
+
+`'''[[$actions]]'''=array('DeletePage', 'LikePage');`
+ * 웹 페이지 하단의 액션 메뉴를 지정한다.
+
+`'''[[$sitename]]'''`
+ * 웹 브라우저에 타이틀에 표시되는 사이트의 이름. 기본값은 {{{UnnamedWiki}}}
+
+`'''$kbd_script'''`
+ * 기본값은 `$url_prefix.'/css/kbd.js'` : 사용하기 싫으면 그 값을 빈 문자열로 한다.
+== 위키 문법 관련 ==
+`'''[[$auto_linebreak]]'''`
+ * 기본값은 0이고, 1로 하면 선별적으로 각 줄에 {{{<br/>}}}이 더해진다.
+
+`'''[[$nonexists]]='simple'''`
+ * 존재하지 않는 페이지 링크
+ * simple: 앞에 ?를 붙임.
+ * nolink: 아무표시도 하지 않음
+ * forcelink:무조건 전체 링크
+ * fancy: 첫글자를 링크시킨다.
+
+`'''$smiley='wikismiley';'''`
+ * wikismiley.php를 읽어들이게 된다. 이 값을 "foobar"로 고치고 foobar.php를 wikismiley.php 대신으로 쓰면 자신이 원하는 smiley를 설정할 수 있게 된다.
+`'''[[$use_smiley]]'''`
+ * 스마일리 사용을 켜거나 끈다.
+`'''[[$mediawiki_style]]'''`
+ * 미디어위키식 위키워드 띄어쓰기 사용 여부 설정
+== 추가기능 ==
+`'''$blog_comments'''`
+ * 1로 설정하면, 블로그 아래 댓글(comment)이 함께 보인다. (기본값 0)
+
+`'''[[$notify]]'''`
+ * Email Notification을 활성화 한다. 이 기능을 키면 SubscribePlugin을 사용할 수 있다.
+`'''[[$sistermap]]'''`
+ * 기본값은 `$data_dir.'/sistermap.txt'` SisterWiki를 위해 사용된다.
+`'''$trail'''`
+ * [Trailer]를 활성화 한다. 
+`'''[[$use_counter]]'''`
+ * 페이지 카운터의 사용 여부를 결정한다 (See PageHitsMacro)
+`'''$use_referer'''`
+ * 간단한 referer_log 남기기 여부 결정. 옵션값을 1로 변경하면 ./data/cache/referer에 기록이 남는다. 
+
+`'''[[$use_sectionedit]]'''`
+ * 1로 설정하면 섹션편집을 할 수 있도록 단락마다 edit 링크를 단다. 
+
+`'''[[$use_sistersites]]'''`
+ * SisterWiki를 사용하기 위한 옵션.
+`'''[[$use_twinpages]]'''`
+ * SisterWiki 사용 혹은 PageAlias를 사용하기 위한 옵션.
+`'''[[$use_trackback]]'''`
+ * 모니위키 블로그에서 트랙백을 사용할 수 있게 한다.
+
+`'''[[$use_hostname]]'''`
+`gethostbyaddr()`의 사용여부 결정. RecentChangesMacro에서 사용된다.
+
+`'''$external_target = '_blank';'''`
+ * 외부 링크가 새창으로 열리게 된다.
+`'''$use_clipmacro=1;'''`
+ * ClipPlugin 활성화, 파일 첨부시 클립보드 이미지 첨부를 쉽게할 수 있다.
+`'''$use_save_refresh=1;'''`
+ * 문서 저장 후 문서 리프레쉬 하도록 지정. 1 이상의 값이면 그 값에 1을 뺀 시간(초)을 기다린 후에 리프레쉬를 한다.
+ * 리플래쉬 하지 않는 경우에 문서를 다시 로딩(!F5)하면 문서를 다시 고치려고 시도하므로 이를 방지하기 위해서 refresh를 하는 것.
+ * `$use_save_refresh=-1`;이라고 하면 http header로 `Status 302: Location` 헤더를 날려주고 종료함.
+`'''$use_refresh=2;'''`
+ * 문서 저장 이외의 리플래쉬가 필요한 액션의 경우 이 값이 사용된다. (예: scrap, userform 등등)
+ * 문서 저정 후 리프레쉬 되지 않게 하려면 `$use_save_refresh=0;`으로 지정
+
+`'''[[wiki:SectionFolding $use_folding]]'''`
+ * 섹션 폴딩
+ * 모니위키 1.2.0부터는 단순히 $javascripts=array("folding.js",... 추가하여 사용하며, 모바일을 함께 지원합니다.
+ * 섹션별 폴딩이 아닌, 본문 내에서 폴딩을 사용하고자 할 때는 FoldingProcessor 를 참조
+
+`'''$rc_strimwidth=0;'''`
+ * RecentChanges 에서 페이지 리스트 글자 수 제한 설정. 값을 0으로 하면 제한이 없어진다. 
+
+`'''$pull_url'''`
+ * pull 액션으로 문서를 끌어올 위키 사이트 주소 입력. 1.2.2 이후 버전에서 사용 가능.
+  * config.php에 {{{$pull_url="http://moniwiki.kldp.net/wiki.php/";}}} 입력
+  * http://자신이설치한모니위키주소/문서제목?action=pull
+== 프로세서 옵션 ==
+`'''[[$inline_latex]]'''`
+ * inline latex문법을 활성화하거나 끈다. latex, mimetex, itex 등등 지원 LatexProcessor
+`'''[[wiki:MoniMarkup $default_markup]]'''`
+ * 포메팅 프로세서 변경.
+
+== 경로 설정 ==
+`'''[[$cache_dir]]'''`
+ * 기본값 `$data_dir.'/cache'`
+`'''[[$css_url]]'''`
+ * 기본 css의 경로를 설정한다. 기본값은 `$url_prefix.'/css/default.css'`
+`'''[[$data_dir]]'''`
+ * 기본값 `'./data'` ../data라고 지정하고 data디렉토리를 지정된 장소로 옮기면 외부에서 data직접 액세스를 차단할 수 있다.
+`'''[[$editlog_name]]'''`
+ * 기본값 `$data_dir.'/editlog'`
+`'''[[$imgs_dir]]'''`
+ * 기본값 `$url_prefix.'/imgs'`
+`'''[[$intermap]]'''`
+ * 기본값 `$data_dir.'/intermap.txt'`
+`'''$kbd_script'''`
+ * 기본값은 `$url_prefix.'/css/kbd.js'`
+`'''$logo_img'''`
+ * 기본값은 `$imgs_dir.'/moniwiki-logo.png'`
+`'''$shared_metadb'''`
+ * 기본값은 `$data_dir."/metadb"`
+`'''$shared_intermap'''`
+ * 기본값은 `$data_dir."/text/InterMap"`
+ * 이렇게 페이지가 위키문서이므로 사용자가 추가/변경이 가능하다.
+ * 따라서 $intermap + $shared_intermap = InterWiki map이 된다.
+`'''[[$text_dir]]'''`
+ * 기본값은 `$data_dir.'/text'`
+`'''[[$upload_dir]]'''`
+ * 기본값은 `'pds'`
+`'''[[$url_prefix]]'''`
+ * 현재 MoniWiki가 존재하는 경로. 기본값은 `monisetup.php`에 의해 자동 결정된다.
+`'''[[$user_dir]]'''`
+ * 기본값 없음. 설정되어 있지 않으면 `'data/user'`를 찾아본다.
+ * `$data_dir` 경로 변경시 로그인이 안 된다면 `$user_dir`이 지정 안 되었기 때문임.
+ * `$data_dir.'/user'` 설정을 권장함.
+`'''[[$vartmp_dir]]'''`
+ * 기본값은 '/var/tmp/', 윈도우즈에서는 '/temp', 혹은 '/tmp'
+ * 이 값을 '/home/foobar/tmp' 식으로 바꾸고 /home/foobar/tmp 디렉토리의 퍼미션을 777과 같이 주는 방식도 가능합니다.
+== 시스템 설정 ==
+`'''[[$lang]]'''`
+ * 기본 언어를 설정한다. 기본값 'auto'로 브라우져 설정을 따르며, 강제로 한국어로 하고자 하면 'ko_KR'로 지정한다.
+
+`'''[[$dba_type]]'''`
+ * "db3, db2, gdbm"등등. php가 지원하는 dba모듈의 유형을 지정한다. 기본값은 보통 db3이며, 처음 설치시 `[[monisetup.php]]`에 의해 자동으로 결정한다.
+`'''[[$metatags]]=''''`
+ * HTML meta tag를 지정할 수 있는 저수준의 옵션이다.
+ * favicon등을 이곳에서 직접 지정할 수 있다.
+`'''[[$path]]'''`
+ * rcs를 ~/bin같은 곳에 설치할 때 이 변수에 path를 지정한다 예를 들어 `/usr/local/bin:/usr/bin`
+ * 윈도우즈 환경이라면 {{{$path='./bin;c:/program files/vim/vimXX';}}}와 같은 식으로 설정한다.
+`'''[[$pds_allowed]]'''`
+ * UploadFile에서 허용되는 확장자를 지정한다.
+ * 기본값은 `'png|jpg|jpeg|gif|mp3|zip|tgz|gz|txt|css|exe|hwp|pdf'`
+`'''[[$query_prefix]]= '/';'''`
+ * (monisetup.php에 의해 자동 결정된다) apache2를 쓸 경우는 '?'를 쓰거나, `AcceptPathInfo on`를 쓰고 '/'로 지정한다.
+`'''[[$security_class]]="needtologin";'''`
+ * `$security_class`에 대한 내용은 [[SecurityPlugin]] 참조.
+`'''[[$use_autosave]]'''`
+ * AutoSave 지원여부 지정.
+{{{$extra_macros=array('Comment');}}}
+ * 모든 페이지 끝 부분에 자동으로 넣을 매크로를 지정하는 옵션.
+ * CommentMacro 참고
+`'''[[$admin_passwd]]'''`
+ * 모니위키 관리자 패스워드 설정. `tools/mkpassswd.pl` 이나 [[HelpOnInstallation#s-5|초기 설정]]을 통해 입력을 권장함.
+
+See also
+ * HelpOnConfiguration
+ * MoniWikiOptionsForBigWikis : 1만페이지 이상 모니위키 운영시 옵션에 대한 설명.
+ * MoniWikiOptimize : 최적화를 위한 설정.
+ * [설치설명서]
+ * MoniWikiTips
+ * [config.php.default.ko]

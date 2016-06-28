@@ -1,0 +1,48 @@
+#keywords help,문법,위키,위키 포매팅,포매팅
+== 페이지 고치기 ==
+위키위키는 기본적으로, 위키위키 내의 모든 페이지를 모든 사용자가 고칠 수 있습니다. 위키위키는 좀 더 편리하고 직관적인 페이지 편집을 지원하며 편집에 앞서 몇가지 포매팅 규칙을 배우셔야 합니다.
+
+다음 페이지들은 위키위키를 고치는데 필수적인 규칙/문법을 설명합니다:
+ * HelpOnFormatting - 기본적인 텍스트 포매팅 문법
+ * HelpOnLinking - 페이지간 연결과 이미지 넣기
+ * HelpOnHeadlines - 단락별 제목 쓰기
+ * HelpOnRules - 수평줄
+ * HelpOnLists - 목록과 들여쓰기 단락
+ * HelpOnTables - 테이블
+ * HelpOnSmileys - :) 와 같은 스마일리 넣기
+그리고 다음과 같은 고급 기능을 제공합니다.
+ * HelpOnMacros - 매크로
+ * HelpOnProcessors - 프로세서
+ * HelpOnActions - 액션
+ * HelpOnProcessingInstructions - 페이지 제어
+모니위키는 다음의 특별 기능을 제공하며 참고적으로 알아두시면 좋습니다:
+ * HelpOnNameSpace - 네임스페이스
+ * HelpOnSubPages - 하위 페이지
+ * HelpOnXmlPages - 페이지를 xml로 저장하고 xslt 적용하기
+ * MoniWiki/HotKeys - 키보드를 이용한 페이지 이동, 편집.
+
+== 편집창 수정 ==
+ * EditTextForm - edit 액션 사용시 나오는 편집 화면에 대한 정의. 위키 문법 링크를 붙이면 편리합니다.
+  * MathChooser
+  * SmileyChooser
+
+위키 포매팅 문법 (위키 마크업)을 테스트하고 싶으시면 WikiSandBox로 가셔서 [[GetText(EditText)]]를 누르시거나 [[Icon(edit)]] 아이콘을 누르시면 WikiSandBox에서 테스트 해보실 수 있습니다. 실제로 저장하지 않더라도 미리보기 버튼을 누르시면 위키 포매팅 결과를 그때 그때 확인하면서 연습하실 수 있습니다.
+
+/!\ 모니위키 1.2.0부터 `data/editform.txt`파일이 있으면 그 파일을 EditTextForm 대신에 참조합니다.
+
+== 외부 에디터 사용 ==
+텍스트 에디터를 사용해 위키를 편집하고 싶을 경우, 몇 가지 브라우저의 확장 기능을 이용하면 복사 - 붙여넣기 보다 더 편하게 편집 가능하다.
+
+[http://wiki.kldp.org/wiki.php/%BF%DC%BA%CE%BF%A1%B5%F0%C5%CD%BB%E7%BF%EB%C7%CF%B1%E2 외부 에디터 사용]
+
+=== 텍스트 브라우저 사용 ===
+lynx, w3m은 텍스트폼 사용 시 외부 에디터(vim) 등을 사용할 수 있다.
+
+=== 파이어폭스 ===
+윈도용 파이어폭스에서만 확인 함. 다른 운영체제는 확인 바람.
+ * [https://addons.mozilla.org/ko/firefox/addon/its-all-text/ TEXTAREA] : 확장 기능 설치 후 TEXT FORM 우측 하단에 {{{edit}}} 아이콘이 생김. 클릭하면 지정한 에디터를 실행할 수 있고, 텍스트 폼 내용이 자동으로 열림. 에디터에서 저장을 하면 텍스트폼에 변경된 내용이 텍스트 폼에도 반영됨.
+
+=== 크롬 ===
+ * TextAid
+----
+[[Navigation(HelpOnEditing)]]

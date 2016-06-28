@@ -1,0 +1,157 @@
+#keywords inter wiki,moniwiki,wiki,wiki name,링크
+== 외부 링크 ==
+외부 링크는 {{{http://kldp.org}}}같이 그대로 적어놓으면 '''자동'''으로 http://moniwiki.kldp.org 라고 링크가 걸립니다. 여기서 주의할 점은, 링크를 적을때 한글 토씨를 그냥 붙여 적을 경우에 한글까지 링크가 걸리게 됩니다. 이럴 경우에는 {{{[http://moniwiki.kldp.org]}}}라고 적으면 [http://moniwiki.kldp.org]와 같이 '''강제'''로 링크될 URL을 지정해줘서 자동으로 링크가 걸리지 않게 합니다. 강제로 링크를 걸러줄 경우는 모니위키에서는 그 링크 앞에 작은 지구 아이콘이 생깁니다.
+
+지원되는 외부 링크는 `http:`, `https:`, `ftp:`, `nntp:`, `news:`, `mailto:`, `telnet:`, 그리고 `file:`등이 있습니다.
+
+모니위키에서는 기본적으로 외부링크라고 해도 새창으로 열리지 않습니다. 강제로 새창으로 열리게 하고 싶은 경우는 {{{[^http://kldp.org]}}}와 같이 맨 앞에 {{{^}}} 기호를 넣어주면 (모니위키 확장) [^http://kldp.org]처럼 링크가 걸리게 됩니다.
+
+외부링크를 항상 새 창으로 열게하려면 `config.php`에 {{{$external_target="_blank";}}}라고 지정해 주어야 합니다.
+
+하지만 이렇게 외부링크를 새창으로 열게끔 하는 방식은 사용자를 새창을 열도록 강제하기때문에 별로 권장할만한 방식이 아닙니다.
+
+<!> 대부분의 브라우져에서 {{{<Control>}}}키를 누고 링크를 클릭하면 새창으로 링크가 열리는 기능을 지원합니다.
+== 그림 링크/넣기 ==
+만약 URL의 끝 부분이 이미지의 확장자일 경우는 ("{{{.gif}}}", "{{{.jpg}}}" or "{{{.png}}}") 그림이 그 위치에 삽입되게 됩니다.
+예를 들어 {{{http://moniwiki.kldp.org/imgs/moniwiki-logo.png}}}라고 적으면 http://moniwiki.kldp.org/imgs/moniwiki-logo.png 처럼 보이게 됩니다. 이 경우 역시 띄어쓰기를 하지 않으면 조사까지 링크가 걸리게 되고 그림이 자동으로 들어가지 않게 됩니다. 이 경우는 강제로 꺽쇠로 묶어주면 즉, {{{[http://moniwiki.kldp.org/imgs/moniwiki-logo.png]}}}라고 쓰면 [http://moniwiki.kldp.org/imgs/moniwiki-logo.png]와 같이 되고, 그림으로 들어가지 않는 대신에 링크를 그대로 보여줍니다.
+
+외부 이미지 가져올 때, 주소가 jpg, png, gif 등으로 안 끝나는(루리웹이나 티스토리의 이미지 같은) 이미지의 경우 맨 뒤에 {{{?.png}}} 혹은 {{{?.gif}}}식으로 가짜 확장자를 붙여주면 됩니다. URL 중간에 이미 ?물음표가 있으면 &.png 이런식으로 해줘야 합니다.
+== 페이지 이름 ==
+모니위키는 페이지 이름을 넣는 여러가지 링크방식을 제공합니다.
+=== CamelCase 링크 ===
+{{{WikiName}}}라고 쓰면 WikiName이 자동으로 링크가 걸립니다.
+=== 꺽쇠(대괄호) 링크 ===
+{{{[모니위키]}}}이라고 적으면 [모니위키]처럼 링크가 됩니다. 이 문법은 모니위키 확장문법으로 제공되었으며 이중 대괄호문법을 대신 쓸것을 권장합니다.
+=== 이중 꺽쇠(대괄호) 링크 ===
+{{{[[모니위키]]}}}라고 적으면 [[모니위키]]처럼 링크가 됩니다. 이것은 MoinMoin 최신이나 MediaWiki에서 쓰이는 페이지 이름 연결 문법으로, 모니위키에서도 호환성 측면에서 지원합니다.
+
+/!\ 이 문법은 매크로 문법과 충돌합니다. 예를 들어 {{{[[Date]]}}}라고 링크를 걸면 Date가 링크가 되는 대신에, Date 매크로가 호출되게 됩니다. 따라서 영문으로 된 페이지 이름을 연결할 경우는 매크로 이름이 중복되어 있다면 이중 대괄호로 링크를 걸 수 없습니다.
+=== 임의의 이름 연결 ===
+공백을 포함하는 임의의 페이지 이름을 연결하고 싶은 경우가 있습니다.
+그런데 {{{[공백이 있는 이름]}}}으로 연결하면 [공백이 있는 이름]으로 연결되며, 공백이 모두 제거 되고 정규화 된 페이지가 링크가 걸립니다. {{{[hello world]}}}라고 링크를 걸렴 [hello world]라고 링크가 걸리고 공백이 모두 사라지면서 정규화 된 페이지 이름인 HelloWorld페이지로 링크가 걸립니다.
+
+공백이 있고 대소문자도 마음대로 지정하고 싶은 경우에는 {{{["임의의 페이지 이름"]}}}으로 링크를 걸면 ["임의의 페이지 이름"]처럼 링크가 됩니다.
+
+[[$mediawiki_style]]=0 옵션으로 항상 공백 무시하고 페이지 연결 할 수 있습니다.
+----
+모니위키 1.1.5부터는 [["임의의 페이지 이름"]]과 같은 문법도 지원합니다.
+
+== 인터위키 연결 ==
+위키위키에서는 외부의 위키 혹은 위키위에 준하는 다른 사이트를 좀 더 쉽게 연결하는 문법을 제공합니다. 예를 들어, {{{http://moniwiki.kldp.org/wiki/FrontPage}}}라고 링크를 거는 대신에 {{{MoniWiki:FrontPage}}}라고 링크를 걸면 MoniWiki:FrontPage 처럼 표시가 됩니다. 이를 인터위키 연결이라고 합니다.
+
+=== 인터위키 확장 ===
+`{{{MoniWiki:FrontPage}}}` 와 `{{{wiki:MoniWiki:FrontPage}}}`는 똑같습니다. 여기서 인터위키를 뺀 {{{wiki:FrontPage}}}는 {{{FrontPage}}}와 똑같습니다. (모인모인 1.0.x에서 지원)
+
+만약 다른 이름으로 보이게 하려면 {{{[wiki:MoniWiki:FrontPage 대문]}}}과 같은 식으로 쓰면 `{{{MoniWiki:FrontPage}}}`로 연결되고 `[wiki:MoniWiki:FrontPage 대문]`이라고 보여지게 됩니다.
+
+일반 위키페이지의 경우에도 마찬가지 방식으로 {{{[wiki:FrontPage 대문]}}}이라고 쓰면 `FrontPage`로 연결되고 `대문`으로 표시됩니다.
+
+특별히 이 경우 {{{[wiki:FrontPage 대문]}}}은 {{{[:FrontPage 대문]}}}과 똑같습니다. (모니위키 1.1.4 확장)
+
+또한 공백을 포함한 페이지의 경우 {{{wiki:"페이지 이름"}}}과 같은 형태의 문법도 지원합니다.
+== 주의사항 ==
+앞부분에서도 언급한 내용이지만, 자동으로 링크가 걸릴 경우 URL 주소 되에 공백을 넣어주거나, <http://moniwiki.kldp.org/wiki.php/FrontPage>와 같이 연결해주어야 합니다. 정리해보면
+ * URL뒤에 공백을 넣는다.
+ * Wiki:SixSingleQuotes 를 이용한다.
+ * 인용부호로 묶는다. "http://moniwiki.kldp.org"처럼
+ * 꺽쇠(대괄호)로 묶는다.
+
+지원되는 URL 형식: `http:`, `https:`, `ftp:`, `nntp:`, `news:`, `mailto:`, `telnet:`, `file:`. (이것을 확장하는 방법은 HelpOnConfiguration 참조)
+
+이와같은 기본 형식과 함께, 모인모인/모니위키에서 지원: `wiki:`, `attachment:`. "`wiki:`" 는 내부링크 혹은 인터위키 링크를 뜻합니다. 따라서 `MoniWiki:FrontPage` 와 `wiki:MoniWiki:FrontPage`는 똑같습니다. 주의할 점은 "`wiki:`" 형식은 괄호로 연결되는 링크의 경우 반드시 사용해야 합니다. `attachment:`는 파일 첨부를 위해 사용됩니다.
+
+WikiName과 같은 식으로 연결되는 것을 방지하고 있는 그대로 보여지는 것을 원한다면 느낌표(''bang'')를 다음과 WikiName앞에 붙여서 다음과 같이 사용할 수 있습니다. {{{!WikiName}}} `!WikiName`. 또한 물음표를 임의의 단어 앞에 붙이면 강제로 링크가 걸리게 됩니다. i.e. {{{?Hello}}} `?Hello`.
+
+/!\ {{{?}}}를 쓰는 강제로 링크를 걸리게 하는 문법은 모니위키 확장 문법입니다.
+
+그밖에 위키 문법은 HelpOnEditing 페이지를 참조하세요.
+
+[[FootNote]]
+
+=== 사용례 ===
+{{{
+ * http://moniwiki.kldp.net/
+ * [http://moniwiki.kldp.net/]
+ * [http://moniwiki.kldp.net/ MoniWiki Sourceforge Homepage]
+ * http://moniwiki.kldp.net/imgs/moniwiki-logo.gif
+ * [http://moniwiki.kldp.net/imgs/moniwiki-logo.gif]
+ * [http://moniwiki.kldp.net/imgs/moniwiki-logo.gif moniwiki-logo.gif]
+ * [http://moniwiki.kldp.net/ http://moniwiki.kldp.net/imgs/moniwiki-logo.gif]
+ * InterWiki
+  * MeatBall:InterWiki
+  * wiki:MeatBall:InterWiki
+  * [wiki:MeatBall:InterWiki]
+  * [wiki:MeatBall:InterWiki InterWiki page on MeatBall]
+ * jh@web.de
+ * mailto:jh@web.de
+ * [#20030702 Anchor Name]
+}}} 
+
+=== 결과 ===
+ * http://moniwiki.kldp.net/
+ * [http://moniwiki.kldp.net/]
+ * [http://moniwiki.kldp.net/ MoniWiki Sourceforge Homepage]
+ * http://moniwiki.kldp.net/imgs/moniwiki-logo.gif
+ * [http://moniwiki.kldp.net/imgs/moniwiki-logo.gif]
+ * [http://moniwiki.kldp.net/imgs/moniwiki-logo.gif moniwiki-logo.gif]
+ * [http://moniwiki.kldp.net/ http://moniwiki.kldp.net/imgs/moniwiki-logo.gif]
+ * InterWiki
+  * MeatBall:InterWiki
+  * wiki:MeatBall:InterWiki
+  * [wiki:MeatBall:InterWiki]
+  * [wiki:MeatBall:InterWiki InterWiki page on MeatBall]
+ * jh@web.de
+ * mailto:jh@web.de
+ * [#20030702 Anchor Name]
+----
+/!\ 혼란을 피하기 위해서, {{{wiki:InterWiki/Page}}} 와 같은 링크는 모니위키에서 지원하지 않습니다.
+모인모인에서는 {{{wiki:MeatBall/InterWiki}}}와 같은 링크가 {{{wiki:MeatBall:InterWiki}}}로 인식됩니다. 하지만 이것은 {{{wiki:WikiPage/SubPage}}} 문법과 일관성이 떨어져 혼란을 주므로 이와같은 모인모인 방식의 인터위키 링크는 모니위키에서 지원하지 않습니다.
+
+== 그밖에 ==
+ * ftp://ftp.nuri.net [ftp://ftp.nuri.net]
+ * irc://irc.lojban.org/lojban [irc://irc.lojban.org/lojban]
+ * telnet://hackerslab.org [telnet://hackerslab.org]
+ * nntp://news.kreonet.re.kr [nntp://news.kreonet.re.kr]
+ * news://news.kreonet.re.kr [news://news.kreonet.re.kr]
+== 모니위키 확장 ==
+=== single bracketed syntax ===
+ * {{{[Hello World]}}} link to [HelloWorld] (no space inserted)
+If you want to insert a space, use {{{["Hello World"]}}}
+
+<!> `$use_singlebracket=0;`를 config.php에 추가하면 이 문법이 비활성화 됩니다.
+=== double bracketed syntax ===
+ * {{{[[Hello World]]}}} link to ![[Hello World]] (no space inserted)
+미디어위키식 링크도 역시 지원합니다. (버전 v1.1.1 이후)
+=== !CamelCase 연결 비활성화 시키기 ===
+!WikiName 식 링크를 config.php에서 `$use_camelcase=0;`라고 추가하면 비활성화 시킬 수 있습니다.
+혹은 페이지별로 !WikiName식 링크 기능을 비활성화/활성화 하려면 `#camelcase` 혹은 `#camelcase 0` 를 페이지 최상단에 넣어줍니다. (ProcessingInstructions 참조)
+=== 물음표를 사용한 강제 연결 ===
+{{{?Hello}}} ?Hello
+=== 인터위키 아이콘 ===
+ * 페이지 이름 없이 인터위키 이름을 다음과 같이 사용하는 경우 {{{[MoinMoin:]}}} [MoinMoin:] {{{[[MoinWiki:]]}}} [[MoniWiki:]]
+
+See also:
+ * InterMap
+ * InterIconMap (since v1.1.1)
+=== 이미지를 bracket으로 감싸기 ===
+{{{
+ * [[http://링크 http://...이미지URL]]
+ * [http://moniwiki.kldp.net/ http://moniwiki.kldp.net/imgs/moniwiki-logo.gif]
+}}}
+ * [http://moniwiki.kldp.net/ http://moniwiki.kldp.net/imgs/moniwiki-logo.gif]
+----
+<!> 두개의 대괄호로 하는 경우 (모니위키 1.1.5 이후)
+{{{
+ * [[http://링크 http://...이미지URL]]
+ * [[http://moniwiki.kldp.net/ http://moniwiki.kldp.net/imgs/moniwiki-logo.gif]]
+}}}
+ * [[http://moniwiki.kldp.net/ http://moniwiki.kldp.net/imgs/moniwiki-logo.gif]]
+----
+{{{
+ * [[wiki:페이지이름 http://...이미지URL]]
+ * [[wiki:FrontPage http://moniwiki.kldp.net/imgs/moniwiki-logo.gif]]
+}}}
+
+ * [[wiki:FrontPage http://moniwiki.kldp.net/imgs/moniwiki-logo.gif]]
+----
+[[Navigation(HelpOnEditing)]]

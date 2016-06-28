@@ -1,0 +1,30 @@
+diff --git a/wiki.php b/wiki.php
+index 1f9c94b..03e326e 100644
+--- a/wiki.php
++++ b/wiki.php
+@@ -1843,7 +1843,11 @@ class Formatter {
+   }
+ 
+   function header($args) {
+-    header($args);
++    if (strtok($args,':')== 'Status')
++      $GLOBALS['http_status']=strtok('');
++    else
++      $GLOBALS['http_header'].=$args."\r\n";
++    #header($args);
+   }
+ 
+   function set_theme($theme="") {
+diff --git a/wikilib.php b/wikilib.php
+index 844f10e..31e05fd 100644
+--- a/wikilib.php
++++ b/wikilib.php
+@@ -41,7 +41,7 @@ function get_scriptname() {
+       strpos($_SERVER['REQUEST_URI'],$_SERVER['SCRIPT_NAME'])===false) {
+     return preg_replace('@/[^/]+\.php@','',$_SERVER['SCRIPT_NAME']);
+   }
+-  return $_SERVER['SCRIPT_NAME'];
++  return '/wiki';
+ }
+ 
+ /**

@@ -1,0 +1,5 @@
+{
+  "name": "nw-demo",
+  "node-main": "socket-chat.js",
+  "main": "panel.html"
+}

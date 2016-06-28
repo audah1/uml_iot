@@ -1,0 +1,766 @@
+.wikiSyntax, .wikiSyntax code{
+  font-family:Bitstream Vera Sans Mono, Courier New, GulimChe, monospace;
+  padding:0.5em;
+}
+
+div.sectionEdit {
+  margin-right:5px; margin-top:3px;
+  visibility:hidden;
+}
+
+#wikiContent div:hover .sectionEdit {
+  visibility:visible;
+}
+
+* html div.sectionEdit {
+  visibility:visible; /* for IE */
+}
+
+div.sectionEdit:hover {
+  visibility:visible;
+}
+
+.fileList {
+  overflow-x:auto;
+}
+
+.gallery-img {
+  /* float:left; */
+}
+.gallery-sel {
+  padding-bottom:10px;
+}
+
+.gallery-comments {
+  padding: 5px;
+}
+
+.gallery-prev-link {
+  float:left;
+}
+.gallery-next-link {
+  float:right;
+}
+
+.gallery-top-link {
+  visibility:hidden;
+}
+
+.cloudView {
+  display:inline;
+}
+
+.cloudView ul{
+  padding:0px;
+  margin:0px;
+  display:inline;
+}
+
+.cloudView li{
+  font-family:Trebuchet MS,Georgia,Verdana,sans-serif;
+  list-style:none;
+  white-space: nowrap;
+  display:inline;
+  padding-left:0px;
+}
+
+span.tag-name {
+}
+
+.cloudView li.tag-item {
+  padding-left:5px;
+  font-size:14px;
+}
+
+#wikiBody .cloudView a:link, #wikiBody .cloudView a:visited {
+  text-decoration:none;
+  color:#000000;
+}
+
+#wikiBody .cloudView a:hover {
+  text-decoration:underline;
+  color:#0000ff;
+}
+
+.cloudView ul {
+  margin:0;
+}
+
+.wikiChat ul {
+  list-style:none;
+  padding:2px;
+  margin:0px;
+}
+
+.wikiChat span.user {
+  font-family:Trebuchet MS,sans-serif;
+  padding-left:2px;
+  padding-right:2px;
+}
+
+.wikiChat span.date {
+  font-family:Trebuchet MS,sans-serif;
+  padding-right:2px;
+}
+
+.blocked {
+  background-color:#ff0000;
+  color:#fff;
+}
+
+div.tourLeft {
+  width:60%;
+  float:left;
+}
+
+div.tourRight {
+  width:40%;
+  float:right;
+}
+
+div.tourFoot {
+  clear:both;
+}
+
+div.tourLeft > ul li {
+  display:inline;
+  margin:0;
+  padding:0;
+}
+
+.depth-1 {
+  background-color:#fafafa;
+  padding:1em;
+}
+ul.depth-2 {
+  background-color:#f0f0f0;
+  padding:1em;
+}
+ul.depth-3 {
+  background-color:#eaeaea;
+  padding:1em;
+}
+ul.depth-4 {
+  background-color:#e0e0e0;
+  padding:1em;
+}
+ul.depth-5 {
+  background-color:#b0b0b0;
+  padding:1em;
+}
+
+.wikiFortune {
+  font-family: Bitstream Vera Sans Mono,Courier New,monospace;
+  white-space:pre;
+}
+
+.soundOff {
+  background:url(../imgs/plugin/Chat/sound_off.png) no-repeat;
+  width:16px;
+  border:0;
+}
+
+.soundOn {
+  background:url(../imgs/plugin/Chat/sound_on.png) no-repeat;
+  width:16px;
+  border:0;
+}
+
+/* for po processor */
+.msgid { color:blue; }
+.msgstr { color:blue; }
+.pofuzzy { color:red; }
+.potype { color:blue; }
+.posrc { color:red; }
+.poold { color:#909090; }
+.posym { color:red; }
+.potok { color:violet; }
+
+/* bts */
+.bts-comment {
+  padding-top: 3px;
+  padding-left:8px !important;
+  border-left: 3px solid #d7b7fb;
+}
+
+span.VisualTour img {
+  border:0px;
+}
+
+span.VisualTour {
+  overflow:auto;
+}
+
+/* admin plugin */
+#admin-submenu li {
+  font-family: Trebuchet MS,sans-serif;
+  font-size:14px;
+  display: inline;
+  line-height: 200%;
+  list-style: none;
+  text-align: center;
+}
+
+#admin-submenu {
+  background: #DFE8FF;
+  border-bottom: none;
+  margin: 0;
+  padding: 3px 2em 0px 3em;
+}
+
+#admin-submenu li a,#admin-submenu li a:visited {
+  text-decoration:none;
+  color: #000;
+  font-size:14px;
+}
+
+#admin-submenu .current {
+  font-weight:bold;
+  background: #f9fcfe;
+  border-top: 1px solid #bcbcbc;
+  border-right: 2px solid #808080;
+  color: #000;
+}
+
+#admin-submenu a {
+  border: none;
+  color: #fff;
+  font-size: 12px;
+  padding: .3em .4em .33em;
+}
+
+#admin-submenu li a:hover {
+  background: #F0F4FF;
+  color: #393939;
+}
+
+#admin-submenu li {
+  line-height: 170%;
+}
+
+/* Scriptaculous autocompleter */
+.autocomplete, #autocomplete_choices {
+  font-size:11px;
+  font-family : tahoma, arial, helvetica, sans-serif;
+  width: 350px;
+  background: #fff;
+  border:1px solid #888;
+  z-index:100;
+}
+
+.autocomplete ul,#autocomplete_choices ul {
+  margin:0px;
+  padding:0px;
+  width:100%;
+  list-style-type:none;
+}
+
+.autocomplete ul li.selected,#autocomplete_choices ul li.selected {
+  background-color: #316ac5;color:white;
+}
+
+.autocomplete ul li,#autocomplete_choices ul li {
+  margin:0;
+  padding:3px;
+  list-style-image: none;
+  cursor:pointer;
+}
+
+/* mootools r1.11 autocompleter */
+ul.autocompleter-choices
+{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid #eee;
+  background-color: white;
+  border-right-color: #ddd;
+  border-bottom-color: #ddd;
+  text-align: left;
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  z-index: 50;
+}
+
+ul.autocompleter-choices li
+{
+  position: relative;
+  padding: 0.1em 1.5em 0.1em 1em;
+  cursor: pointer;
+  font-weight: normal;
+  font-size: 1em;
+
+  padding-left:0px;
+}
+
+ul.autocompleter-choices li.autocompleter-selected
+{
+  background-color: #444;
+  color: #fff;
+}
+
+ul.autocompleter-choices span.autocompleter-queried
+{
+  font-weight: bold;
+}
+
+ul.autocompleter-choices li.autocompleter-selected span.autocompleter-queried
+{
+  color: #9FCFFF;
+}
+
+/* TeX */
+.previewTex {
+  vertical-align:middle;
+}
+
+/* Styles for folding processor */
+.folding {
+	background:#eee;
+	border-color:#ccc;
+	margin:10px;
+	padding:0;
+}
+
+.folding dt {
+	background-color:#bdc2bd;
+	height:20px;
+	font-weight:bold;
+	line-height:20px;
+	vertical-align:middle;
+	cursor:pointer;
+}
+
+.folding dd {
+	display:none;
+	padding:10px;
+	margin:0;
+}
+
+/* Styles for search word highlighting */
+@media screen {
+ .searchword0 { background: #ff9 }
+ .searchword1 { background: #cfc }
+ .searchword2 { background: #cff }
+ .searchword3 { background: #ccf }
+ .searchword4 { background: #fcf }
+}
+
+.imgLeft { margin-right:5px;float:left; clear:right;}
+.imgRight { margin-left:5px;float:right; clear:left;}
+.imgCenter { margin-left: auto; margin-right: auto; }
+
+/* Moniwiki BBS plugin */
+table.bbs { width:100%;}
+.bbsSimple .date { font-family: Trebuchet MS,Sans-serif;}
+.bbsSimple .more { text-align:right;}
+
+table.bbs thead {
+  background:url(../imgs/plugin/BBS/titlebg.png) repeat-x;
+  color:#000000;
+  font-family:Trebuchet MS,Sans-serif;
+}
+
+table.bbs tbody tr:hover {
+  /* background:url(../imgs/plugin/BBS/titlebg.png) repeat-x; */
+  background:#f8f8f8;
+}
+
+table.bbs tbody td {
+  font-family:Trebuchet MS,Sans-serif;
+}
+
+div.bbsArticle {
+  margin-bottom:0.5em;
+}
+
+div.bbsArticle .msg {
+  padding:0.5em;
+}
+
+.bbsArticle .head, .bbsArticle .head h2 { /* heading */
+  background-color:#6DC0F1;
+  border-bottom:0px;
+  margin-top:0.0em;
+  margin-bottom:0.0em;
+  font-size:1.2em;
+  color:black;
+  background:url(../imgs/plugin/BBS/articleheadbg.png) no-repeat;
+}
+
+.bbsArticle .user {
+}
+
+.bbsArticle, .bbsArticle .body {
+  background:url(../imgs/plugin/BBS/articlebodybg.png) repeat-y;
+  margin-left:5px;
+}
+
+.bbsArticle .body {
+  background-position:100% 0pt;
+  padding-right:15px;
+  padding-left:5px;
+}
+
+.bbsArticle .foot, .bbsArticle .foot div {
+  height:15px;
+  background:url(../imgs/plugin/BBS/articlefootbg.png) no-repeat;
+}
+.bbsArticle .foot {
+  background-position:0px 0px;
+}
+.bbsArticle .foot div {
+  margin-left:15px;
+  background-position:100% 0px;
+}
+
+.bbsArticle .extra {
+  float: right;
+  font-family: Trebuchet MS,Sans-serif;
+}
+
+.bbsArticle .head h2 {
+  padding:5px;
+  margin-left:15px;
+  background-position:100% 0pt;
+}
+
+.bbsArticle h3 { /* heading */
+  border-bottom:0px;
+  margin-top:0.0em;
+  font-size:1.1em;
+  font-weight:normal;
+}
+
+.bbsComment {
+  padding:5px;
+}
+
+.bbsBtn {
+  text-align:right;
+}
+
+.bbsArticleBtn {
+  text-align:center;
+}
+
+.bbsAdminBtn {
+}
+
+.bbsRSS {
+  float:right;
+}
+
+td.hit { text-align:center; }
+td.date { text-align:center; }
+td.no { text-align:center; }
+td.title { padding-left:0.5em; }
+td.name { padding-left:0.5em; }
+
+/* from the zeroboard */
+/*
+#mycontent a.button, span.button, del.button {
+  background-position:0px 0px;
+  background-repeat:no-repeat;
+  border:medium none;
+  color:#2E523B;
+  cursor:pointer;
+  display:-moz-inline-box;
+  font-style:normal;
+  height:30px;
+  line-height:0pt;
+  margin:0pt 6px 0px 0pt;
+  padding:0pt 10px 0pt 0pt;
+  vertical-align:middle;
+}
+*:first-child + html a.button, *:first-child + html span.button, *:first-child + html del.button {
+  position:relative;
+  top:-4px;
+}
+a.button, span.button, del.button, a.button span, span.button button, span.button input, del.button span {
+  background-image:url(../imgs/plugin/BBS/form_btns.png);
+}
+#mycontent a.button span, span.button button, span.button input, del.button span {
+  background-color:transparent;
+  background-position:100% 0pt;
+  background-repeat:no-repeat;
+  border:medium none;
+  color:#222222;
+  cursor:pointer;
+  display:-moz-inline-box;
+  font-size:0pt; 
+  font-size:12px !important;
+  font-style:normal;
+  height:30px;
+  letter-spacing:0pt !important;
+  line-height:1;
+  margin:0pt -16px 0pt 10px;
+  padding:8px 20px 0pt 10px;
+  text-decoration:none;
+  white-space:nowrap;
+}
+span.button button {
+  line-height:2.5;
+}
+html.safari a.button span, html.safari del.button span {
+  line-height:1.3;
+}
+html.safari span.button button {
+  line-height:2.6;
+}
+html.safari a.button:focus, html.safari span.button button:focus {
+  outline-color:invert;
+  outline-style:none;
+  outline-width:medium;
+}
+del.button {
+  background-position:0pt -120px;
+}
+del.button span {
+  background-position:100% -120px;
+  color:#AAAAAA !important;
+  cursor:default;
+}
+span.button button, span.button input {
+  line-height:2.5;
+  padding-top:0px;
+}
+a.button:hover, span.button:hover, a.button:focus, a.dom-button-focus, span.button-behavior-hover {
+  background-position:0pt -60px;
+  color:#222222;
+  text-decoration:none;
+}
+a.button:hover span, span.button:hover button, span.button:hover input, a.button:focus span, span.button-behavior-hover button, span.button-behavior-hover input {
+  background-position:100% -60px;
+}
+a.button:active, a.button:focus span {
+  color:#444444;
+}
+del.button-behavior-hover, del.button:hover {
+  background-position:0pt -180px;
+}
+del.button-behavior-hover span, del.button:hover span {
+  background-position:100% -180px;
+}
+span.button button, del.button span, span.button input {
+}
+
+*/
+
+/* */
+.pnut {
+  text-align:center;
+}
+
+.deleteDialog {
+  text-align:center;
+}
+
+.deleteDialog table {
+  text-align:center;
+  margin-left:auto; /* Moz */
+  margin-right:auto; /* Moz */
+}
+
+.captcha input {
+  vertical-align:middle;
+  height:17px; /* reload icon height */
+}
+
+#editor_area .captcha {
+  vertical-align:middle;
+  /* position:absolute; /* */
+  right:17px; /* ~ scrollbar width */
+  /* bottom:14px; /* ~ resizer grip height */
+  /* opacity:0.7;filter:alpha(opacity=70); /* */
+  /* IE Fix */
+  _float:right;
+  _margin-top:-73px;
+  _margin-right:0px;
+  _position:relative;
+  _opacity:1;
+  _filter:alpha(opacity=100);
+}
+
+#editor_area .captcha:hover {
+  opacity:1;filter:alpha(opacity=100);
+}
+
+.captcha img {
+  vertical-align: middle;
+}
+
+#mathChooser {
+  padding: 2px;
+  margin-top:3px;
+  margin-bottom:3px;
+  display:inline-block;
+  /* background-color: #f0f0f0; /* */
+}
+
+#mathChooser .tabs {
+  list-style-image: none;
+  list-style-type: none;
+  list-style-position: outside;
+  margin: 0;
+  padding:0;
+  display: inline;
+  height:14px;
+  overflow:hidden;
+}
+
+#mathChooser ul.tabs li {
+  cursor: pointer;
+  display:inline;
+  float:left;
+}
+
+#mathChooser .tabs li {
+    padding: 5px 0px;
+    padding-bottom:0px;
+    margin-left: 3px;
+    padding-top:0; /* */
+    background: url(../imgs/misc/btn.gif) no-repeat;
+    background-position: left -63px; /* */
+    display: inline;
+}
+
+#mathChooser .tabs li span {
+    margin-left: 5px;
+    background: url(../imgs/misc/btn.gif) no-repeat; /* */
+    float:left;
+}
+
+#mathChooser .tabs li span {
+    display: inline;
+    padding: 5px 10px;
+    padding-bottom:0px;
+    padding-left:5px;
+    background-position: right -63px;
+    position:relative;
+    left:2px;
+}
+#mathChooser .tabs li:hover span {
+  background-position: right -65px;
+}
+
+#mathChooser .tabs li:hover {
+  background-position: left -65px;
+}
+
+#mathChooser .tabs li.active {
+  font-weight:bold;
+  background-position: left -65px;
+}
+
+#mathChooser .tabs li.active span {
+  background-position: right -65px;
+}
+
+#magnify {
+  padding:2px;
+  /* border:1px solid ThreeDHighlight; /* */
+  border:1px solid black;
+  background:#FFFFE1;
+}
+
+#wikiBody ul.toolbar {
+  display:inline-block;
+  list-style-image: none;
+  list-style-type: none;
+  list-style-position: outside;
+  margin: 2px;
+  margin-top:0px;
+  padding:0 2px;
+  _padding-bottom:2px;
+  _margin-left:1px;
+  float:left;
+  background:url(../imgs/misc/panbg.png) repeat-x;
+  border-top: 0;
+  z-index:100;
+  border-top: 1px solid #e4e4e4;
+  border-bottom: 1px solid #808080;
+  border-right: 1px solid #bebebe;
+  border-left: 1px solid #bebebe;
+}
+
+.toolbar li {
+  margin-top:2px;
+  margin-bottom:2px;
+  cursor: pointer;
+  display: inline-block;
+  float:left;
+}
+
+.toolbar a {
+  float:left;
+  padding:1px;
+  margin:1px;
+  border:1px solid gray;
+  background:white;
+}
+
+.toolbar a:hover {
+  border:1px solid #3077CC;
+  background:url(../imgs/misc/btnpushed.png) repeat-x;
+}
+
+.commentflag {
+cursor:pointer;
+font-size:90%;
+font-weight:normal;
+height:21px;
+line-height:1.9em;
+margin-top:-1px;
+padding-left:5px;
+margin-left:-10px;
+position:absolute;
+text-align:left;
+vertical-align:top;
+width:25px;
+z-index:900;
+}
+
+/*
+.reviewComment {
+ position:absolute;
+ display:none;
+ background:#ffff88;
+ border:1px solid #333333;
+ z-index:901;
+ padding:5px;
+ color: black;
+}
+
+div.diff-removed:hover .commentflag, div.diff-added:hover .commentflag {
+  background:transparent url(../imgs/misc/comment-ghost.png) no-repeat scroll 0 0 !important;
+}
+
+div.diff-removed:hover .commentflag.selected, div.diff-added:hover .commentflag.selected {
+  background:transparent url(../imgs/misc/comment.png) no-repeat scroll 0 0 !important;
+}
+
+div.diff-removed.selected .commentflag.selected, div.diff-added.selected .commentflag.selected {
+  background: url('../imgs/misc/comment-draft.png') no-repeat !important;
+}
+
+div.diff-added.selected .commentflag, div.diff-removed.selected .commentflag {
+  background: url('../imgs/misc/comment-draft.png') no-repeat !important;
+}
+
+.commentflag.draft {
+  background: url('../imgs/misc/comment-draft.png') no-repeat !important;
+}
+
+.commentflag.selected {
+  background: url('../imgs/misc/comment.png') no-repeat !important;
+}
+.commentflag.selected {
+  background:transparent url(../imgs/misc/comment.png) no-repeat scroll 0 0 !important;
+}
+*/
+
+#category-select {
+  font-family:monospace, sans-serif;
+}
+

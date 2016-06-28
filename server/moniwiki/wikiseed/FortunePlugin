@@ -1,0 +1,23 @@
+Fortune 매크로 플러그인은 GNU fortune프로그램을 이용한 매크로입니다.
+
+<!> 현재 유닉스만 지원하며 다음을 만족시켜야 합니다.
+ 1. fortune이 설치되어 있어야 한다. {{{/usr/bin/fortune, /usr/share/games/fortune/}}}
+ 1. 이게 맞지 않는다면 {{{$fortune_dir="/to_my_fortune_dir";}}}라는 식의 설정을 {{{config.php}}}에 넣어줍니다.
+  * 모니위키 1.1.5 이전 버전의 경우에는 `plugin/Fortune.php`파일을 직접 수정해주어야 합니다.
+
+== 사용예 ==
+{{{[[Fortune]]}}} (default '''art''')
+[[Fortune]]
+----
+{{{[[Fortune(love)]]}}}
+[[Fortune(love)]]
+----
+{{{[[Fortune(*)]]}}}
+[[Fortune(*)]]
+== 특징 ==
+Fortune 매크로는 fortune파일의 인덱스를 직접 읽어들여 사용하므로 RandomQuote매크로보다 매우 빠릅니다. :)
+
+Please see also
+ * http://korea.gnu.org/people/chsong/fortune/
+== Fortune 파일 직접 설치하기 ==
+fortune 파일을 직접 설치하실 수 있습니다. 예를 들어 data/fortune 디렉토리를 만들어 여기에 fortune 파일을 복사해 넣고, `config.php`에 `$fortune_dir="data/fortune";` 식으로 디렉토리를 직접 지정해 넣으면 됩니다.

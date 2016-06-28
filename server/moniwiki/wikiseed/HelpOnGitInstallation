@@ -1,0 +1,87 @@
+== github로 받기 ==
+{{{
+git clone https://github.com/wkpark/moniwiki.git
+}}}
+
+== 번역 메시지 초기화 ==
+다운로드 받은 후에 그대로 설치를 하면 모든 메시지가 영문으로 보이게 됩니다.
+
+한글 메시지로 보려면 다음의 절차를 통해서 번역 메시지를 초기화 시켜야 합니다.
+----
+번역 메시지 초기화는 두가지 방식을 지원합니다.
+ 1. 리눅스 gmake(make)+xgettext를 이용한 po 메시지 파일을 mo파일로 변환
+ 2. 혹은 config.php에서 {{{$use_local_translation=1;}}} 옵션을 추가하면 내장된 {{{TGetText.php}}}를 이용해서 po를 mo파일로 변환
+윈도위에서는 2번 방식을 쓸 수 있습니다.
+
+2번 방식은 {{{TGetText.php}}}의 일부 버그가 발견되어서 기본값으로 내정되어있지 않은 상태이나, 향후 기본값으로 내정되고 모니위키의 i18n에 사용되게 될 것입니다.
+=== `[[$use_local_translation]]=1;` 옵션 사용 ===
+ 1. [[config.php]]를 열어서 `[[$use_local_translation]]=1;`을 추가하고
+ 2. `data/cache/locale` 디렉토리 아래의 모든 내용을 삭제한 후에
+ 3. 임의의 위키 문서를 열어봅니다.
+이렇게 하면 자동으로 `locale/po/*.po` 파일을 변환하에 메시지 파일이 얻어지며, 얻어진 메시지 파일이 gettext에 의해 사용됩니다.
+
+/!\ gettext를 지원하지 않더라도 같이 변환된 `*.php` 파일을 이용해서 메시지가 번역되게 됩니다.
+
+=== make/xgettext를 사용한 메시지 변환 ===
+ * /!\ 이 단계에서는 `make` 혹은 `gmake`가 필요합니다. 리눅스 서버 호스팅의 경우 간혹 `make` 혹은 `gmake`를 쓸 수 없는 경우가 있습니다.
+ * 이 과정을 건너뛰는 경우에는 한글 메시지가 나오지 않습니다.
+
+모니위키 본체 프로그램에 대한 번역 메시지.
+{{{
+cd moniwiki/locale
+sh update-makefile.sh
+make
+...
+...
+}}}
+----
+자바스크립트에 대한 번역 메시지.
+{{{
+cd moniwiki/local/js/locale # 디렉토리 명칭에 유의하세요.
+sh update-makefile.sh
+make
+...
+...
+}}}
+=== 모니위키 초기화 및 초기설정 변경 팁 ===
+이후의 설치방법은 HelpOnInstallation 페이지를 참고하세요.
+
+== github에서 업데이트 받기 ==
+받고 난 뒤에 변경사항이 있다면 아래 명령으로 갱신된 내용을 받을 수 있습니다.
+
+git clone 명령으로 받아 생성된 moniwiki 디렉토리로 이동해서 아래 명령 실행(.git 디렉토리 있어야 실행 가능합니다).
+{{{
+git pull
+}}}
+
+예를 들어서
+{{{
+$ git pull
+remote: Counting objects: 67, done.
+remote: Compressing objects: 100% (13/13), done.
+remote: Total 49 (delta 38), reused 47 (delta 36)
+Unpacking objects: 100% (49/49), done.
+From https://github.com/wkpark/moniwiki
+   6b15773..812193b  master     -> origin/master
+Updating 6b15773..812193b
+Fast-forward
+ config.php.default        |    1 -
+ lib/HTTPClient.php        |  148 +++++++++++++++++++++++++-------------------
+ lib/PageIndex.php         |    2 +-
+ lib/titleindexer.text.php |    2 +-
+ local/moniwyg.js          |    6 ++-
+ plugin/Diff.php           |    6 +--
+ plugin/FullSearch.php     |    2 +-
+ plugin/Info.php           |    6 +-
+ plugin/LikePages.php      |   17 -----
+ plugin/rcsexport.php      |    4 +-
+ plugin/rcsimport.php      |    4 +-
+ plugin/revert.php         |    3 +-
+ wiki.php                  |  109 +++++++--------------------------
+ wikilib.php               |   95 ++++++++++++++++-------------
+ 14 files changed, 174 insertions(+), 231 deletions(-)
+}}}
+
+이렇게 하면 자동으로 업데이트되며, 자신이 고쳐서 쓰고있는 부분은 대게 잘 보존됩니다.
+----
+[[Navigation(HelpOnAdministration)]]
